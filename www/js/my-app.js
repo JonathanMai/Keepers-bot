@@ -58,7 +58,7 @@ function stringParse(info){
     // Local varibales that are used to hold temp information.
     var AnswersList = [];
     var NextList = [];
-
+    console.log("testing visual code");
     //loops through information given to format it
     for(i = 0; i < info.length; i++){
         // Pushes all of the titles, contents, and questions into one list
