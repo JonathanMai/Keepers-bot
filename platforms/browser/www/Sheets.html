@@ -1,0 +1,248 @@
+<html>
+  <head>
+      <link rel="stylesheet" href="css/styles.css">
+      
+      <!--<script src="js/sheets.js"></script>
+      <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};onInit()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+      </script>-->
+  </head>
+  
+  <body>
+    <!--
+      Author: Adam Snyder
+      Company: Keepers
+      Description:
+        This is my current document which I am using to test certain information pertaining to google sheets, and the reading in of data for the decision tree project
+      Before Running:
+        Make sure you are running a local server.  This can be done by downloading python3 and typing "python3 -m http.server 8000" into terminal wherever this file is stored.  You can then reach it in a web browser at http://localhost:8000/index.html.  
+        Additionally, this is based off the spreadsheetId of a spreadsheet I copied.  Please change it as necessary.  It may also be necessary to change the range if it increases or decreases.  
+      Current bugs:
+        While the information is read in, the formatting is not as good as would be preferred to be sent over as a list of objects.  
+
+
+    -->
+    <!--
+    BEFORE RUNNING:
+    
+    1. If not already done, enable the Google Sheets API
+       and check the quota for your project at
+       https://console.developers.google.com/apis/api/sheets
+    2. Get access keys for your application. See
+       https://developers.google.com/api-client-library/javascript/start/start-js#get-access-keys-for-your-application
+    3. For additional information on authentication, see
+       https://developers.google.com/sheets/api/quickstart/js#step_2_set_up_the_sample
+    -->
+
+
+    <script>
+    //relevant variables
+var Titles = [];
+var Contents = [];
+var Question = [];
+var Answers = [];
+var Next = [];
+
+// ------------------------------------------------------------------------------------------------------------------
+function onInit() {
+    // If the user already signed in using local storeage, then we hide the the button we dont need.
+    if(localStorage.getItem("signed") == 'true') {
+        document.getElementById("signout-button").style.visibility = "visible";
+    }
+    else {
+        document.getElementById("signin-button").style.visibility = "visible";
+    }
+    setTimeout(function(){
+      handleClientLoad();
+      console.log('here bitcvhers');
+    },5000);
+   // while(this.readyState != 'complete');
+}
+// ------------------------------------------------------------------------------------------------------------------
+function makeApiCall() {
+  var params = {
+    // The ID of the spreadsheet to retrieve data from.
+    spreadsheetId: '19mGKx7aMqjc_bSVCJ_04tnwTAguLLGK5kPrkF7wI4jE',  // TODO: Update placeholder value.
+    // The A1 notation of the values to retrieve.
+    range: 'B2:J9',  // TODO: Update placeholder value.
+    // How values should be represented in the output.
+    // The default render option is ValueRenderOption.FORMATTED_VALUE.
+    valueRenderOption: 'FORMATTED_VALUE',  // TODO: Update placeholder value.
+    // How dates, times, and durations should be represented in the output.
+    // This is ignored if value_render_option is
+    // FORMATTED_VALUE.
+    // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+    dateTimeRenderOption: 'SERIAL_NUMBER',  // TODO: Update placeholder value.
+    majorDimension: 'ROWS',
+  };
+  var request = gapi.client.sheets.spreadsheets.values.get(params);
+  request.then(function(response) {
+    // TODO: Change code below to process the `response` object:
+    stringParse(response.result.values);
+    console.log(response.result);
+  }, function(reason) {
+    console.error('error: ' + reason.result.error.message);
+  });
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+//This function is my main addition to this code.  It is meant to take in the relevant data and format it for later use
+function stringParse(info){
+
+    // Local varibales that are used to hold temp information.
+    var AnswersList = [];
+    var NextList = [];
+
+    //loops through information given to format it
+    for(i = 0; i < info.length; i++){
+        // Pushes all of the titles, contents, and questions into one list
+        this.Titles.push(info[i][0]);
+        this.Contents.push(info[i][1]);
+        this.Question.push(info[i][2]);
+
+        // Pushes all of the answers into one list
+        for(q = 3; q < info[i].length; q++){
+            AnswersList.push(info[i][q].slice(0, info[i][q].length - 3));
+            NextList.push(parseInt(info[i][q].slice(info[i][q].length - 2, info[i][q].length - 1)));
+        }
+
+        // Checks to see if there are any answers listed in the row
+        this.Answers.push(AnswersList);
+        this.Next.push(NextList);
+        AnswersList = [];
+        NextList = [];
+    }
+    
+    nodeOutput(0);
+  }
+
+// ------------------------------------------------------------------------------------------------------------------
+function nodeOutput(index) {
+    var textOutput = [];
+    // Output the title inside the title at the html.
+    document.getElementById('title').innerHTML = Titles[index];
+
+    // Output the content and question inside the text at the html.
+    if (Answers[index][2]) {
+        textOutput = Contents[index] + "</br>" + Question[index];
+    }
+
+    else{
+        textOutput = Contents[index];
+    }
+
+    document.getElementById('text').innerHTML = textOutput;   
+    
+    clearButtons();
+    
+    // Create answer buttons.
+    if(Answers[index]) {
+        for(i = 0; i < Answers[index].length; i++)
+        {
+            var button = document.createElement("button");
+            button.innerHTML = Answers[index][i];
+            button.id = i;
+            var answers = document.getElementById("answers");
+            answers.appendChild(button);
+            button.addEventListener ("click", function() {
+                var temp = Next[index][this.id];
+                console.log(temp);          
+                nodeOutput(temp-1);
+            });
+        }
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+// Clear the buttons from the screen when needed.
+function clearButtons(){
+  var length = document.getElementById('answers').childElementCount;
+  var div =  document.getElementById('answers');
+  for(i=0; i<length; i++){
+     div.removeChild(document.getElementById(i));
+  }
+}
+
+
+// ------------------------------------------------------------------------------------------------------------------
+// Initiates the client
+function initClient() {
+    var API_KEY = 'AIzaSyD1548_G7dQRFH7us5ziBpOp-DRRQ3w1yk';  // TODO: Update placeholder with desired API key.
+    var CLIENT_ID = '371986161218-v1ejafinod0idod1dl5jll2nrap36q5o.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
+    // TODO: Authorize using one of the following scopes:
+    //   'https://www.googleapis.com/auth/drive'
+    //   'https://www.googleapis.com/auth/drive.file'
+    //   'https://www.googleapis.com/auth/drive.readonly'
+    //   'https://www.googleapis.com/auth/spreadsheets'
+    //   'https://www.googleapis.com/auth/spreadsheets.readonly'
+    var SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+    gapi.client.init({
+        'apiKey': API_KEY,
+        'clientId': CLIENT_ID,
+        'scope': SCOPE,
+        'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+    }).then(function() {
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+    });
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+// Loads the client so that a user may log in
+function handleClientLoad() {
+    gapi.load('client:auth2', initClient);
+    setTimeout(function(){
+      handleSignIn();
+    },50);    
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+// Grabs the data if the user is signed in
+function updateSignInStatus(isSignedIn) {
+    if (isSignedIn) {
+        makeApiCall();
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+//signs in a user
+function handleSignIn() {
+    gapi.auth2.getAuthInstance().signIn();
+    document.getElementById("signin-button").style.visibility = "hidden";
+    document.getElementById("signout-button").style.visibility = "visible";
+    localStorage.setItem("signed", true);
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+//signs out a user
+function handleSignOutClick(event) {
+    gapi.auth2.getAuthInstance().signOut();
+    document.getElementById("signout-button").style.visibility = "hidden";
+    document.getElementById("signin-button").style.visibility = "visible";
+    localStorage.setItem("signed", false); // TODO: need to check efficiency.
+}
+    </script>
+<script async defer src="https://apis.google.com/js/api.js"
+  onload="this.onload=function(){};handleClientLoad()"
+  onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+
+    <div tag="mainPanel">
+      <h1 id="title"></h1>
+      <p id="text"></p>
+      <div id="answers"></div>
+    </div>
+  
+    <div class="bottomPanel">
+      <!--creates the sign in button-->
+        <button class="logbutton" id="signin-button" onclick="handleSignIn()">Sign in</button>
+      <!--creates the sign out button-->
+        <button class="logbutton" id="signout-button" onclick="handleSignOutClick()">Sign out</button>
+      <!--creates the home button-->
+        <button class="logbutton" id="home" onclick="nodeOutput(0)">Home</button>      
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+  </body>
+</html>
