@@ -22,8 +22,9 @@ var Contents = [];
 var Question = [];
 var Answers = [];
 var Next = [];
+var Back = [];
 
-function makeApiCall() {
+/*function makeApiCall() {
     var params = {
         // The ID of the spreadsheet to retrieve data from.
         spreadsheetId: '16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0',  // TODO: Update placeholder value.
@@ -50,7 +51,7 @@ function makeApiCall() {
     }, function(reason) {
         console.error('error: ' + reason.result.error.message);
     });
-}
+}*/
 
 // ------------------------------------------------------------------------------------------------------------------
 //This function is my main addition to this code.  It is meant to take in the relevant data and format it for later use
@@ -58,7 +59,6 @@ function stringParse(info){
     // Local varibales that are used to hold temp information.
     var AnswersList = [];
     var NextList = [];
-
     //loops through information given to format it
     for(i = 0; i < info.length; i++){
         // Pushes all of the titles, contents, and questions into one list
@@ -81,11 +81,17 @@ function stringParse(info){
     
     // Starts to output the first node in the decision tree.
     nodeOutput(0);
-  }
+}
 
 // ------------------------------------------------------------------------------------------------------------------
 function nodeOutput(index) {
     var textOutput = [];
+    
+    if(index == 0 && document.getElementById('backButton').disabled == false)
+        document.getElementById('backButton').disabled = true;
+    else if(index != 0 && document.getElementById('backButton').disabled == true)
+        document.getElementById('backButton').disabled = false;
+
     // Output the title inside the title at the html.
     document.getElementById('title').innerHTML = Titles[index];
 
@@ -114,7 +120,7 @@ function nodeOutput(index) {
             answers.appendChild(button);
             button.addEventListener ("click", function() {
                 var temp = Next[index][this.id];
-                console.log(temp);          
+                Back.push(index);      
                 nodeOutput(temp-1);
             });
         }
@@ -134,8 +140,9 @@ function clearButtons(){
 
 // ------------------------------------------------------------------------------------------------------------------
 // Initiates the client
-function initClient() {
+/*function initClient() {
     var API_KEY = 'AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak';  // TODO: Update placeholder with desired API key.
+    
     //var API_KEY = 'AIzaSyD1548_G7dQRFH7us5ziBpOp-DRRQ3w1yk';  // TODO: Update placeholder with desired API key.
     var CLIENT_ID = '264708841934-nceklkm8rbtougbded3ihr25cr1v30lq.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
     //var CLIENT_ID = '371986161218-v1ejafinod0idod1dl5jll2nrap36q5o.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
@@ -155,29 +162,41 @@ function initClient() {
         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
         updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
     });
-}
+}*/
 
 // ------------------------------------------------------------------------------------------------------------------
 // Loads the client so that a user may log in
-function handleClientLoad() {
+/*function handleClientLoad() {
     gapi.load('client:auth2', initClient);
     setTimeout(function(){
         handleSignIn();
     },5000);    
+}*/
+
+function handleClientLoad() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/B2:J9?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
+        xhr.send();
+        xhr.onreadystatechange = function (e){
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                stringParse(response.values);
+            }
+        }
 }
  
 // ------------------------------------------------------------------------------------------------------------------
 // Grabs the data if the user is signed in
-function updateSignInStatus(isSignedIn) {
+/*function updateSignInStatus(isSignedIn) {
     if (isSignedIn)
         makeApiCall();
-}
+}*/
  
  // ------------------------------------------------------------------------------------------------------------------
  //signs in a user
-function handleSignIn() {
+/*function handleSignIn() {
     gapi.auth2.getAuthInstance().signIn();
-}
+}*/
 
  
 // Now we need to run the code that will be executed only for About page.
