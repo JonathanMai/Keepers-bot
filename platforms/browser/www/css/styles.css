@@ -14,7 +14,7 @@
     background: #000000;
 }
 
-.bottomPanel{
+/* .bottomPanel{
     position: absolute;
     bottom: 0;
     left: 0;
@@ -26,8 +26,7 @@
     align-items: center;
     justify-content: center;
 }
-
-
+ */
 
 .buttons {
     background-color: #008CBA;
@@ -38,10 +37,10 @@
     text-align: center;
     text-decoration: none;
     display: flex;
-    font-size: 13px;
+    font-size: 11px;
     margin: 4px 2px;
     cursor: pointer;
-    box-shadow: 0 5px #999;
+    box-shadow: 0 3px #999;
 }
 
 .buttons:hover {
@@ -51,6 +50,6 @@
 }
 
 .buttons:active {
-    box-shadow: 0 2px #666;
-    transform: translateY(4px);
+    box-shadow: 0 1px #666;
+    transform: translateY(2px);
 }

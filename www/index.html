@@ -36,16 +36,28 @@
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
 </head>
 
 <body>
-
+    
     <!-- Status bar overlay for full screen mode (PhoneGap) -->
     <div class="statusbar-overlay"></div>
-
+    
     <!-- Panels overlay-->
     <div class="panel-overlay"></div>
-
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+        <div class="content-block">
+            <p>Left panel content goes here</p>
+        </div>
+    </div>
+        
     <!-- Views -->
     <div class="views">
         <!-- Your main view, should have "view-main" class -->
@@ -55,6 +67,13 @@
                 <div class="navbar-inner">
                     <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
                     <div class="center sliding">Keepers-bot</div>
+                    <div class="right">
+                            <!--
+                              Right link contains only icon - additional "icon-only" class
+                              Additional "open-panel" class tells app to open panel when we click on this link
+                            -->
+                        <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                    </div>
                 </div>
             </div>
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
@@ -75,18 +94,13 @@
             <div class="toolbar">
                 <div class="toolbar-inner">                                
                     <!--creates the home button-->
-                    <button class="buttons" id="home" onclick="nodeOutput(0)">Home</button> 
+                    <button class="buttons" id="backButton" onclick="nodeOutput(Back.pop())">Back</button> 
+                    <button class="buttons" id="homeButton" onclick="nodeOutput(0)">Home</button> 
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
-    <script async defer src="https://apis.google.com/js/api.js"
-        onload="this.onload=function(){};handleClientLoad()"
-        onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
 </body>
 
 </html>
