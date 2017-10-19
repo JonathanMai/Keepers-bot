@@ -87,10 +87,10 @@ function stringParse(info){
 function nodeOutput(index) {
     var textOutput = [];
     
-    if(index == 0 && document.getElementById('backButton').disabled == false)
-        document.getElementById('backButton').disabled = true;
-    else if(index != 0 && document.getElementById('backButton').disabled == true)
-        document.getElementById('backButton').disabled = false;
+    // if(index == 0 && document.getElementById('backButton').disabled == false)
+    //     document.getElementById('backButton').disabled = true;
+    // else if(index != 0 && document.getElementById('backButton').disabled == true)
+    //     document.getElementById('backButton').disabled = false;
 
     // Output the title inside the title at the html.
     document.getElementById('title').innerHTML = Titles[index];
@@ -174,15 +174,15 @@ function clearButtons(){
 }*/
 
 function handleClientLoad() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/B2:J9?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
-        xhr.send();
-        xhr.onreadystatechange = function (e){
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var response = JSON.parse(xhr.responseText);
-                stringParse(response.values);
-            }
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/B2:J9?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
+    xhr.send();
+    xhr.onreadystatechange = function (e){
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            stringParse(response.values);
         }
+    }
 }
  
 // ------------------------------------------------------------------------------------------------------------------

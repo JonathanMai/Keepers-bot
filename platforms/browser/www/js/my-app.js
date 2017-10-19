@@ -87,10 +87,10 @@ function stringParse(info){
 function nodeOutput(index) {
     var textOutput = [];
     
-    if(index == 0 && document.getElementById('backButton').disabled == false)
-        document.getElementById('backButton').disabled = true;
-    else if(index != 0 && document.getElementById('backButton').disabled == true)
-        document.getElementById('backButton').disabled = false;
+    // if(index == 0 && document.getElementById('backButton').disabled == false)
+    //     document.getElementById('backButton').disabled = true;
+    // else if(index != 0 && document.getElementById('backButton').disabled == true)
+    //     document.getElementById('backButton').disabled = false;
 
     // Output the title inside the title at the html.
     document.getElementById('title').innerHTML = Titles[index];

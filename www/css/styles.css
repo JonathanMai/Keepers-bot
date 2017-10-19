@@ -14,6 +14,31 @@
     background: #000000;
 }
 
+.fa {
+    padding: 15px;
+    font-size: 20px;
+    width: 19px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+  
+
 /* .bottomPanel{
     position: absolute;
     bottom: 0;

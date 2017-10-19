@@ -33,15 +33,12 @@
         http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
     -->
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
-    <script async defer src="https://apis.google.com/js/api.js"
-        onload="this.onload=function(){};handleClientLoad()"
-        onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
 </head>
 
 <body>
@@ -54,7 +51,8 @@
     <!-- Left panel with reveal effect-->
     <div class="panel panel-left panel-reveal">
         <div class="content-block">
-            <p>Left panel content goes here</p>
+            <a href="#" class="fa fa-facebook" onclick="window.open('https://www.facebook.com/keeperschildsafety/', '_blank')"></a>
+            <a href="#" class="fa fa-youtube" onclick="window.open('https://www.youtube.com/channel/UCeWRhIpLDLHPssI5KhAVBqA/', '_blank')"></a>
         </div>
     </div>
         
@@ -69,8 +67,8 @@
                     <div class="center sliding">Keepers-bot</div>
                     <div class="right">
                             <!--
-                              Right link contains only icon - additional "icon-only" class
-                              Additional "open-panel" class tells app to open panel when we click on this link
+                                Right link contains only icon - additional "icon-only" class
+                                Additional "open-panel" class tells app to open panel when we click on this link
                             -->
                         <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
                     </div>
@@ -94,12 +92,16 @@
             <div class="toolbar">
                 <div class="toolbar-inner">                                
                     <!--creates the home button-->
-                    <button class="buttons" id="backButton" onclick="nodeOutput(Back.pop())">Back</button> 
+                    <button class="buttons" id="backButton" onclick="nodeOutput((a = Back.pop()) > 0? a : 0)">Back</button> 
                     <button class="buttons" id="homeButton" onclick="nodeOutput(0)">Home</button> 
                 </div>
             </div>
         </div>
     </div>
+    <script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
     <script type="text/javascript" src="js/my-app.js"></script>
 </body>
 
