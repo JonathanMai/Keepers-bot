@@ -199,12 +199,12 @@ function handleClientLoad() {
 }*/
 
  
-// Now we need to run the code that will be executed only for About page.
+// Now we need to run the code that will be executed only for Contact page.
 
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
-myApp.onPageInit('about', function (page) {
+myApp.onPageInit('contact', function (page) {
     // Do something here for "about" page
-
+    myApp.alert('Here comes About page');
 })
 
 // Option 2. Using one 'pageInit' event handler for all pages:
@@ -212,14 +212,27 @@ $$(document).on('pageInit', function (e) {
     // Get page data from event data
     var page = e.detail.page;
 
-    if (page.name === 'about') {
+    if (page.name === 'contact') {
         // Following code will be executed for page with data-page attribute equal to "about"
         myApp.alert('Here comes About page');
     }
 })
 
 // Option 2. Using live 'pageInit' event handlers for each page
-$$(document).on('pageInit', '.page[data-page="about"]', function (e) {
+$$(document).on('pageInit', '.page[data-page="contact"]', function (e) {
     // Following code will be executed for page with data-page attribute equal to "about"
     myApp.alert('Here comes About page');
 })
+
+
+function recieveData() {
+    var data = [];
+    data.push(document.getElementById('nameInput').value);
+    data.push(document.getElementById('emailInput').value);
+    data.push(document.getElementById('subjectInput').value);
+    data.push(document.getElementById('msgInput').value);    
+    for(i = 0; i<4; i++)
+        console.log(data[i]);
+    // at this point we need to change it to JSON format and send to the server.
+    // Need the right api for it first.
+}
