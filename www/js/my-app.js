@@ -108,12 +108,17 @@ function nodeOutput(index) {
     if(Question[index]) {
         for(i = 0; i < Answers[index].length; i++)
         {
-            var button = document.createElement("input");
-            button.innerHTML = Answers[index][i];
+            var button = document.createElement("button");  
+            var paragraph = document.createElement("p");
+            var image = document.createElement("img");
+            var text = document.createTextNode(Answers[index][i]);
+            paragraph.appendChild(text);
+            // button.innerHTML = Answers[index][i];
             button.id = i;
-            button.class = "buttons";
+            button.className = "categoryBtn";
             var answers = document.getElementById("answers");
             answers.appendChild(button);
+            answers.appendChild(paragraph);
             button.addEventListener ("click", function() {
                 var temp = Next[index][this.id];
                 Back.push(index);      
