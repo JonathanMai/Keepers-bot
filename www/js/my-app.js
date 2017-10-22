@@ -17,6 +17,7 @@ $$(document).on('deviceready', function() {
 });
 
 //relevant variables
+var ImagesURL = [];
 var Titles = [];
 var Contents = [];
 var Question = [];
@@ -62,12 +63,13 @@ function stringParse(info){
     //loops through information given to format it
     for(i = 0; i < info.length; i++){
         // Pushes all of the titles, contents, and questions into one list
-        this.Titles.push(info[i][0]);
-        this.Contents.push(info[i][1]);
-        this.Question.push(info[i][2]);
+        this.ImagesURL.push(info[i][0]);        
+        this.Titles.push(info[i][1]);
+        this.Contents.push(info[i][2]);
+        this.Question.push(info[i][3]);
 
         // Pushes all of the answers into one list
-        for(q = 3; q < info[i].length; q++){
+        for(q = 4; q < info[i].length; q++){
             AnswersList.push(info[i][q].slice(0, info[i][q].length - 3));
             NextList.push(parseInt(info[i][q].slice(info[i][q].length - 2, info[i][q].length - 1)));
         }
@@ -86,17 +88,11 @@ function stringParse(info){
 // ------------------------------------------------------------------------------------------------------------------
 function nodeOutput(index) {
     var textOutput = [];
-    
-    // if(index == 0 && document.getElementById('backButton').disabled == false)
-    //     document.getElementById('backButton').disabled = true;
-    // else if(index != 0 && document.getElementById('backButton').disabled == true)
-    //     document.getElementById('backButton').disabled = false;
-
     // Output the title inside the title at the html.
     document.getElementById('title').innerHTML = Titles[index];
 
     // Output the content and question inside the text at the html.
-    if (Answers[index][2]) {
+    if (Question[index]) {
         textOutput = Contents[index] + "</br>" + Question[index];
     }
 
@@ -109,10 +105,10 @@ function nodeOutput(index) {
     clearButtons();
     
     // Creates answer buttons.
-    if(Answers[index]) {
+    if(Question[index]) {
         for(i = 0; i < Answers[index].length; i++)
         {
-            var button = document.createElement("button");
+            var button = document.createElement("input");
             button.innerHTML = Answers[index][i];
             button.id = i;
             button.class = "buttons";
