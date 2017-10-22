@@ -108,10 +108,10 @@ function nodeOutput(index) {
     if(Question[index]) {
         for(i = 0; i < Answers[index].length; i++)
         {
-            var button = document.createElement("input");
+            var button = document.createElement("button");
             button.innerHTML = Answers[index][i];
             button.id = i;
-            button.class = "buttons";
+            button.className = "buttons";
             var answers = document.getElementById("answers");
             answers.appendChild(button);
             button.addEventListener ("click", function() {
@@ -171,7 +171,8 @@ function clearButtons(){
 
 function handleClientLoad() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/B2:J9?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
+    var range = "B2:J9";
+    xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
     xhr.send();
     xhr.onreadystatechange = function (e){
         if (xhr.readyState == 4 && xhr.status == 200) {
@@ -229,6 +230,10 @@ function recieveData() {
     data.push(document.getElementById('msgInput').value);    
     for(i = 0; i<4; i++)
         console.log(data[i]);
+
+    // document.location.href = "mailto:jonathann.maimon@gmail.com?subject="
+    // + encodeURIComponent(data[2])
+    // + "&body=" + encodeURIComponent(data[3]);
     // at this point we need to change it to JSON format and send to the server.
     // Need the right api for it first.
 }

@@ -17,6 +17,7 @@ $$(document).on('deviceready', function() {
 });
 
 //relevant variables
+var ImagesURL = [];
 var Titles = [];
 var Contents = [];
 var Question = [];
@@ -62,12 +63,13 @@ function stringParse(info){
     //loops through information given to format it
     for(i = 0; i < info.length; i++){
         // Pushes all of the titles, contents, and questions into one list
-        this.Titles.push(info[i][0]);
-        this.Contents.push(info[i][1]);
-        this.Question.push(info[i][2]);
+        this.ImagesURL.push(info[i][0]);        
+        this.Titles.push(info[i][1]);
+        this.Contents.push(info[i][2]);
+        this.Question.push(info[i][3]);
 
         // Pushes all of the answers into one list
-        for(q = 3; q < info[i].length; q++){
+        for(q = 4; q < info[i].length; q++){
             AnswersList.push(info[i][q].slice(0, info[i][q].length - 3));
             NextList.push(parseInt(info[i][q].slice(info[i][q].length - 2, info[i][q].length - 1)));
         }
@@ -86,17 +88,11 @@ function stringParse(info){
 // ------------------------------------------------------------------------------------------------------------------
 function nodeOutput(index) {
     var textOutput = [];
-    
-    // if(index == 0 && document.getElementById('backButton').disabled == false)
-    //     document.getElementById('backButton').disabled = true;
-    // else if(index != 0 && document.getElementById('backButton').disabled == true)
-    //     document.getElementById('backButton').disabled = false;
-
     // Output the title inside the title at the html.
     document.getElementById('title').innerHTML = Titles[index];
 
     // Output the content and question inside the text at the html.
-    if (Answers[index][2]) {
+    if (Question[index]) {
         textOutput = Contents[index] + "</br>" + Question[index];
     }
 
@@ -109,13 +105,13 @@ function nodeOutput(index) {
     clearButtons();
     
     // Creates answer buttons.
-    if(Answers[index]) {
+    if(Question[index]) {
         for(i = 0; i < Answers[index].length; i++)
         {
             var button = document.createElement("button");
             button.innerHTML = Answers[index][i];
             button.id = i;
-            button.class = "buttons";
+            button.className = "buttons";
             var answers = document.getElementById("answers");
             answers.appendChild(button);
             button.addEventListener ("click", function() {
@@ -175,7 +171,8 @@ function clearButtons(){
 
 function handleClientLoad() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/B2:J9?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
+    var range = "B2:J9";
+    xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
     xhr.send();
     xhr.onreadystatechange = function (e){
         if (xhr.readyState == 4 && xhr.status == 200) {
@@ -233,6 +230,10 @@ function recieveData() {
     data.push(document.getElementById('msgInput').value);    
     for(i = 0; i<4; i++)
         console.log(data[i]);
+
+    // document.location.href = "mailto:jonathann.maimon@gmail.com?subject="
+    // + encodeURIComponent(data[2])
+    // + "&body=" + encodeURIComponent(data[3]);
     // at this point we need to change it to JSON format and send to the server.
     // Need the right api for it first.
 }
