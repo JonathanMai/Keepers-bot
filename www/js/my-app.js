@@ -109,6 +109,9 @@ function nodeOutput(index) {
         for(i = 0; i < Answers[index].length; i++)
         {
             var button = document.createElement("button");  
+            var image = document.createElement("img");
+            image.setAttribute("src", "");
+            button.appendChild(image);
             var paragraph = document.createElement("p");
             var image = document.createElement("img");
             var text = document.createTextNode(Answers[index][i]);
