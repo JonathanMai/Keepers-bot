@@ -113,6 +113,7 @@ function nodeOutput(index) {
             var div = document.createElement("div");
             var button = document.createElement("button");  
             var image = document.createElement("img");
+            div.setAttribute("id", "div" + i);
             image.setAttribute("id", "image" + i);
             image.className = "icon";
             image.setAttribute("src", ImagesURL[i]);
@@ -144,9 +145,7 @@ function clearButtons(){
     var length = document.getElementById('answers').childElementCount;
     var div =  document.getElementById('answers');
     for(i=0; i<length; i++){
-        div.removeChild(document.getElementById("par" + i));
-        div.removeChild(document.getElementById("image" + i));
-        div.removeChild(document.getElementById(i));
+         div.removeChild(document.getElementById("div" + i));
   }
 }
 
