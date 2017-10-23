@@ -106,13 +106,25 @@ function nodeOutput(index) {
     
     clearButtons();
     
+    const INSIDE_DIV = 2;                                   // How many div can contain in row.
     // Creates answer buttons.
     if(Question[index]) {
+        var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
+        mainDiv.setAttribute("class", "mainDiv");           // set class
+        
         for(i = 0; i < Answers[index].length; i++)
         {
+            if(mainDiv.childElementCount == INSIDE_DIV) {   // If the main div contain 2 children
+                answers.appendChild(mainDiv);               // append it to the dom.
+                mainDiv = document.createElement("div");    // create new div with 0 children.
+                mainDiv.setAttribute("class", "mainDiv");   // set class.
+            }
             var div = document.createElement("div");
-            div.setAttribute("id", "div" + i);
-            
+            if(i % 2 == 0) {
+                div.setAttribute("class", "left");
+            } else {
+                div.setAttribute("class", "right");
+            }
             var image;
             if(index == 0) {
                 image = document.createElement("img");
@@ -144,7 +156,10 @@ function nodeOutput(index) {
             }
             // button.innerHTML = Answers[index][i];
             var answers = document.getElementById("answers");
-            answers.appendChild(div);
+            mainDiv.appendChild(div);
+            if(i == Answers[index].length - 1) {        // if the number of the buttons if odd.
+                answers.appendChild(mainDiv);           // add the last button to the DOM.
+            }
             
         }
     }
@@ -155,8 +170,8 @@ function nodeOutput(index) {
 function clearButtons(){
     var length = document.getElementById('answers').childElementCount;
     var div =  document.getElementById('answers');
-    for(i=0; i<length; i++){
-         div.removeChild(document.getElementById("div" + i));
+    for(i = 0; i < length; i++){
+        div.removeChild(document.getElementsByClassName("mainDiv")[0]);
   }
 }
 

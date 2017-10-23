@@ -95,7 +95,12 @@
 .content-block {
     text-align: center;
     margin: 0 auto;
-    max-width: 400px;
+    max-width: 300px;
+}
+
+.mainDiv {
+    height: 120px;
+    margin-top: 40px;
 }
 
 .icon_paragraph {
@@ -103,22 +108,33 @@
     margin: 0 auto;
 }
 
-#first {
+.left {
     float: left;
 }
 
-@media screen and (max-width: 700px) {
-    
+.right {
+    float: right;
 }
 
-@media screen and (max-width: 300px) {
-    .content-block {
-        text-align: center;
-        margin: 0 auto;
-        max-width: 200px;
-    }
-
-    #first {
+@media screen and (max-width: 200px){
+    .left {
         float: none;
+        height: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .right {
+        float: none;
+        height: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .mainDiv {
+        height: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 }
+
