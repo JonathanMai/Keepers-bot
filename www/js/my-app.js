@@ -67,7 +67,7 @@ function stringParse(info){
         this.Titles.push(info[i][1]);
         this.Contents.push(info[i][2]);
         this.Question.push(info[i][3]);
-
+            console.log(info[i][0]);
         // Pushes all of the answers into one list
         for(q = 4; q < info[i].length; q++){
             AnswersList.push(info[i][q].slice(0, info[i][q].length - 3));
@@ -89,6 +89,8 @@ function stringParse(info){
 function nodeOutput(index) {
     var textOutput = [];
     // Output the title inside the title at the html.
+    
+    
     document.getElementById('title').innerHTML = Titles[index];
 
     // Output the content and question inside the text at the html.
@@ -108,20 +110,25 @@ function nodeOutput(index) {
     if(Question[index]) {
         for(i = 0; i < Answers[index].length; i++)
         {
+            var div = document.createElement("div");
             var button = document.createElement("button");  
             var image = document.createElement("img");
-            image.setAttribute("src", "");
+            image.setAttribute("id", "image" + i);
+            image.className = "icon";
+            image.setAttribute("src", ImagesURL[i]);
             button.appendChild(image);
             var paragraph = document.createElement("p");
-            var image = document.createElement("img");
+            paragraph.className = "icon_paragraph";
+            paragraph.setAttribute("id", "par" + i);
             var text = document.createTextNode(Answers[index][i]);
             paragraph.appendChild(text);
+            div.appendChild(button);
+            div.appendChild(paragraph);
             // button.innerHTML = Answers[index][i];
             button.id = i;
             button.className = "categoryBtn";
             var answers = document.getElementById("answers");
-            answers.appendChild(button);
-            answers.appendChild(paragraph);
+            answers.appendChild(div);
             button.addEventListener ("click", function() {
                 var temp = Next[index][this.id];
                 Back.push(index);      
@@ -134,10 +141,12 @@ function nodeOutput(index) {
 // ------------------------------------------------------------------------------------------------------------------
 // Clear the buttons from the screen when needed.
 function clearButtons(){
-  var length = document.getElementById('answers').childElementCount;
-  var div =  document.getElementById('answers');
-  for(i=0; i<length; i++){
-     div.removeChild(document.getElementById(i));
+    var length = document.getElementById('answers').childElementCount;
+    var div =  document.getElementById('answers');
+    for(i=0; i<length; i++){
+        div.removeChild(document.getElementById("par" + i));
+        div.removeChild(document.getElementById("image" + i));
+        div.removeChild(document.getElementById(i));
   }
 }
 
@@ -179,7 +188,8 @@ function clearButtons(){
 
 function handleClientLoad() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/B2:J9?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
+    var range = "B2:J9";
+    xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
     xhr.send();
     xhr.onreadystatechange = function (e){
         if (xhr.readyState == 4 && xhr.status == 200) {

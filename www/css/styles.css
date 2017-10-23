@@ -83,6 +83,42 @@
     background-color: #008CBA;
     border-radius: 100px;
     border: none;
+    width: 60px;
+    height: 60px;
+}
+
+.icon{
     width: 50px;
     height: 50px;
+}
+
+.content-block {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.icon_paragraph {
+    max-width: 50px;
+    margin: 0 auto;
+}
+
+#first {
+    float: left;
+}
+
+@media screen and (max-width: 700px) {
+    
+}
+
+@media screen and (max-width: 300px) {
+    .content-block {
+        text-align: center;
+        margin: 0 auto;
+        max-width: 200px;
+    }
+
+    #first {
+        float: none;
+    }
 }
