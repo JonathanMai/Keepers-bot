@@ -111,30 +111,41 @@ function nodeOutput(index) {
         for(i = 0; i < Answers[index].length; i++)
         {
             var div = document.createElement("div");
-            var button = document.createElement("button");  
-            var image = document.createElement("img");
             div.setAttribute("id", "div" + i);
-            image.setAttribute("id", "image" + i);
-            image.className = "icon";
-            image.setAttribute("src", ImagesURL[i]);
-            button.appendChild(image);
+            
+            var image;
+            if(index == 0) {
+                image = document.createElement("img");
+                image.setAttribute("id", "image" + i);
+                image.className = "icon";
+                image.setAttribute("src", ImagesURL[i]);
+            }
+            
             var paragraph = document.createElement("p");
             paragraph.className = "icon_paragraph";
             paragraph.setAttribute("id", "par" + i);
-            var text = document.createTextNode(Answers[index][i]);
-            paragraph.appendChild(text);
-            div.appendChild(button);
-            div.appendChild(paragraph);
-            // button.innerHTML = Answers[index][i];
+            
+            var button = document.createElement("button");  
             button.id = i;
             button.className = "categoryBtn";
-            var answers = document.getElementById("answers");
-            answers.appendChild(div);
             button.addEventListener ("click", function() {
                 var temp = Next[index][this.id];
                 Back.push(index);      
                 nodeOutput(temp-1);
             });
+            
+            paragraph.appendChild(document.createTextNode(Answers[index][i]));
+            div.appendChild(button);
+            div.appendChild(paragraph);
+            if(index == 0) {
+                button.appendChild(image);
+            } else {
+                button.appendChild(paragraph);
+            }
+            // button.innerHTML = Answers[index][i];
+            var answers = document.getElementById("answers");
+            answers.appendChild(div);
+            
         }
     }
 }
