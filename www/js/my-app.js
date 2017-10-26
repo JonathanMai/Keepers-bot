@@ -273,6 +273,10 @@ function recieveData() {
     data.push(document.getElementById('msgInput').value);    
     for(i = 0; i<4; i++)
         console.log(data[i]);
+
+    // document.location.href = "mailto:jonathann.maimon@gmail.com?subject="
+    // + encodeURIComponent(data[2])
+    // + "&body=" + encodeURIComponent(data[3]);
     // at this point we need to change it to JSON format and send to the server.
     // Need the right api for it first.
 }
