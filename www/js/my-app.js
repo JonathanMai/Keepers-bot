@@ -213,12 +213,13 @@ function clearButtons(){
 
 function handleClientLoad() {
     var xhr = new XMLHttpRequest();
-    var range = "B2:J9";
+    var range = "B2:L40";
     xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
     xhr.send();
     xhr.onreadystatechange = function (e){
         if (xhr.readyState == 4 && xhr.status == 200) {
             var response = JSON.parse(xhr.responseText);
+            console.log(response);
             stringParse(response.values);
         }
     }
