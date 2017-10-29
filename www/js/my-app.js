@@ -112,6 +112,7 @@ function nodeOutput(index) {
         var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
         mainDiv.setAttribute("class", "mainDiv");           // set class
         
+        // Creates the all buttons we need using a for loop.
         for(i = 0; i < Answers[index].length; i++)
         {
             if(mainDiv.childElementCount == INSIDE_DIV) {   // If the main div contain 2 children
@@ -125,6 +126,7 @@ function nodeOutput(index) {
             } else {
                 div.setAttribute("class", "right");
             }
+
             var image;
             if(index == 0) {
                 image = document.createElement("img");
@@ -153,6 +155,7 @@ function nodeOutput(index) {
                 button.appendChild(image);
             } else {
                 button.appendChild(paragraph);
+                paragraph.style = "color: white"
             }
             // button.innerHTML = Answers[index][i];
             var answers = document.getElementById("answers");
@@ -162,6 +165,74 @@ function nodeOutput(index) {
             }
             
         }
+    }
+
+    // When its the last node to show - ask if the information helped.
+    else {
+      
+        mainDiv = document.createElement("div");    // create new div with 0 children.
+        mainDiv.setAttribute("class", "mainDiv");   // set class.
+
+        //innerHTML = "<br><br>Was the information helpful?";
+        var helpedText = document.createElement("p"); 
+        helpedText.innerHTML = "<br><br>Was the information helpful?";
+        mainDiv.appendChild(helpedText);
+
+        
+        // Left div creation - 'no' button.
+        var lefParagraph = document.createElement("p");
+        lefParagraph.className = "icon_paragraph";
+        lefParagraph.style = "color: white"
+        lefParagraph.appendChild(document.createTextNode("No"));        
+        
+        var leftDiv = document.createElement("div");
+        leftDiv.setAttribute("class", "left");
+        
+        var leftButton = document.createElement("button");  
+        leftButton.className = "categoryBtn";
+        leftButton.addEventListener ("click", function() {
+            Back = [];
+            ga('send', 'event', {
+                eventCategory: 'Information quality',
+                eventAction: 'click',
+                eventLabel: 'Not helpful content: ' + Contents[index]
+            });
+            // ga('send', 'pageview', 'Not helpful content: ' + Contents[index]);
+            // ga('send', 'event', 'Not helpful content: ' + Contents[index]);
+            // ga('send', 'item', 'Not helpful content: ' + Contents[index]);
+            nodeOutput(0);    
+        });
+        
+        leftDiv.appendChild(leftButton);
+        leftDiv.appendChild(lefParagraph);
+        leftButton.appendChild(lefParagraph)        
+        
+        mainDiv.appendChild(leftDiv);        
+        
+        // Right div creation - 'yes' button.
+        var rightParagraph = document.createElement("p");
+        rightParagraph.className = "icon_paragraph";
+        rightParagraph.style = "color: white"
+        rightParagraph.appendChild(document.createTextNode("Yes"));                
+        
+        var rightDiv = document.createElement("div");
+        rightDiv.setAttribute("class", "right");
+        
+        var rightButton = document.createElement("button");  
+        rightButton.className = "categoryBtn";
+        rightButton.addEventListener ("click", function() {
+            Back = [];
+            ga('send', 'item', 'Yes ' + Contents[index]);
+            nodeOutput(0);              
+        });
+        
+        rightDiv.appendChild(rightButton);
+        rightDiv.appendChild(rightParagraph);
+        rightButton.appendChild(rightParagraph)
+
+        mainDiv.appendChild(rightDiv);
+
+        document.getElementById("answers").appendChild(mainDiv);  
     }
 }
 
@@ -219,7 +290,6 @@ function handleClientLoad() {
     xhr.onreadystatechange = function (e){
         if (xhr.readyState == 4 && xhr.status == 200) {
             var response = JSON.parse(xhr.responseText);
-            console.log(response);
             stringParse(response.values);
         }
     }
@@ -273,10 +343,22 @@ function recieveData() {
     data.push(document.getElementById('msgInput').value);    
     for(i = 0; i<4; i++)
         console.log(data[i]);
-
+    sendMessage("jonathann.maimon@gmail.com", document.getElementById('emailInput').value, )
     // document.location.href = "mailto:jonathann.maimon@gmail.com?subject="
     // + encodeURIComponent(data[2])
     // + "&body=" + encodeURIComponent(data[3]);
     // at this point we need to change it to JSON format and send to the server.
     // Need the right api for it first.
+}
+function sendMessage(userId, email, callback) {
+  // Using the js-base64 library for encoding:
+  // https://www.npmjs.com/package/js-base64
+  var base64EncodedEmail = Base64.encodeURI(email);
+  var request = gapi.client.gmail.users.messages.send({
+    'userId': userId,
+    'resource': {
+      'raw': base64EncodedEmail
+    }
+  });
+  request.execute(callback);
 }
