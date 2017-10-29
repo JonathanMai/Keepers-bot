@@ -1,3 +1,14 @@
+createMsg(msg, side)
+{
+  return {
+    msg: msg,
+    align: side,
+    delay: msg.length() * 50,
+    time: Date().getHours()+':'+Date().getMinutes()
+  }
+}
+
+
 var chatMessages = [{
   name: "ms1",
   msg: "Who are you?",
