@@ -107,9 +107,10 @@ function nodeOutput(index) {
     clearButtons();
     
     const INSIDE_DIV = 2;                                   // How many div can contain in row.
-    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
-    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "", "Hello world", "Time is Time"));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
-    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", "", "Hello world", "Time is Time"));
+    // document.getElementById("text").appendChild(createChat());
+    // document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
+    // document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", "Hello world"));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+    // document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", "Hello world"));
 
     // Creates answer buttons.
     if(Question[index]) {
@@ -365,89 +366,4 @@ function sendMessage(userId, email, callback) {
     }
   });
   request.execute(callback);
-}
-
-
-
-
-
-
-/*
-//     <li class="message-left">
-//         <div>
-//             <img src="http://iconshow.me/media/images/ui/ios7-icons/png/512/contact-outline.png" class="chatIcon">                                                                    
-//             <span class="message-text"> This is Message.</span>
-//             <span class="message-time"> Here Is Time 15:48 </span>
-//         </div>
-//     </li> 
-*/
-function createMsg(direction, imgSrc, text, time) {     // Direction should be message-left or message-right => Admin Left, User Right.
-
-    var msg = document.createElement("li");
-    msg.setAttribute("class", direction);
-
-    var div = document.createElement("div");
-
-    var img = document.createElement("img");
-    img.setAttribute("src", imgSrc);
-    img.setAttribute("class", "chatIcon");
-
-    var spanMsg = document.createElement("span");
-    spanMsg.setAttribute("class", "message-text");
-    spanMsg.innerHTML = text;
-
-    var spanTime = document.createElement("span");
-    spanTime.setAttribute("class", "message-time");
-    spanTime.innerHTML = time;
-
-    div.appendChild(img);
-    div.appendChild(spanMsg);
-    div.appendChild(spanTime);
-
-    msg.appendChild(div);
-
-    return msg;
-}
-
-
-
-
-
-/*     <div>
-//         <span class="spinme-left">
-//             <div class="spinner">
-//                 <div class="bounce1"></div>
-//                 <div class="bounce2"></div>
-//                 <div class="bounce3"></div>
-//             </div>
-//         </span>
-//     </div>
-*/ 
-function createMsgSpinner() {
-    var spinner = document.createElement("div");
-
-    var span = document.createElement("span");
-    span.setAttribute("class", "spinme-left");
-
-    var divSpinner = document.createElement("div");
-    divSpinner.setAttribute("class", "spinner");
-
-    var bounce1 = document.createElement("div");
-    bounce1.setAttribute("class", "bounce1");
-
-    var bounce2 = document.createElement("div");
-    bounce2.setAttribute("class", "bounce2");
-
-    var bounce3 = document.createElement("div");
-    bounce3.setAttribute("class", "bounce3");
-
-    divSpinner.appendChild(bounce1);
-    divSpinner.appendChild(bounce2);
-    divSpinner.appendChild(bounce3);
-
-    span.appendChild(divSpinner);
-
-    spinner.appendChild(span);
-
-    return spinner;
 }
