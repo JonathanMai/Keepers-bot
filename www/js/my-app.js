@@ -18,7 +18,7 @@ $$(document).on('deviceready', function() {
 
 //relevant variables
 var ImagesURL = [];
-var Titles = [];
+// var Titles = [];
 var Contents = [];
 var Question = [];
 var Answers = [];
@@ -64,7 +64,7 @@ function stringParse(info){
     for(i = 0; i < info.length; i++){
         // Pushes all of the titles, contents, and questions into one list
         this.ImagesURL.push(info[i][0]);        
-        this.Titles.push(info[i][1]);
+        // this.Titles.push(info[i][1]);
         this.Contents.push(info[i][2]);
         this.Question.push(info[i][3]);
             console.log(info[i][0]);
@@ -90,7 +90,7 @@ function nodeOutput(index) {
     var textOutput = [];
     // Output the title inside the title at the html.  
     
-    document.getElementById('title').innerHTML = Titles[index];
+    // document.getElementById('title').innerHTML = Titles[index];
 
     // Output the content and question inside the text at the html.
     // if (Question[index]) {
@@ -135,28 +135,33 @@ function chatScreen(index, col) {
     if( Back.length == 1) {
         document.getElementById("text").appendChild(createChat());
     }
-        
+
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Answers[Back[Back.length-1]][col]));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.                
-    
+    scrollBottonUpdate();
     var msg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Contents[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
-    
+    scrollBottonUpdate();
     setTimeout(function (){
         if(document.getElementsByClassName("chat-message-list")[0]) {
             document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
             document.getElementsByClassName("chat-message-list")[0].appendChild(msg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+            scrollBottonUpdate();
             if(Question[index]) {
                 document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
+                scrollBottonUpdate();
                 var questMsg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
                 setTimeout(function (){
                     if(document.getElementsByClassName("chat-message-list")[0]) {
                         document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
                         document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
                         createButtons(index);
+                        scrollBottonUpdate();
                     }
                 }, Question[index].length*50); 
             }    
-            else {   helpfulInfo(index);    }
+            else {   
+                helpfulInfo(index);
+            }
         }
     }, Contents[index].length*50);    
     
@@ -169,7 +174,7 @@ function chatScreen(index, col) {
 // Create all the buttons and puts it in answers panel.
 function createButtons(index) {
 
-    const INSIDE_DIV = 2;   // How many divs can be in row.
+    const INSIDE_DIV = 3;   // How many divs can be in row.
 
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
     mainDiv.setAttribute("class", "mainDiv");           // set class
@@ -183,9 +188,9 @@ function createButtons(index) {
             mainDiv.setAttribute("class", "mainDiv");   // set class.
         }
         var div = document.createElement("div");
-        if(i % 2 == 0) {
+        if(i % INSIDE_DIV == 0) {
             div.setAttribute("class", "left");
-        } else {
+        } else if(i % INSIDE_DIV == 1){
             div.setAttribute("class", "right");
         }
         
@@ -235,9 +240,9 @@ function helpfulInfo(index) {
     mainDiv = document.createElement("div");    // create new div with 0 children.
     mainDiv.setAttribute("class", "mainDiv");   // set class.
 
-    //innerHTML = "<br><br>Was the information helpful?";
+    //innerHTML = "Was the information helpful?";
     var helpedText = document.createElement("p"); 
-    helpedText.innerHTML = "<br><br>Was the information helpful?";
+    helpedText.innerHTML = "Was the information helpful?";
     mainDiv.appendChild(helpedText);
 
     
@@ -345,7 +350,7 @@ function clearButtons(){
 
 function handleClientLoad() {
     var xhr = new XMLHttpRequest();
-    var range = "B2:L40";
+    var range = "B2:N40";
     xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
     xhr.send();
     xhr.onreadystatechange = function (e){

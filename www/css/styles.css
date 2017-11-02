@@ -100,7 +100,8 @@
 
 .mainDiv {
     height: 120px;
-    margin-top: 40px;
+    /* margin-top: 40px; */
+    padding-top: 25px;
     max-width: 360px;
     margin: 0 auto;
 }
@@ -218,12 +219,14 @@ body {
   margin: 0 auto;
   background: #f5f7fa;
   max-width: 420px;  
+  overflow-y: scroll;
+  height: 250px;
   
 }
 
 .chat-container {
   height: 400px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   padding-right: 16px;
   
 }
@@ -302,4 +305,8 @@ body {
 img.chatIcon {
     width: 50px;
     height: 50px;
+}
+
+span.spinme-left {
+  float:left;
 }

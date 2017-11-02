@@ -111,3 +111,13 @@ function getTimeNow() { // return time now in the next format => HH:MM
 
     return (now.getMinutes-20 < 10) ? str += "0" + now.getMinutes() : str += now.getMinutes();  
 }
+
+
+//Make sure message list is scrolled to the bottom
+function scrollBottonUpdate() {
+    var container = document.getElementsByClassName("chat")[0];
+    var containerHeight = container.clientHeight;
+    var contentHeight = container.scrollHeight;
+
+    container.scrollTop = contentHeight - containerHeight;
+}
