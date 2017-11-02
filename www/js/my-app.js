@@ -88,157 +88,189 @@ function stringParse(info){
 // ------------------------------------------------------------------------------------------------------------------
 function nodeOutput(index) {
     var textOutput = [];
-    // Output the title inside the title at the html.
-    
+    // Output the title inside the title at the html.  
     
     document.getElementById('title').innerHTML = Titles[index];
 
     // Output the content and question inside the text at the html.
-    if (Question[index]) {
-        textOutput = Contents[index] + "</br>" + Question[index];
-    }
+    // if (Question[index]) {
+        
+    // }
 
-    else{
-        textOutput = Contents[index];
-    }
+    // else{
+    //     textOutput = Contents[index];
+    // }
 
-    document.getElementById('text').innerHTML = textOutput;   
+    //document.getElementById('text').innerHTML = textOutput;   
     
     clearButtons();
     
-    const INSIDE_DIV = 2;                                   // How many div can contain in row.
-    // document.getElementById("text").appendChild(createChat());
-    // document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
-    // document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", "Hello world"));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
-    // document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", "Hello world"));
-
     // Creates answer buttons.
-    if(Question[index]) {
-        var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
-        mainDiv.setAttribute("class", "mainDiv");           // set class
-        
-        // Creates the all buttons we need using a for loop.
-        for(i = 0; i < Answers[index].length; i++)
-        {
-            if(mainDiv.childElementCount == INSIDE_DIV) {   // If the main div contain 2 children
-                answers.appendChild(mainDiv);               // append it to the dom.
-                mainDiv = document.createElement("div");    // create new div with 0 children.
-                mainDiv.setAttribute("class", "mainDiv");   // set class.
-            }
-            var div = document.createElement("div");
-            if(i % 2 == 0) {
-                div.setAttribute("class", "left");
-            } else {
-                div.setAttribute("class", "right");
-            }
-
-            var image;
-            if(index == 0) {
-                image = document.createElement("img");
-                image.setAttribute("id", "image" + i);
-                image.className = "icon";
-                image.setAttribute("src", ImagesURL[i]);
-            }
-            
-            var paragraph = document.createElement("p");
-            paragraph.className = "icon_paragraph";
-            paragraph.setAttribute("id", "par" + i);
-            
-            var button = document.createElement("button");  
-            button.id = i;
-            button.className = "categoryBtn";
-            button.addEventListener ("click", function() {
-                var temp = Next[index][this.id];
-                Back.push(index);      
-                nodeOutput(temp-1);
-            });
-            
-            paragraph.appendChild(document.createTextNode(Answers[index][i]));
-            div.appendChild(button);
-            div.appendChild(paragraph);
-            if(index == 0) {
-                button.appendChild(image);
-            } else {
-                button.appendChild(paragraph);
-                paragraph.style = "color: white"
-            }
-            // button.innerHTML = Answers[index][i];
-            var answers = document.getElementById("answers");
-            mainDiv.appendChild(div);
-            if(i == Answers[index].length - 1) {        // if the number of the buttons if odd.
-                answers.appendChild(mainDiv);           // add the last button to the DOM.
-            }
-            
+    if(index == 0)  {   createHomeScreen();    }
+    else { 
+        if( Back.length == 1) {
+        document.getElementById('text').innerHTML = textOutput;   
+        document.getElementById("text").appendChild(createChat());
         }
+        chatScreen(index);   
     }
 
     // When its the last node to show - ask if the information helped.
-    else {
-      
-        mainDiv = document.createElement("div");    // create new div with 0 children.
-        mainDiv.setAttribute("class", "mainDiv");   // set class.
+   
+}
 
-        //innerHTML = "<br><br>Was the information helpful?";
-        var helpedText = document.createElement("p"); 
-        helpedText.innerHTML = "<br><br>Was the information helpful?";
-        mainDiv.appendChild(helpedText);
+// ------------------------------------------------------------------------------------------------------------------
+// Asks the user if the information was helpful and sends the answer to google analytics.
+function createHomeScreen() {
 
+    var textOutput = Contents[0] + "</br>" + Question[0];
+    document.getElementById('text').innerHTML = textOutput;       
+    createButtons(0);
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+// Asks the user if the information was helpful and sends the answer to google analytics.
+function chatScreen(index) {
+    //var textOutput = Contents[index] + "</br>" + Question[index];
+
+    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
+    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", "Hello world"));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", "Hello world"));
+    
+
+    if(Question[index]) { createButtons(index);   }
+    else {   helpfulInfo(index);    }
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+// Create all the buttons and puts it in answers panel.
+function createButtons(index) {
+
+    const INSIDE_DIV = 2;                                   // How many div can contained in row.
+
+    var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
+    mainDiv.setAttribute("class", "mainDiv");           // set class
+
+    // Creates the all buttons we need using a for loop.
+    for(i = 0; i < Answers[index].length; i++)
+    {
+        if(mainDiv.childElementCount == INSIDE_DIV) {   // If the main div contain 2 children
+            answers.appendChild(mainDiv);               // append it to the dom.
+            mainDiv = document.createElement("div");    // create new div with 0 children.
+            mainDiv.setAttribute("class", "mainDiv");   // set class.
+        }
+        var div = document.createElement("div");
+        if(i % 2 == 0) {
+            div.setAttribute("class", "left");
+        } else {
+            div.setAttribute("class", "right");
+        }
         
-        // Left div creation - 'no' button.
-        var lefParagraph = document.createElement("p");
-        lefParagraph.className = "icon_paragraph";
-        lefParagraph.style = "color: white"
-        lefParagraph.appendChild(document.createTextNode("No"));        
+        // We need image only on main screen.
+        var image;
+        if(index == 0) {
+            image = document.createElement("img");
+            image.setAttribute("id", "image" + i);
+            image.className = "icon";
+            image.setAttribute("src", ImagesURL[i]);
+        }
         
-        var leftDiv = document.createElement("div");
-        leftDiv.setAttribute("class", "left");
+        var paragraph = document.createElement("p");
+        paragraph.className = "icon_paragraph";
+        paragraph.setAttribute("id", "par" + i);
         
-        var leftButton = document.createElement("button");  
-        leftButton.className = "categoryBtn";
-        leftButton.addEventListener ("click", function() {
-            Back = [];
-            ga('send', 'event', {
-                eventCategory: 'Information quality',
-                eventAction: 'click',
-                eventLabel: 'Not helpful content: ' + Contents[index]
-            });
-            // ga('send', 'pageview', 'Not helpful content: ' + Contents[index]);
-            // ga('send', 'event', 'Not helpful content: ' + Contents[index]);
-            // ga('send', 'item', 'Not helpful content: ' + Contents[index]);
-            nodeOutput(0);    
+        var button = document.createElement("button");  
+        button.id = i;
+        button.className = "categoryBtn";
+        button.addEventListener ("click", function() {
+            var temp = Next[index][this.id];
+            Back.push(index);      
+            nodeOutput(temp-1);
         });
         
-        leftDiv.appendChild(leftButton);
-        leftDiv.appendChild(lefParagraph);
-        leftButton.appendChild(lefParagraph)        
-        
-        mainDiv.appendChild(leftDiv);        
-        
-        // Right div creation - 'yes' button.
-        var rightParagraph = document.createElement("p");
-        rightParagraph.className = "icon_paragraph";
-        rightParagraph.style = "color: white"
-        rightParagraph.appendChild(document.createTextNode("Yes"));                
-        
-        var rightDiv = document.createElement("div");
-        rightDiv.setAttribute("class", "right");
-        
-        var rightButton = document.createElement("button");  
-        rightButton.className = "categoryBtn";
-        rightButton.addEventListener ("click", function() {
-            Back = [];
-            ga('send', 'item', 'Yes ' + Contents[index]);
-            nodeOutput(0);              
+        paragraph.appendChild(document.createTextNode(Answers[index][i]));
+        div.appendChild(button);
+        div.appendChild(paragraph);
+        if(index == 0) {
+            button.appendChild(image);
+        } else {
+            button.appendChild(paragraph);
+            paragraph.style = "color: white"
+        }
+        // button.innerHTML = Answers[index][i];
+        var answers = document.getElementById("answers");
+        mainDiv.appendChild(div);
+        if(i == Answers[index].length - 1) {        // if the number of the buttons if odd.
+            answers.appendChild(mainDiv);           // add the last button to the DOM.
+        }
+    }   
+}
+// ------------------------------------------------------------------------------------------------------------------
+// Asks the user if the information was helpful and sends the answer to google analytics.
+function helpfulInfo(index) {
+    mainDiv = document.createElement("div");    // create new div with 0 children.
+    mainDiv.setAttribute("class", "mainDiv");   // set class.
+
+    //innerHTML = "<br><br>Was the information helpful?";
+    var helpedText = document.createElement("p"); 
+    helpedText.innerHTML = "<br><br>Was the information helpful?";
+    mainDiv.appendChild(helpedText);
+
+    
+    // Left div creation - 'no' button.
+    var lefParagraph = document.createElement("p");
+    lefParagraph.className = "icon_paragraph";
+    lefParagraph.style = "color: white"
+    lefParagraph.appendChild(document.createTextNode("No"));        
+    
+    var leftDiv = document.createElement("div");
+    leftDiv.setAttribute("class", "left");
+    
+    var leftButton = document.createElement("button");  
+    leftButton.className = "categoryBtn";
+    leftButton.addEventListener ("click", function() {
+        Back = [];
+        ga('send', 'event', {
+            eventCategory: 'Information quality',
+            eventAction: 'click',
+            eventLabel: 'Not helpful content: ' + Contents[index]
         });
-        
-        rightDiv.appendChild(rightButton);
-        rightDiv.appendChild(rightParagraph);
-        rightButton.appendChild(rightParagraph)
+        // ga('send', 'pageview', 'Not helpful content: ' + Contents[index]);
+        // ga('send', 'event', 'Not helpful content: ' + Contents[index]);
+        // ga('send', 'item', 'Not helpful content: ' + Contents[index]);
+        nodeOutput(0);    
+    });
+    
+    leftDiv.appendChild(leftButton);
+    leftDiv.appendChild(lefParagraph);
+    leftButton.appendChild(lefParagraph)        
+    
+    mainDiv.appendChild(leftDiv);        
+    
+    // Right div creation - 'yes' button.
+    var rightParagraph = document.createElement("p");
+    rightParagraph.className = "icon_paragraph";
+    rightParagraph.style = "color: white"
+    rightParagraph.appendChild(document.createTextNode("Yes"));                
+    
+    var rightDiv = document.createElement("div");
+    rightDiv.setAttribute("class", "right");
+    
+    var rightButton = document.createElement("button");  
+    rightButton.className = "categoryBtn";
+    rightButton.addEventListener ("click", function() {
+        Back = [];
+        ga('send', 'item', 'Yes ' + Contents[index]);
+        nodeOutput(0);              
+    });
+    
+    rightDiv.appendChild(rightButton);
+    rightDiv.appendChild(rightParagraph);
+    rightButton.appendChild(rightParagraph)
 
-        mainDiv.appendChild(rightDiv);
+    mainDiv.appendChild(rightDiv);
 
-        document.getElementById("answers").appendChild(mainDiv);  
-    }
+    document.getElementById("answers").appendChild(mainDiv);  
 }
 
 // ------------------------------------------------------------------------------------------------------------------
