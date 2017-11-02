@@ -130,7 +130,12 @@ function createHomeScreen() {
 function chatScreen(index, col) {
     //var textOutput = Contents[index] + "</br>" + Question[index];
     clearButtons();
-    // Checks if its the first screen to show.
+
+    // Two variables that holds the last node index - we use it to print the user "message".
+    var answersRow = Back[Back.length-1][0];
+    var answersCol = Back[Back.length-1][1];
+
+    document.getElementById('backButton').disabled = true;
 
     if( Back.length == 1) {
         document.getElementById("text").appendChild(createChat());
@@ -150,17 +155,21 @@ function chatScreen(index, col) {
                 document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
                 scrollBottonUpdate();
                 var questMsg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
+                
+                // Makes the spinner work and after few seconds shows the message question and also deletes the 3 dot spinner.
                 setTimeout(function (){
                     if(document.getElementsByClassName("chat-message-list")[0]) {
                         document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
                         document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
                         createButtons(index);
-                        scrollBottonUpdate();
+                        scrollBottonUpdate();                        
+                        document.getElementById('backButton').disabled = false;                        
                     }
                 }, Question[index].length*50); 
             }    
-            else {   
-                helpfulInfo(index);
+            else {
+                document.getElementById('backButton').disabled = false;                
+                helpfulInfo(index);    
             }
         }
     }, Contents[index].length*50);    
@@ -211,9 +220,11 @@ function createButtons(index) {
         button.id = i;
         button.className = "categoryBtn";
         button.addEventListener ("click", function() {
-            document.getElementsByClassName("toolbar")[0].style = "display: block;"
             var temp = Next[index][this.id];
-            Back.push(index);      
+            var tempArr = [index, this.id];
+            console.log('temp'+this.id);
+            document.getElementsByClassName("toolbar")[0].style = "display: block;"
+            Back.push(tempArr);      
             chatScreen(temp-1, this.id);
         });
         
@@ -312,6 +323,19 @@ function clearButtons(){
   }
 }
 
+function backListener() {
+    if ((Back[Back.length-1][0]) > 0) {
+        var row = Back[Back.length-1][0];
+        var col =  Back[Back.length-1][1];
+        Back.pop();        
+        chatScreen(row,col);
+    }
+
+    else{
+        Back.pop();
+        createHomeScreen();
+    }
+}
 
 // ------------------------------------------------------------------------------------------------------------------
 // Initiates the client

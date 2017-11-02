@@ -104,12 +104,12 @@ function createMsg(direction, imgSrc, text) {     // Direction should be message
     
 }
     
-
-function getTimeNow() { // return time now in the next format => HH:MM
+// Function which returns the time in this format => HH:MM
+function getTimeNow() {
     var now = new Date();
     var str = now.getHours() + ":";
 
-    return (now.getMinutes-20 < 10) ? str += "0" + now.getMinutes() : str += now.getMinutes();  
+    return (now.getMinutes() < 10) ? str += "0" + now.getMinutes() : str += now.getMinutes();  
 }
 
 
