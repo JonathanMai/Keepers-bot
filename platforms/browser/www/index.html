@@ -1,5 +1,5 @@
 
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
     <head>
         <!--
@@ -44,13 +44,11 @@
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108462660-1"></script>
         <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-108462660-1');
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-108462660-1');
         </script>
-
     </head>
 
     <body>
@@ -61,7 +59,7 @@
         <!-- Panels overlay-->
         <div class="panel-overlay"></div>
         <!-- Left panel with reveal effect-->
-        <div class="panel panel-left panel-reveal" id="leftPanel">
+        <div class="panel panel-right panel-reveal">
             <div class="content-block">
                 <a href="#" class="fa fa-facebook" onclick="window.open('https://www.facebook.com/keeperschildsafety/', '_blank')"></a>
                 <a href="#" class="fa fa-youtube" onclick="window.open('https://www.youtube.com/channel/UCeWRhIpLDLHPssI5KhAVBqA/', '_blank')"></a>
@@ -95,19 +93,21 @@
                         <!-- Scrollable page content -->
                         <div class="page-content">
                             <div class="content-block">
-                                <h1 id="title"></h1>
-                                <p id="text"></p>
+                                <!-- <h1 id="title"></h1> -->
+                                <h3 id="text">
+                                    <!-- Append Chat Here -->
+                                </h3>
                                 <div id="answers"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Bottom Toolbar-->
-                <div class="toolbar">
+                <div class="toolbar" style="display: none;">
                     <div class="toolbar-inner">                                
                         <!--creates the home button-->
-                        <button class="buttons" id="backButton" onclick="nodeOutput((a = Back.pop()) > 0? a : 0)">Back</button> 
-                        <button class="buttons" id="homeButton" onclick="nodeOutput(0)">Home</button> 
+                        <button class="buttons" id="backButton" onclick="backListener()">Back</button> 
+                        <button class="buttons" id="homeButton" onclick="clearButtons();Back = []; createHomeScreen();">Home</button> 
                     </div>
                 </div>
             </div>
@@ -117,5 +117,6 @@
             onreadystatechange="if (this.readyState === 'complete') this.onload()">
         </script>
         <script type="text/javascript" src="js/my-app.js"></script>
+        <script type="text/javascript" src="js/chat.js"></script>
     </body>
 </html>

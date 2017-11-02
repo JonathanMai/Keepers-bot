@@ -436,29 +436,32 @@ $$(document).on('pageInit', '.page[data-page="contact"]', function (e) {
 
 
 function recieveData() {
-    var data = [];
-    data.push(document.getElementById('nameInput').value);
-    data.push(document.getElementById('emailInput').value);
-    data.push(document.getElementById('subjectInput').value);
-    data.push(document.getElementById('msgInput').value);    
-    for(i = 0; i<4; i++)
-        console.log(data[i]);
-    sendMessage("jonathann.maimon@gmail.com", document.getElementById('emailInput').value, )
+    var email = document.getElementById('emailInput').value;
+    var name = document.getElementById('nameInput').value;
+    var subject = document.getElementById('subjectInput').value;
+    var msg = document.getElementById('msgInput').value;    
+
+    sendMessage(email, name, subject, msg);
     // document.location.href = "mailto:jonathann.maimon@gmail.com?subject="
     // + encodeURIComponent(data[2])
     // + "&body=" + encodeURIComponent(data[3]);
     // at this point we need to change it to JSON format and send to the server.
     // Need the right api for it first.
 }
-function sendMessage(userId, email, callback) {
+function sendMessage(email, name, subject, msg) {
   // Using the js-base64 library for encoding:
-  // https://www.npmjs.com/package/js-base64
-  var base64EncodedEmail = Base64.encodeURI(email);
-  var request = gapi.client.gmail.users.messages.send({
-    'userId': userId,
-    'resource': {
-      'raw': base64EncodedEmail
-    }
+  var api_key = 'key-f40db47c07d08435c967f7d1c3786599';
+  var domain = 'sandbox4fd134d803914cbfb5198d49ff10d08a.mailgun.org';
+  var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+   
+  var data = {
+    from: email,
+    to: 'jonathann.maimon@gmail.com',
+    subject: suject,
+    text: 'from' + name + '<br><br>' + msg
+  };
+   
+  mailgun.messages().send(data, function (error, body) {
+    console.log(body);
   });
-  request.execute(callback);
 }
