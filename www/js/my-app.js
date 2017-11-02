@@ -145,20 +145,19 @@ function chatScreen(index, col) {
         if(document.getElementsByClassName("chat-message-list")[0]) {
             document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
             document.getElementsByClassName("chat-message-list")[0].appendChild(msg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
-        }
-        if(Question[index]) {
-            if(document.getElementsByClassName("chat-message-list")[0])
+            if(Question[index]) {
                 document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
-            var questMsg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
-            setTimeout(function (){
-                if(document.getElementsByClassName("chat-message-list")[0]) {
-                    document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
-                    document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
-                }
-                createButtons(index);
-            }, Question[index].length*50); 
-        }    
-        else {   helpfulInfo(index);    }
+                var questMsg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
+                setTimeout(function (){
+                    if(document.getElementsByClassName("chat-message-list")[0]) {
+                        document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
+                        document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+                        createButtons(index);
+                    }
+                }, Question[index].length*50); 
+            }    
+            else {   helpfulInfo(index);    }
+        }
     }, Contents[index].length*50);    
     
     //document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index])); // direction, logo, msg
