@@ -24,6 +24,7 @@ var Question = [];
 var Answers = [];
 var Next = [];
 var Back = [];
+var chatEntered;
 
 /*function makeApiCall() {
     var params = {
@@ -119,6 +120,8 @@ function nodeOutput(index) {
 // ------------------------------------------------------------------------------------------------------------------
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function createHomeScreen() {
+    chatEntered = false;
+
     var textOutput = Contents[0] + "</br>" + Question[0];
     document.getElementsByClassName("toolbar")[0].style = "display: none;"    
     document.getElementById('text').innerHTML = textOutput;       
@@ -137,7 +140,9 @@ function chatScreen(index, col) {
 
     document.getElementById('backButton').disabled = true;
 
-    if( Back.length == 1) {
+    if(!chatEntered) {
+        chatEntered = true;
+        document.getElementById('text').innerHTML = "";       
         document.getElementById("text").appendChild(createChat());
     }
 
@@ -324,6 +329,8 @@ function clearButtons(){
 }
 
 function backListener() {
+    clearButtons();
+
     if ((Back[Back.length-1][0]) > 0) {
         var row = Back[Back.length-1][0];
         var col =  Back[Back.length-1][1];
