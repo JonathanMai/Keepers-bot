@@ -141,13 +141,18 @@ function chatScreen(index, col) {
     var msg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Contents[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
     
+    // Makes the spinner work and after few seconds shows the message content.
     setTimeout(function (){
         if(document.getElementsByClassName("chat-message-list")[0]) {
             document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
             document.getElementsByClassName("chat-message-list")[0].appendChild(msg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+            
+            // Makes the second message(question message), if needed.
             if(Question[index]) {
                 document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
                 var questMsg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
+                
+                // Makes the spinner work and after few seconds shows the message question and also deletes the 3 dot spinner.
                 setTimeout(function (){
                     if(document.getElementsByClassName("chat-message-list")[0]) {
                         document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
