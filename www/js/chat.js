@@ -81,18 +81,18 @@ function createMsg(direction, imgSrc, text) {     // Direction should be message
     
         var div = document.createElement("div");
     
-        var img = document.createElement("img");
-        img.setAttribute("src", imgSrc);
-        img.setAttribute("class", "chatIcon");
-    
+        
         var spanMsg = document.createElement("span");
         spanMsg.setAttribute("class", "message-text");
         spanMsg.innerHTML = text;
-    
+        
         var spanTime = document.createElement("span");
         spanTime.setAttribute("class", "message-time");
         spanTime.innerHTML = getTimeNow();
-    
+        var img = document.createElement("img");
+        img.setAttribute("src", imgSrc);
+        img.setAttribute("class", "chatIcon");
+        
         div.appendChild(img);
         div.appendChild(spanMsg);
         div.appendChild(spanTime);
