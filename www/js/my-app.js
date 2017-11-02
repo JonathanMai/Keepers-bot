@@ -108,10 +108,7 @@ function nodeOutput(index) {
     // Creates answer buttons.
     if(index == 0)  {   createHomeScreen();    }
     else { 
-        if( Back.length == 1) {
-        document.getElementById('text').innerHTML = textOutput;   
-        document.getElementById("text").appendChild(createChat());
-        }
+
         chatScreen(index);   
     }
 
@@ -130,23 +127,46 @@ function createHomeScreen() {
 
 // ------------------------------------------------------------------------------------------------------------------
 // Asks the user if the information was helpful and sends the answer to google analytics.
-function chatScreen(index) {
+function chatScreen(index, col) {
     //var textOutput = Contents[index] + "</br>" + Question[index];
+    clearButtons();
+    // Checks if its the first screen to show.
 
+    if( Back.length == 1) {
+        document.getElementById("text").appendChild(createChat());
+    }
+        
+    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Answers[Back[Back.length-1]][col]));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.                
+    
+    var msg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Contents[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
-    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", "Hello world"));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
-    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", "Hello world"));
+    
+    setTimeout(function (){
+        document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
+        document.getElementsByClassName("chat-message-list")[0].appendChild(msg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+        
+        if(Question[index]) {
+            document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
+            var questMsg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
+            setTimeout(function (){
+                document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
+                document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+                createButtons(index);
+            }, Question[index].length*50); 
+        }    
+        else {   helpfulInfo(index);    }
+    }, Contents[index].length*50);    
+    
+    //document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index])); // direction, logo, msg
     
 
-    if(Question[index]) { createButtons(index);   }
-    else {   helpfulInfo(index);    }
 }
 
 // ------------------------------------------------------------------------------------------------------------------
 // Create all the buttons and puts it in answers panel.
 function createButtons(index) {
 
-    const INSIDE_DIV = 2;                                   // How many div can contained in row.
+    const INSIDE_DIV = 2;   // How many divs can be in row.
 
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
     mainDiv.setAttribute("class", "mainDiv");           // set class
@@ -185,7 +205,7 @@ function createButtons(index) {
         button.addEventListener ("click", function() {
             var temp = Next[index][this.id];
             Back.push(index);      
-            nodeOutput(temp-1);
+            chatScreen(temp-1, this.id);
         });
         
         paragraph.appendChild(document.createTextNode(Answers[index][i]));
