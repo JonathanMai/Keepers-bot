@@ -59,7 +59,7 @@
         <!-- Panels overlay-->
         <div class="panel-overlay"></div>
         <!-- Left panel with reveal effect-->
-        <div class="panel panel-left panel-reveal" id="leftPanel">
+        <div class="panel panel-right panel-reveal">
             <div class="content-block">
                 <a href="#" class="fa fa-facebook" onclick="window.open('https://www.facebook.com/keeperschildsafety/', '_blank')"></a>
                 <a href="#" class="fa fa-youtube" onclick="window.open('https://www.youtube.com/channel/UCeWRhIpLDLHPssI5KhAVBqA/', '_blank')"></a>
@@ -77,7 +77,7 @@
                     <div class="navbar-inner">
                         <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
                         <div class="center sliding">Keepers-bot</div>
-                        <div class="right">
+                        <div class="left">
                                 <!--
                                     Right link contains only icon - additional "icon-only" class
                                     Additional "open-panel" class tells app to open panel when we click on this link
@@ -106,8 +106,8 @@
                 <div class="toolbar">
                     <div class="toolbar-inner">                                
                         <!--creates the home button-->
-                        <button class="buttons" id="backButton" onclick="chatScreen((a = Back.pop()) > 0? a : 0)">Back</button> 
-                        <button class="buttons" id="homeButton" onclick="clearButtons();Back = []; createHomeScreen()">Home</button> 
+                        <button class="buttons" id="backButton" onclick="backListener()">Back</button> 
+                        <button class="buttons" id="homeButton" onclick="clearButtons();Back = []; createHomeScreen();">Home</button> 
                     </div>
                 </div>
             </div>
