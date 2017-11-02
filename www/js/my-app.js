@@ -119,8 +119,8 @@ function nodeOutput(index) {
 // ------------------------------------------------------------------------------------------------------------------
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function createHomeScreen() {
-
     var textOutput = Contents[0] + "</br>" + Question[0];
+    document.getElementsByClassName("toolbar")[0].style = "display: none;"    
     document.getElementById('text').innerHTML = textOutput;       
     createButtons(0);
 }
@@ -142,15 +142,19 @@ function chatScreen(index, col) {
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
     
     setTimeout(function (){
-        document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
-        document.getElementsByClassName("chat-message-list")[0].appendChild(msg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
-        
+        if(document.getElementsByClassName("chat-message-list")[0]) {
+            document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
+            document.getElementsByClassName("chat-message-list")[0].appendChild(msg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+        }
         if(Question[index]) {
-            document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
+            if(document.getElementsByClassName("chat-message-list")[0])
+                document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
             var questMsg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
             setTimeout(function (){
-                document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
-                document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+                if(document.getElementsByClassName("chat-message-list")[0]) {
+                    document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
+                    document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+                }
                 createButtons(index);
             }, Question[index].length*50); 
         }    
@@ -203,6 +207,7 @@ function createButtons(index) {
         button.id = i;
         button.className = "categoryBtn";
         button.addEventListener ("click", function() {
+            document.getElementsByClassName("toolbar")[0].style = "display: block;"
             var temp = Next[index][this.id];
             Back.push(index);      
             chatScreen(temp-1, this.id);

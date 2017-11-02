@@ -107,7 +107,7 @@
                     <div class="toolbar-inner">                                
                         <!--creates the home button-->
                         <button class="buttons" id="backButton" onclick="chatScreen((a = Back.pop()) > 0? a : 0)">Back</button> 
-                        <button class="buttons" id="homeButton" onclick="Back = []; nodeOutput(0)">Home</button> 
+                        <button class="buttons" id="homeButton" onclick="clearButtons();Back = []; createHomeScreen()">Home</button> 
                     </div>
                 </div>
             </div>
