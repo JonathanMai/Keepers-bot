@@ -37,6 +37,7 @@ function createChat() {
 /* Create dots animation like typing */
 function createMsgSpinner() {
     var spinner = document.createElement("div");
+    spinner.setAttribute("id", "spinner");
 
     var span = document.createElement("span");
     span.setAttribute("class", "spinme-left");
@@ -76,34 +77,37 @@ function createMsgSpinner() {
 */
 function createMsg(direction, imgSrc, text) {     // Direction should be message-left or message-right => Admin Left, User Right.
     
-        var msg = document.createElement("li");
-        msg.setAttribute("class", direction);
+    var msg = document.createElement("li");
+    msg.setAttribute("class", direction);
+
+    var div = document.createElement("div");
+
     
-        var div = document.createElement("div");
+    var spanMsg = document.createElement("span");
+    spanMsg.setAttribute("class", "message-text");
+    spanMsg.innerHTML = text;
     
-        
-        var spanMsg = document.createElement("span");
-        spanMsg.setAttribute("class", "message-text");
-        spanMsg.innerHTML = text;
-        
-        var spanTime = document.createElement("span");
-        spanTime.setAttribute("class", "message-time");
-        spanTime.innerHTML = getTimeNow();
-        var img = document.createElement("img");
-        img.setAttribute("src", imgSrc);
-        img.setAttribute("class", "chatIcon");
-        
-        div.appendChild(img);
-        div.appendChild(spanMsg);
-        div.appendChild(spanTime);
+    var spanTime = document.createElement("span");
+    spanTime.setAttribute("class", "message-time");
+    spanTime.innerHTML = getTimeNow();
+    var img = document.createElement("img");
+    img.setAttribute("src", imgSrc);
+    img.setAttribute("class", "chatIcon");
     
-        msg.appendChild(div);
+    div.appendChild(img);
+    div.appendChild(spanMsg);
+    div.appendChild(spanTime);
+
+    msg.appendChild(div);
+
+    return msg;
     
-        return msg;
-    }
+}
     
 
 function getTimeNow() { // return time now in the next format => HH:MM
     var now = new Date();
-    return now.getHours() + ":" + now.getMinutes();       
+    var str = now.getHours() + ":";
+
+    return (now.getMinutes-20 < 10) ? str += "0" + now.getMinutes() : str += now.getMinutes();  
 }
