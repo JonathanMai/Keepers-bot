@@ -193,6 +193,9 @@ function createButtons(index) {
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
     mainDiv.setAttribute("class", "mainDiv");           // set class
 
+    // if(chatEntered) {
+    //     mainDiv.style = "height: auto; padding-top: 10px;";
+    // }
     // Creates the all buttons we need using a for loop.
     for(i = 0; i < Answers[index].length; i++)
     {
