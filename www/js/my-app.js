@@ -256,6 +256,8 @@ function createButtons(index) {
 // ------------------------------------------------------------------------------------------------------------------
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function helpfulInfo(index) {
+    ga('create', 'UA-108462660-1',{"name": "HelpfulInfo"});        
+    
     mainDiv = document.createElement("div");    // create new div with 0 children.
     mainDiv.setAttribute("class", "mainDiv");   // set class.
 
@@ -278,10 +280,10 @@ function helpfulInfo(index) {
     leftButton.className = "categoryBtn";
     leftButton.addEventListener ("click", function() {
         Back = [];
-        ga('send', 'event', {
+        ga('HelpfulInfo.send', 'event', {
             eventCategory: 'Information quality',
             eventAction: 'click',
-            eventLabel: 'Not helpful content: ' + Contents[index]
+            eventLabel: 'Content of node ' + (index+1) + ' was not helpful.'
         });
         // ga('send', 'pageview', 'Not helpful content: ' + Contents[index]);
         // ga('send', 'event', 'Not helpful content: ' + Contents[index]);
@@ -308,7 +310,13 @@ function helpfulInfo(index) {
     rightButton.className = "categoryBtn";
     rightButton.addEventListener ("click", function() {
         Back = [];
-        ga('send', 'item', 'Yes ' + Contents[index]);
+        
+        ga('HelpfulInfo.send', 'event', {
+            eventCategory: 'Information quality',
+            eventAction: 'click',
+            eventLabel: 'Content of node ' + (index+1) + ' helped!'
+        });
+
         nodeOutput(0);              
     });
     
