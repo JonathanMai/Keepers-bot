@@ -280,15 +280,15 @@ function helpfulInfo(index) {
     leftButton.className = "categoryBtn";
     leftButton.addEventListener ("click", function() {
         Back = [];
-        ga('HelpfulInfo.send', 'event', {
+        ga('HelpfulInfo.send', 'item', {
             eventCategory: 'Information quality',
             eventAction: 'click',
             eventLabel: 'Content of node ' + (index+1) + ' was not helpful.'
         });
-        // ga('send', 'pageview', 'Not helpful content: ' + Contents[index]);
-        // ga('send', 'event', 'Not helpful content: ' + Contents[index]);
-        // ga('send', 'item', 'Not helpful content: ' + Contents[index]);
-        nodeOutput(0);    
+
+        // Returns to home screen.
+        clearButtons();
+        createHomeScreen(); 
     });
     
     leftDiv.appendChild(leftButton);
@@ -311,13 +311,13 @@ function helpfulInfo(index) {
     rightButton.addEventListener ("click", function() {
         Back = [];
         
-        ga('HelpfulInfo.send', 'event', {
+        ga('HelpfulInfo.send', 'item', {
             eventCategory: 'Information quality',
             eventAction: 'click',
-            eventLabel: 'Content of node ' + (index+1) + ' helped!'
+            eventLabel: 'helped: ' +(index+1)
         });
-
-        nodeOutput(0);              
+        clearButtons();
+        createHomeScreen();
     });
     
     rightDiv.appendChild(rightButton);
