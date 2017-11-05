@@ -473,3 +473,25 @@ function sendMessage(email, name, subject, msg) {
     console.log(body);
   });
 }
+
+function sendFeedbackMessage() {
+    $.ajax('https://api.mailgun.net/v3/sandbox4fd134d803914cbfb5198d49ff10d08a.mailgun.org/messages',
+    {
+        type:'POST',
+        username: 'api',
+        password: 'key-f40db47c07d08435c967f7d1c3786599',
+        data:{
+            'html': '<h1>TITLE-HERE</h1>',
+            'subject': 'Title',
+            'from': 'Bot New Feedback<postmaster@sandbox4fd134d803914cbfb5198d49ff10d08a.mailgun.org>',
+            'to': '<jonathann.maimon@gmail.com>'
+        },
+        success:function(a,b,c){
+            console.log( 'mail sent: ', b );
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }.bind(this),
+        error:function( xhr, status, errText ){console.log( 'mail sent failed: ', xhr.responseText );}
+    });
+} 
