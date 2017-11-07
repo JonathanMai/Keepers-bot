@@ -394,7 +394,7 @@ function backListener() {
 
 function handleClientLoad() {
     var xhr = new XMLHttpRequest();
-    var range = "B2:N40";
+    var range = "B2:Q40";
     xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
     xhr.send();
     xhr.onreadystatechange = function (e){
@@ -506,15 +506,18 @@ function sendFeedbackMessage() {
     });
 } 
 
-var red = 32;
-var green = 207;
-var blue = 228;
+const RED = 29;
+const GREEN = 186;
+const BLUE = 205;
 
 function getButtonColor(i) {
-    if(i % 2 == 0) {
-        this.red = this.red - 3;
-        this.green = this.green - 21;
-        this.blue = this.blue - 23;
+    var red, green, blue;
+    var index = i;
+    if(index % 2 != 0) {
+        index--;
     }
-    return "rgb(" + this.red + ", " + this.green + "," + this.blue + ")";
+    red = RED - (3 * index / 2);
+    green = GREEN - (21 * index / 2);
+    blue = BLUE - (23 * index / 2);
+    return "rgb(" + red + ", " + green + "," + blue + ")";
 }
