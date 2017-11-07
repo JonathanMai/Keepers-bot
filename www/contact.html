@@ -1,10 +1,5 @@
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->
-<head>
-<script
-src="https://code.jquery.com/jquery-3.2.1.js"
-integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-crossorigin="anonymous"></script>
-</head>
+
 <!-- Top Navbar-->
 <div class="navbar">
     <div class="navbar-inner">
@@ -24,7 +19,7 @@ crossorigin="anonymous"></script>
     <div data-page="about" class="page no-toolbar">
         <div class="page-content">
             <div class="content-block">
-                <form id="myform" onsubmit="sendFeedbackMessage();">
+                <form id="myform" onsubmit="sendFeedbackMessage();return false;">
                     <!-- Name input field. -->
                     <div class="item-input">
                         <input class="item-input" name="Name" type="text" id="nameInput" placeholder="Name" required>

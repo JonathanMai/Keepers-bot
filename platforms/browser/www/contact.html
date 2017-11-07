@@ -19,10 +19,10 @@
     <div data-page="about" class="page no-toolbar">
         <div class="page-content">
             <div class="content-block">
-                <form method="POST" id="myform" role="form">
+                <form id="myform" onsubmit="sendFeedbackMessage();return false;">
                     <!-- Name input field. -->
                     <div class="item-input">
-                        <input class="item-input" name="Name" type="text" id="nameInput" placeholder="Name">
+                        <input class="item-input" name="Name" type="text" id="nameInput" placeholder="Name" required>
                     </div>
                     
                     </br>
@@ -36,14 +36,14 @@
                 
                     <!-- Subject input field. -->
                     <div class="item-input">
-                        <input name="subject" type="text" id="subjectInput" placeholder="Subject">
+                        <input name="subject" type="text" id="subjectInput" placeholder="Subject" required>
                     </div>
     
                     </br>
                     
                     <!-- Message content input field. -->
                     <div class="item-input">
-                        <textarea name="message" style="resize:none" id="msgInput" rows="4" cols="50" placeholder="Message"></textarea>
+                        <textarea name="message" style="resize:none" id="msgInput" rows="4" cols="50" placeholder="Message" required></textarea>
                     </div> 
 
                     <input type="submit" class="buttons" id="sendButton" value="Send">  

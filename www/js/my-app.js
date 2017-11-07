@@ -280,10 +280,10 @@ function helpfulInfo(index) {
     leftButton.className = "categoryBtn";
     leftButton.addEventListener ("click", function() {
         Back = [];
-        ga('HelpfulInfo.send', 'item', {
+        ga('HelpfulInfo.send', 'event', {
             eventCategory: 'Information quality',
             eventAction: 'click',
-            eventLabel: 'Content of node ' + (index+1) + ' was not helpful.'
+            eventLabel: 'Didn\'t help:' + (index+1)
         });
 
         // Returns to home screen.
@@ -311,10 +311,10 @@ function helpfulInfo(index) {
     rightButton.addEventListener ("click", function() {
         Back = [];
         
-        ga('HelpfulInfo.send', 'item', {
+        ga('HelpfulInfo.send', 'event', {
             eventCategory: 'Information quality',
             eventAction: 'click',
-            eventLabel: 'helped: ' +(index+1)
+            eventLabel: 'Helped: ' +(index+1)
         });
         clearButtons();
         createHomeScreen();
@@ -444,10 +444,7 @@ $$(document).on('pageInit', '.page[data-page="contact"]', function (e) {
 
 
 function recieveData() {
-    var email = document.getElementById('emailInput').value;
-    var name = document.getElementById('nameInput').value;
-    var subject = document.getElementById('subjectInput').value;
-    var msg = document.getElementById('msgInput').value;    
+
 
     sendMessage(email, name, subject, msg);
     // document.location.href = "mailto:jonathann.maimon@gmail.com?subject="
@@ -473,18 +470,29 @@ function sendMessage(email, name, subject, msg) {
     console.log(body);
   });
 }
-
+$("#myform").on('submit', function(e) {
+    e.preventDefault();
+    console.log("WORKD");
+    sendFeedbackMessage();
+});
 function sendFeedbackMessage() {
+    var email = document.getElementById('emailInput').value;
+    var name = document.getElementById('nameInput').value;
+    var subject = document.getElementById('subjectInput').value;
+    var msg = document.getElementById('msgInput').value;    
+
     $.ajax('https://api.mailgun.net/v3/sandbox4fd134d803914cbfb5198d49ff10d08a.mailgun.org/messages',
     {
         type:'POST',
         username: 'api',
         password: 'key-f40db47c07d08435c967f7d1c3786599',
         data:{
-            'html': '<h1>TITLE-HERE</h1>',
-            'subject': 'Title',
+            'html': 'from ' + name + ', email ' + email + '<br><br>' + msg,
+            'subject': subject,
             'from': 'Bot New Feedback<postmaster@sandbox4fd134d803914cbfb5198d49ff10d08a.mailgun.org>',
-            'to': '<jonathann.maimon@gmail.com>'
+            //'from': 'Bot New Feedback<postmaster@sandbox4fd134d803914cbfb5198d49ff10d08a.mailgun.org>',
+            'to': '<jonathann.maimon@gmail.com>',
+            text: 'from' + name + '<br><br>' + msg
         },
         success:function(a,b,c){
             console.log( 'mail sent: ', b );
