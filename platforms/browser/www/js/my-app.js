@@ -17,7 +17,7 @@ $$(document).on('deviceready', function() {
 });
 
 //relevant variables
-var ImagesURL = [];
+// var ImagesURL = [];
 // var Titles = [];
 var Contents = [];
 var Question = [];
@@ -64,7 +64,7 @@ function stringParse(info){
     //loops through information given to format it
     for(i = 0; i < info.length; i++){
         // Pushes all of the titles, contents, and questions into one list
-        this.ImagesURL.push(info[i][0]);        
+        // this.ImagesURL.push(info[i][0]);        
         // this.Titles.push(info[i][1]);
         this.Contents.push(info[i][2]);
         this.Question.push(info[i][3]);
@@ -123,7 +123,7 @@ function createHomeScreen() {
     chatEntered = false;
 
     var textOutput = Contents[0] + "</br>" + Question[0];
-    document.getElementsByClassName("toolbar")[0].style = "display: none;"    
+    // document.getElementsByClassName("toolbar")[0].style = "display: none;"    
     document.getElementById('text').innerHTML = textOutput;       
     createButtons(0);
 }
@@ -188,7 +188,7 @@ function chatScreen(index, col) {
 // Create all the buttons and puts it in answers panel.
 function createButtons(index) {
 
-    const INSIDE_DIV = 3;   // How many divs can be in row.
+    const INSIDE_DIV = 2;   // How many divs can be in row.
 
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
     mainDiv.setAttribute("class", "mainDiv");           // set class
@@ -212,13 +212,13 @@ function createButtons(index) {
         }
         
         // We need image only on main screen.
-        var image;
-        if(index == 0) {
-            image = document.createElement("img");
-            image.setAttribute("id", "image" + i);
-            image.className = "icon";
-            image.setAttribute("src", ImagesURL[i]);
-        }
+        // var image;
+        // if(index == 0) {
+        //     image = document.createElement("img");
+        //     image.setAttribute("id", "image" + i);
+        //     image.className = "icon";
+        //     image.setAttribute("src", ImagesURL[i]);
+        // }
         
         var paragraph = document.createElement("p");
         paragraph.className = "icon_paragraph";
@@ -231,7 +231,7 @@ function createButtons(index) {
             var temp = Next[index][this.id];
             var tempArr = [index, this.id];
             console.log('temp'+this.id);
-            document.getElementsByClassName("toolbar")[0].style = "display: block;"
+            // document.getElementsByClassName("toolbar")[0].style = "display: block;"
             Back.push(tempArr);      
             chatScreen(temp-1, this.id);
         });
@@ -239,12 +239,12 @@ function createButtons(index) {
         paragraph.appendChild(document.createTextNode(Answers[index][i]));
         div.appendChild(button);
         div.appendChild(paragraph);
-        if(index == 0) {
-            button.appendChild(image);
-        } else {
+        // if(index == 0) {
+        //     button.appendChild(image);
+        // } else {
             button.appendChild(paragraph);
             paragraph.style = "color: white"
-        }
+        // }
         // button.innerHTML = Answers[index][i];
         var answers = document.getElementById("answers");
         mainDiv.appendChild(div);

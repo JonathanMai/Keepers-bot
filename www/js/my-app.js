@@ -17,7 +17,7 @@ $$(document).on('deviceready', function() {
 });
 
 //relevant variables
-var ImagesURL = [];
+// var ImagesURL = [];
 // var Titles = [];
 var Contents = [];
 var Question = [];
@@ -64,7 +64,7 @@ function stringParse(info){
     //loops through information given to format it
     for(i = 0; i < info.length; i++){
         // Pushes all of the titles, contents, and questions into one list
-        this.ImagesURL.push(info[i][0]);        
+        // this.ImagesURL.push(info[i][0]);        
         // this.Titles.push(info[i][1]);
         this.Contents.push(info[i][2]);
         this.Question.push(info[i][3]);
@@ -123,7 +123,7 @@ function createHomeScreen() {
     chatEntered = false;
 
     var textOutput = Contents[0] + "</br>" + Question[0];
-    document.getElementsByClassName("toolbar")[0].style = "display: none;"    
+    // document.getElementsByClassName("toolbar")[0].style = "display: none;"    
     document.getElementById('text').innerHTML = textOutput;       
     createButtons(0);
 }
@@ -231,7 +231,7 @@ function createButtons(index) {
             var temp = Next[index][this.id];
             var tempArr = [index, this.id];
             console.log('temp'+this.id);
-            document.getElementsByClassName("toolbar")[0].style = "display: block;"
+            // document.getElementsByClassName("toolbar")[0].style = "display: block;"
             Back.push(tempArr);      
             chatScreen(temp-1, this.id);
         });
