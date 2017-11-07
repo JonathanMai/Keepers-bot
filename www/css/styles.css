@@ -80,7 +80,7 @@
 }
 
 .categoryBtn {
-    background-color: #008CBA;
+    /* background-color: rgb(29, 187, 205);  (30,175,192) */
     border-radius: 100px;
     border: none;
     width: 150px;
@@ -96,9 +96,9 @@
 .mainDiv {
     /* height: 150px;  If 3 or more cols so must be off */
     /* margin-top: 40px; */
-    padding-top: 25px;
-    padding-bottom: 25px;
-    max-width: 360px;
+    padding-top: 10px;
+    padding-bottom: 23px;
+    max-width: 315px;
     margin: 0 auto;
 }
 
@@ -115,7 +115,7 @@
     float: right;
 }
 
-@media screen and (max-width: 200px){
+@media screen and (max-width: 333px){
     .left {
         float: none;
         height: auto;
@@ -132,8 +132,8 @@
 
     .mainDiv {
         height: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        padding-top: 0px;
+        padding-bottom: 0px;
     }
 }
 

@@ -227,6 +227,8 @@ function createButtons(index) {
         var button = document.createElement("button");  
         button.id = i;
         button.className = "categoryBtn";
+        var color = getButtonColor(i);
+        button.setAttribute("style", "background:" + color +  ";");
         button.addEventListener ("click", function() {
             var temp = Next[index][this.id];
             var tempArr = [index, this.id];
@@ -503,3 +505,16 @@ function sendFeedbackMessage() {
         error:function( xhr, status, errText ){console.log( 'mail sent failed: ', xhr.responseText );}
     });
 } 
+
+var red = 32;
+var green = 207;
+var blue = 228;
+
+function getButtonColor(i) {
+    if(i % 2 == 0) {
+        this.red = this.red - 3;
+        this.green = this.green - 21;
+        this.blue = this.blue - 23;
+    }
+    return "rgb(" + this.red + ", " + this.green + "," + this.blue + ")";
+}
