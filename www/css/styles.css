@@ -119,15 +119,15 @@
     .left {
         float: none;
         height: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 7px;
+        margin-bottom: 7px;
     }
 
     .right {
         float: none;
         height: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 7px;
+        margin-bottom: 7px;
     }
 
     .mainDiv {
