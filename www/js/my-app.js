@@ -188,7 +188,7 @@ function chatScreen(index, col) {
 // Create all the buttons and puts it in answers panel.
 function createButtons(index) {
 
-    const INSIDE_DIV = 3;   // How many divs can be in row.
+    const INSIDE_DIV = 2;   // How many divs can be in row.
 
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
     mainDiv.setAttribute("class", "mainDiv");           // set class
@@ -212,13 +212,13 @@ function createButtons(index) {
         }
         
         // We need image only on main screen.
-        var image;
-        if(index == 0) {
-            image = document.createElement("img");
-            image.setAttribute("id", "image" + i);
-            image.className = "icon";
-            image.setAttribute("src", ImagesURL[i]);
-        }
+        // var image;
+        // if(index == 0) {
+        //     image = document.createElement("img");
+        //     image.setAttribute("id", "image" + i);
+        //     image.className = "icon";
+        //     image.setAttribute("src", ImagesURL[i]);
+        // }
         
         var paragraph = document.createElement("p");
         paragraph.className = "icon_paragraph";
@@ -239,12 +239,12 @@ function createButtons(index) {
         paragraph.appendChild(document.createTextNode(Answers[index][i]));
         div.appendChild(button);
         div.appendChild(paragraph);
-        if(index == 0) {
-            button.appendChild(image);
-        } else {
+        // if(index == 0) {
+        //     button.appendChild(image);
+        // } else {
             button.appendChild(paragraph);
             paragraph.style = "color: white"
-        }
+        // }
         // button.innerHTML = Answers[index][i];
         var answers = document.getElementById("answers");
         mainDiv.appendChild(div);
