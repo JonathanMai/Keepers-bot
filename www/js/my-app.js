@@ -230,6 +230,8 @@ function createButtons(index) {
         button.addEventListener ("click", function() {
             var temp = Next[index][this.id];
             var tempArr = [index, this.id];
+            if(index == 0)
+                document.getElementById("backButton").style = "display: block;"             
             console.log('temp'+this.id);
             // document.getElementsByClassName("toolbar")[0].style = "display: block;"
             Back.push(tempArr);      

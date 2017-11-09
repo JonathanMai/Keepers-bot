@@ -97,7 +97,10 @@
                         <!-- Scrollable page content -->
                         <div class="page-content">
                             <div class="content-block">
-                                <!-- <h1 id="title"></h1> -->
+                                    <span>
+                                        <i class="icon icon-back" id="backButton" onclick="backListener()" style="display: none;"></i>
+                                        <div id="title">Our Consultants</div>
+                                    </span>
                                 <h3 id="text">
                                     <!-- Append Chat Here -->
                                 </h3>
@@ -107,13 +110,13 @@
                     </div>
                 </div>
                 <!-- Bottom Toolbar-->
-                <div class="toolbar" style="display: none;">
+                <!-- <div class="toolbar" style="display: none;"> -->
                     <!-- <div class="toolbar-inner">                                 -->
                         <!--creates the home button-->
                         <button class="buttons" id="backButton" onclick="backListener()">Back</button> 
                         <!-- <button class="buttons" id="homeButton" onclick="clearButtons();Back = []; createHomeScreen();">Home</button> 
                     </div> -->
-                </div>
+                <!-- </div> -->
             </div>
         </div>
         <script async defer src="https://apis.google.com/js/api.js"
