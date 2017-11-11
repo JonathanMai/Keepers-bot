@@ -319,9 +319,11 @@ span.spinme-left {
 }
 
 .navbar-inner {
-  background:rgb(23, 144,159);
+  background:rgb(26, 165,182);
 }
 
 i.icon.icon-bars {
-  background-image: url();
+  width: 20px;
+  height: 20px;
+  background-image: url("../assets/Messages.png");
 }
