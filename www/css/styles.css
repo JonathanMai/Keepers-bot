@@ -10,6 +10,15 @@
    See https://github.com/apache/cordova-plugin-statusbar
 */
 
+/* Add background image. */
+/* div.page-content {
+  background: url("../assets/Background.png") no-repeat center center fixed; 
+  -webkit-background-size: 80%;
+  -moz-background-size: 80%;
+  -o-background-size: 80%;
+  background-size: 80%;
+} */
+
 .statusbar-overlay {
     background: #000000;
 }
@@ -94,8 +103,10 @@
 }
 
 #titleImage {
+  display: block;
+  margin: 0 auto;
   height: 120px;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 #backButton {
@@ -106,7 +117,9 @@
 }
 
 #title {
+  line-height: 20px;
   font-size: 30px;
+  margin-bottom: 0px;
 }
 
 #text {
