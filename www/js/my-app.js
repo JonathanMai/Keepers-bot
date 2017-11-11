@@ -18,7 +18,7 @@ $$(document).on('deviceready', function() {
 
 //relevant variables
 // var ImagesURL = [];
-// var Titles = [];
+var Titles = [];
 var Contents = [];
 var Question = [];
 var Answers = [];
@@ -26,34 +26,19 @@ var Next = [];
 var Back = [];
 var chatEntered;
 
-/*function makeApiCall() {
-    var params = {
-        // The ID of the spreadsheet to retrieve data from.
-        spreadsheetId: '16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0',  // TODO: Update placeholder value.
-        //spreadsheetId: '19mGKx7aMqjc_bSVCJ_04tnwTAguLLGK5kPrkF7wI4jE',  // TODO: Update placeholder value.
-        // The A1 notation of the values to retrieve.
-        range: 'B2:J9',  // TODO: Update placeholder value.
-        // How values should be represented in the output.
-        // The default render option is ValueRenderOption.FORMATTED_VALUE.
-        valueRenderOption: 'FORMATTED_VALUE',  // TODO: Update placeholder value.
-        // How dates, times, and durations should be represented in the output.
-        // This is ignored if value_render_option is
-        // FORMATTED_VALUE.
-        // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
-        dateTimeRenderOption: 'SERIAL_NUMBER',  // TODO: Update placeholder value.
-        majorDimension: 'ROWS',
-    };
-
-    var request = gapi.client.sheets.spreadsheets.values.get(params);
-
-    request.then(function(response) {
-        // TODO: Change code below to process the `response` object:
-        stringParse(response.result.values);
-        console.log(response.result);
-    }, function(reason) {
-        console.error('error: ' + reason.result.error.message);
-    });
-}*/
+// Connects to the google sheets server and asks for the sheet we need to work with.
+function handleClientLoad() {
+    var xhr = new XMLHttpRequest();
+    var range = "B2:Q40";
+    xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
+    xhr.send();
+    xhr.onreadystatechange = function (e){
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            stringParse(response.values);
+        }
+    }
+}
 
 // ------------------------------------------------------------------------------------------------------------------
 //This function is my main addition to this code.  It is meant to take in the relevant data and format it for later use
@@ -64,13 +49,11 @@ function stringParse(info){
     //loops through information given to format it
     for(i = 0; i < info.length; i++){
         // Pushes all of the titles, contents, and questions into one list
-        // this.ImagesURL.push(info[i][0]);        
-        // this.Titles.push(info[i][1]);
-        this.Contents.push(info[i][2]);
-        this.Question.push(info[i][3]);
-            console.log(info[i][0]);
+        this.Titles.push(info[i][0]);
+        this.Contents.push(info[i][1]);
+        this.Question.push(info[i][2]);
         // Pushes all of the answers into one list
-        for(q = 4; q < info[i].length; q++){
+        for(q = 3; q < info[i].length; q++){
             AnswersList.push(info[i][q].slice(0, info[i][q].length - 3));
             NextList.push(parseInt(info[i][q].slice(info[i][q].length - 2, info[i][q].length - 1)));
         }
@@ -360,68 +343,6 @@ function backListener() {
         createHomeScreen();
     }
 }
-
-// ------------------------------------------------------------------------------------------------------------------
-// Initiates the client
-/*function initClient() {
-    var API_KEY = 'AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak';  // TODO: Update placeholder with desired API key.
-    
-    //var API_KEY = 'AIzaSyD1548_G7dQRFH7us5ziBpOp-DRRQ3w1yk';  // TODO: Update placeholder with desired API key.
-    var CLIENT_ID = '264708841934-nceklkm8rbtougbded3ihr25cr1v30lq.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
-    //var CLIENT_ID = '371986161218-v1ejafinod0idod1dl5jll2nrap36q5o.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
-    // TODO: Authorize using one of the following scopes:
-    //   'https://www.googleapis.com/auth/drive'
-    //   'https://www.googleapis.com/auth/drive.file'
-    //   'https://www.googleapis.com/auth/drive.readonly'
-    //   'https://www.googleapis.com/auth/spreadsheets'
-    //   'https://www.googleapis.com/auth/spreadsheets.readonly'
-    var SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
-    gapi.client.init({
-        'apiKey': API_KEY,
-        'clientId': CLIENT_ID,
-        'scope': SCOPE,
-        'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-    }).then(function() {
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
-        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-    });
-}*/
-
-// ------------------------------------------------------------------------------------------------------------------
-// Loads the client so that a user may log in
-/*function handleClientLoad() {
-    gapi.load('client:auth2', initClient);
-    setTimeout(function(){
-        handleSignIn();
-    },5000);    
-}*/
-
-function handleClientLoad() {
-    var xhr = new XMLHttpRequest();
-    var range = "B2:Q40";
-    xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
-    xhr.send();
-    xhr.onreadystatechange = function (e){
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var response = JSON.parse(xhr.responseText);
-            stringParse(response.values);
-        }
-    }
-}
- 
-// ------------------------------------------------------------------------------------------------------------------
-// Grabs the data if the user is signed in
-/*function updateSignInStatus(isSignedIn) {
-    if (isSignedIn)
-        makeApiCall();
-}*/
- 
- // ------------------------------------------------------------------------------------------------------------------
- //signs in a user
-/*function handleSignIn() {
-    gapi.auth2.getAuthInstance().signIn();
-}*/
-
  
 // Now we need to run the code that will be executed only for Contact page.
 
