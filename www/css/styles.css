@@ -102,7 +102,7 @@
     height: 30px;
     margin: 15px 5px 4px 10px;
     max-height: 30px;
-    
+    display: none;
 }
 
 #title {
@@ -332,11 +332,9 @@ span.spinme-left {
 }
 
 .navbar-inner {
-  background:rgb(26, 165,182);
+  background:rgb(23, 144,159);
 }
 
-i.icon.icon-contact-us {
-  width: 25px;
-  height: 30px;
-  background-image: url("../assets/Messages.png");
+i.icon.icon-bars {
+
 }

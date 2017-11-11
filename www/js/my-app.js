@@ -104,7 +104,9 @@ function nodeOutput(index) {
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function createHomeScreen() {
     var index = 0;
-
+    if (chatEntered) {
+        document.getElementById("titleImage").style.display = "unset";        
+    }
     chatEntered = false;
     document.getElementById('title').innerHTML = Titles[index];
     document.getElementById('contents').innerHTML = Contents[index]
@@ -127,13 +129,20 @@ function chatScreen(index, col) {
 
     if(!chatEntered) {
         chatEntered = true;
-        document.getElementById('text').innerHTML = "";       
+        document.getElementById("titleImage").style.display = "none";
+        document.getElementById("backButton").style.display = "unset"         
+        document.getElementById("title").innerHTML = Answers[answersRow][answersCol];
+        document.getElementById("text").innerHTML = "";       
         document.getElementById("text").appendChild(createChat());
+        document.getElementById("contents").innerHTML = "";
     }
 
-    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Answers[answersRow][answersCol]));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.                
+    else {
+        document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", Answers[answersRow][answersCol]));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.                
+    }
+
     scrollBottonUpdate();
-    var msg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Contents[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+    var msg = createMsg("message-left", Contents[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
     scrollBottonUpdate();
     setTimeout(function (){
@@ -144,7 +153,7 @@ function chatScreen(index, col) {
             if(Question[index]) {
                 document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
                 scrollBottonUpdate();
-                var questMsg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
+                var questMsg = createMsg("message-left", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
                 
                 // Makes the spinner work and after few seconds shows the message question and also deletes the 3 dot spinner.
                 setTimeout(function (){
@@ -217,10 +226,6 @@ function createButtons(index) {
         button.addEventListener ("click", function() {
             var temp = Next[index][this.id];
             var tempArr = [index, this.id];
-            if(index == 0){
-                document.getElementById("backButton").style = "display: block;" 
-                console.log("done");    
-            }        
             console.log('temp'+this.id);
             // document.getElementsByClassName("toolbar")[0].style = "display: block;"
             Back.push(tempArr);      
