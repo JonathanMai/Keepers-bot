@@ -330,3 +330,11 @@ img.chatIcon {
 span.spinme-left {
   float:left;
 }
+
+.navbar-inner {
+  background:rgb(23, 144,159);
+}
+
+i.icon.icon-bars {
+  background-image: url();
+}
