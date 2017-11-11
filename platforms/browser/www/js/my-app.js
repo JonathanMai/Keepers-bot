@@ -66,7 +66,7 @@ function stringParse(info){
     }
     
     // Starts to output the first node in the decision tree.
-    nodeOutput(0);
+    createHomeScreen();
 }
 
 // ------------------------------------------------------------------------------------------------------------------
@@ -103,11 +103,13 @@ function nodeOutput(index) {
 // ------------------------------------------------------------------------------------------------------------------
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function createHomeScreen() {
-    chatEntered = false;
+    var index = 0;
 
-    var textOutput = Contents[0] + "</br>" + Question[0];
+    chatEntered = false;
+    document.getElementById('title').innerHTML = Titles[index];
+    document.getElementById('contents').innerHTML = Contents[index]
+    document.getElementById('text').innerHTML = Question[index];       
     // document.getElementsByClassName("toolbar")[0].style = "display: none;"    
-    document.getElementById('text').innerHTML = textOutput;       
     createButtons(0);
 }
 
