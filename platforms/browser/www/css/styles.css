@@ -330,3 +330,13 @@ img.chatIcon {
 span.spinme-left {
   float:left;
 }
+
+.navbar-inner {
+  background:rgb(26, 165,182);
+}
+
+i.icon.icon-contact-us {
+  width: 25px;
+  height: 30px;
+  background-image: url("../assets/Messages.png");
+}
