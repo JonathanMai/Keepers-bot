@@ -111,27 +111,28 @@
                         <!-- Scrollable page content -->
                         <div class="page-content">
                             <div class="content-block">
-                                    <div class="flex-container">
-                                        <img id="titleImage" src="assets/Consultant.png">
-                                        <p id="title">
-                                            <img id="backButton" src="assets/Back.png" onclick="backListener()"/>                                                
-                                        </p>
-                                        <img src="assets/Line.png" style="width: 90%; max-height: 6px;"/>                                        
-                                    </div>
-                                <h3 id="contents" style="margin: 0px;"></h3>
-                                <div id="text">
-                                    <!-- Append Chat Here -->
+                                <div class="flex-container">
+                                    <img id="titleImage" src="assets/Consultant.png">
+                                    <p id="title">
+                                        <!-- <img id="backButton" src="assets/Back.png" onclick="backListener()"/>                                                 -->
+                                    </p>
+                                    <img id="breakline" src="assets/Line.png"/>                                        
                                 </div>
-                                <div id="answers"></div> 
+                                <div>
+                                    <p id="contents"></p>
+                                    <div id="text">
+                                        <!-- Append Chat Here -->
+                                    </div>
+                                    <div id="answers"></div> 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 <!-- Bottom Toolbar-->
                 <!-- <div class="toolbar" style="display: none;"> -->
                     <!-- <div class="toolbar-inner">                                 -->
                         <!--creates the home button-->
-                        <button class="buttons" id="backButton" onclick="backListener()">Back</button> 
+                    <button class="buttons" id="backButton" onclick="backListener()">Back</button> 
                         <!-- <button class="buttons" id="homeButton" onclick="clearButtons();Back = []; createHomeScreen();">Home</button> 
                     </div> -->
                 <!-- </div> -->

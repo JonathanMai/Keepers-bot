@@ -46,6 +46,13 @@
   background: #bb0000;
   color: white;
 }
+
+#contents {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 290px;
+  line-height: 30px;
+}
   
 
 /* .bottomPanel{
@@ -352,4 +359,9 @@ i.icon.icon-contact-us {
   width: 25px;
   height: 30px;
   background-image: url("../assets/Messages.png");
+}
+
+img#breakline {
+  width: 90%; 
+  max-height: 6px;
 }
