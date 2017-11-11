@@ -52,55 +52,63 @@
     justify-content: center;
 }
  */
-.backButton {
+ 
+ .buttons {
+   background-color: #008CBA;
+   border: none;
+   color: white;
+   border-radius: 15px;
+   padding: 10px 25px; 
+   text-align: center;
+   text-decoration: none;
+   display: flex;
+   font-size: 11px;
+   margin: 4px 2px;
+   cursor: pointer;
+   box-shadow: 0 3px #999;
+  }
   
-}
-.buttons {
-    background-color: #008CBA;
-    border: none;
-    color: white;
-    border-radius: 15px;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: flex;
-    font-size: 11px;
-    margin: 4px 2px;
-    cursor: pointer;
-    box-shadow: 0 3px #999;
-}
-
 .buttons:hover {
-    background-color: white;
-    color: #008CBA;
-    border: 1.5px solid #2747AA;
+  background-color: white;
+  color: #008CBA;
+  border: 1.5px solid #2747AA;
 }
 
 .buttons:active {
-    box-shadow: 0 1px #666;
-    transform: translateY(2px);
+  box-shadow: 0 1px #666;
+  transform: translateY(2px);
 }
 
 .categoryBtn {
-    background-color: #008CBA;
-    border-radius: 100px;
-    border: none;
-    width: 150px;
-    height: 25px;
+  /* background-color: rgb(29, 187, 205);  (30,175,192) */
+  border-radius: 100px;
+  border: none;
+  width: 150px;
+  height: 25px;
 }
 
 .content-block {
-    text-align: center;
-    margin: 0 auto;
-    max-width: 420;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 420;
 }
 
+#titleImage {
+  height: 120px;
+}
+
+#backButton {
+    height: 30px;
+    margin: 15px 5px 4px 10px;
+    max-height: 30px;
+    
+}
 .mainDiv {
-    /* height: 150px;  If 3 or more cols so must be off */
+  /* height: 150px;  If 3 or more cols so must be off */
     /* margin-top: 40px; */
-    padding-top: 25px;
-    padding-bottom: 25px;
-    max-width: 360px;
+    padding-top: 10px;
+    padding-bottom: 23px;
+    max-width: 315px;
     margin: 0 auto;
 }
 
@@ -117,25 +125,25 @@
     float: right;
 }
 
-@media screen and (max-width: 200px){
+@media screen and (max-width: 333px){
     .left {
         float: none;
         height: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 7px;
+        margin-bottom: 7px;
     }
 
     .right {
         float: none;
         height: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 7px;
+        margin-bottom: 7px;
     }
 
     .mainDiv {
         height: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        padding-top: 0px;
+        padding-bottom: 0px;
     }
 }
 

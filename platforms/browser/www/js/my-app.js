@@ -227,11 +227,15 @@ function createButtons(index) {
         var button = document.createElement("button");  
         button.id = i;
         button.className = "categoryBtn";
+        var color = getButtonColor(i);
+        button.setAttribute("style", "background:" + color +  ";");
         button.addEventListener ("click", function() {
             var temp = Next[index][this.id];
             var tempArr = [index, this.id];
-            if(index == 0)
-                document.getElementById("backButton").style = "display: block;"             
+            if(index == 0){
+                document.getElementById("backButton").style = "display: block;" 
+                console.log("done");    
+            }        
             console.log('temp'+this.id);
             // document.getElementsByClassName("toolbar")[0].style = "display: block;"
             Back.push(tempArr);      
@@ -394,7 +398,7 @@ function backListener() {
 
 function handleClientLoad() {
     var xhr = new XMLHttpRequest();
-    var range = "B2:N40";
+    var range = "B2:Q40";
     xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
     xhr.send();
     xhr.onreadystatechange = function (e){
@@ -505,3 +509,19 @@ function sendFeedbackMessage() {
         error:function( xhr, status, errText ){console.log( 'mail sent failed: ', xhr.responseText );}
     });
 } 
+
+const RED = 29;
+const GREEN = 186;
+const BLUE = 205;
+
+function getButtonColor(i) {
+    var red, green, blue;
+    var index = i;
+    if(index % 2 != 0) {
+        index--;
+    }
+    red = RED - (3 * index / 2);
+    green = GREEN - (21 * index / 2);
+    blue = BLUE - (23 * index / 2);
+    return "rgb(" + red + ", " + green + "," + blue + ")";
+}
