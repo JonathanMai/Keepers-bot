@@ -113,6 +113,17 @@
   font-size: 15px;
 }
 
+.lines {
+  height: 1px;
+  width: 80%;
+  background-color: grey;
+  display: none;
+}
+
+#topLine {
+  display: block;
+}
+
 #answers {
   
 }

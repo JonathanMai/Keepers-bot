@@ -65,7 +65,8 @@ function stringParse(info){
         NextList = [];
     }
     
-    // Starts to output the first node in the decision tree.
+    // Creates the home screen with all the information we got from the google sheet.
+    // It starts to output the first node in the google sheet.
     createHomeScreen();
 }
 
@@ -106,11 +107,13 @@ function createHomeScreen() {
     var index = 0;
     if (chatEntered) {
         document.getElementById("titleImage").style.display = "unset";        
+        document.getElementsByClassName("lines")[0].style = ""; // Change top line color on home screen.  
+        document.getElementsByClassName("lines")[1].style = ""; // Change top line color on home screen.          
     }
     chatEntered = false;
-    document.getElementById('title').innerHTML = Titles[index];
-    document.getElementById('contents').innerHTML = Contents[index]
-    document.getElementById('text').innerHTML = Question[index];       
+    document.getElementById("title").innerHTML = Titles[index];
+    document.getElementById("contents").innerHTML = Contents[index];
+    document.getElementById("text").innerHTML = Question[index];  
     // document.getElementsByClassName("toolbar")[0].style = "display: none;"    
     createButtons(0);
 }
@@ -125,8 +128,11 @@ function chatScreen(index, col) {
     var answersRow = Back[Back.length-1][0];
     var answersCol = Back[Back.length-1][1];
 
-    document.getElementById('backButton').disabled = true;
-
+    // document.getElementById('backButton').disabled = true;
+    document.getElementById("backButton").style.pointerEvents = "none";
+    document.getElementById("backButton").style = "color: grey;";  
+    document.getElementsByClassName("lines")[0].style = "background-color: #1DBACD;"; // Change top line color on home screen.      
+    
     if(!chatEntered) {
         chatEntered = true;
         document.getElementById("titleImage").style.display = "none";
@@ -135,6 +141,7 @@ function chatScreen(index, col) {
         document.getElementById("text").innerHTML = "";       
         document.getElementById("text").appendChild(createChat());
         document.getElementById("contents").innerHTML = "";
+        document.getElementsByClassName("lines")[1].style.display = "block"         
     }
 
     else {
@@ -162,12 +169,14 @@ function chatScreen(index, col) {
                         document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
                         createButtons(index);
                         scrollBottonUpdate();                        
-                        document.getElementById('backButton').disabled = false;                        
+                        // document.getElementById('backButton').disabled = false; 
+                        document.getElementById('backButton').style.pointerEvents = 'auto';
                     }
                 }, Question[index].length*50); 
             }    
             else {
-                document.getElementById('backButton').disabled = false;                
+                // document.getElementById('backButton').disabled = false;  
+                document.getElementById('backButton').style.pointerEvents = 'auto';                
                 helpfulInfo(index);    
             }
         }

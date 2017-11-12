@@ -96,8 +96,7 @@ function createMsg(direction, text) {     // Direction should be message-left or
 
     msg.appendChild(div);
 
-    return msg;
-    
+    return msg;  
 }
     
 // Function which returns the time in this format => HH:MM
