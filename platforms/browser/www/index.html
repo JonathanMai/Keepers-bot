@@ -113,16 +113,20 @@
                             <div class="content-block">
                                 <div class="flex-container">
                                     <img id="titleImage" src="assets/Consultant.png">
-                                    <p id="title">
+                                <img id="backButton" src="assets/Back.png" onclick="backListener()"/>
+                                <p id="title">
                                         <!-- <img id="backButton" src="assets/Back.png" onclick="backListener()"/>                                                 -->
                                     </p>
-                                    <img id="breakline" src="assets/Line.png"/>                                        
+                                    <hr class="lines" id="topLine">
                                 </div>
                                 <div>
                                     <p id="contents"></p>
                                     <div id="text">
                                         <!-- Append Chat Here -->
                                     </div>
+
+                                    <hr class="lines">
+                                    
                                     <div id="answers"></div> 
                                 </div>
                             </div>
@@ -132,7 +136,7 @@
                 <!-- <div class="toolbar" style="display: none;"> -->
                     <!-- <div class="toolbar-inner">                                 -->
                         <!--creates the home button-->
-                    <button class="buttons" id="backButton" onclick="backListener()">Back</button> 
+                        <!-- <button class="buttons" id="backButton" onclick="backListener()">Back</button>  -->
                         <!-- <button class="buttons" id="homeButton" onclick="clearButtons();Back = []; createHomeScreen();">Home</button> 
                     </div> -->
                 <!-- </div> -->

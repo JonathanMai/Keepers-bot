@@ -65,7 +65,8 @@ function stringParse(info){
         NextList = [];
     }
     
-    // Starts to output the first node in the decision tree.
+    // Creates the home screen with all the information we got from the google sheet.
+    // It starts to output the first node in the google sheet.
     createHomeScreen();
 }
 
@@ -104,9 +105,15 @@ function nodeOutput(index) {
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function createHomeScreen() {
     var index = 0;
+    if (chatEntered) {
+        document.getElementById("titleImage").style.display = "unset";        
+        document.getElementsByClassName("lines")[0].style = ""; // Change top line color on home screen.  
+        document.getElementsByClassName("lines")[1].style = ""; // Change top line color on home screen.          
+        document.getElementById('contents').innerHTML = "";   
+        document.getElementById('text').innerHTML = "";           
+    }
+    
     chatEntered = false;
-    document.getElementById('contents').innerHTML = "";   
-    document.getElementById('text').innerHTML = "";           
     document.getElementById('title').innerHTML = Titles[index];
 
     var bold = document.createElement("b");
@@ -129,17 +136,28 @@ function chatScreen(index, col) {
     var answersRow = Back[Back.length-1][0];
     var answersCol = Back[Back.length-1][1];
 
-    document.getElementById('backButton').disabled = true;
-
+    // document.getElementById('backButton').disabled = true;
+    document.getElementById("backButton").style.pointerEvents = "none";
+    document.getElementById("backButton").style = "color: grey;";  
+    document.getElementsByClassName("lines")[0].style = "background-color: #1DBACD;"; // Change top line color on home screen.      
+    
     if(!chatEntered) {
         chatEntered = true;
-        document.getElementById('text').innerHTML = "";       
+        document.getElementById("titleImage").style.display = "none";
+        document.getElementById("backButton").style.display = "unset"         
+        document.getElementById("title").innerHTML = Answers[answersRow][answersCol];
+        document.getElementById("text").innerHTML = "";       
         document.getElementById("text").appendChild(createChat());
+        document.getElementById("contents").innerHTML = "";
+        document.getElementsByClassName("lines")[1].style.display = "block"         
     }
 
-    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Answers[answersRow][answersCol]));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.                
+    else {
+        document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", Answers[answersRow][answersCol]));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.                
+    }
+
     scrollBottonUpdate();
-    var msg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Contents[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+    var msg = createMsg("message-left", Contents[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
     scrollBottonUpdate();
     setTimeout(function (){
@@ -150,7 +168,7 @@ function chatScreen(index, col) {
             if(Question[index]) {
                 document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
                 scrollBottonUpdate();
-                var questMsg = createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
+                var questMsg = createMsg("message-left", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
                 
                 // Makes the spinner work and after few seconds shows the message question and also deletes the 3 dot spinner.
                 setTimeout(function (){
@@ -159,12 +177,14 @@ function chatScreen(index, col) {
                         document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
                         createButtons(index);
                         scrollBottonUpdate();                        
-                        document.getElementById('backButton').disabled = false;                        
+                        // document.getElementById('backButton').disabled = false; 
+                        document.getElementById('backButton').style.pointerEvents = 'auto';
                     }
                 }, Question[index].length*50); 
             }    
             else {
-                document.getElementById('backButton').disabled = false;                
+                // document.getElementById('backButton').disabled = false;  
+                document.getElementById('backButton').style.pointerEvents = 'auto';                
                 helpfulInfo(index);    
             }
         }
@@ -223,10 +243,6 @@ function createButtons(index) {
         button.addEventListener ("click", function() {
             var temp = Next[index][this.id];
             var tempArr = [index, this.id];
-            if(index == 0){
-                document.getElementById("backButton").style = "display: block;" 
-                console.log("done");    
-            }        
             console.log('temp'+this.id);
             // document.getElementsByClassName("toolbar")[0].style = "display: block;"
             Back.push(tempArr);      

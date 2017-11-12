@@ -75,7 +75,7 @@ function createMsgSpinner() {
 //         </div>
 //     </li> 
 */
-function createMsg(direction, imgSrc, text) {     // Direction should be message-left or message-right => Admin Left, User Right.
+function createMsg(direction, text) {     // Direction should be message-left or message-right => Admin Left, User Right.
     
     var msg = document.createElement("li");
     msg.setAttribute("class", direction);
@@ -90,18 +90,13 @@ function createMsg(direction, imgSrc, text) {     // Direction should be message
     var spanTime = document.createElement("span");
     spanTime.setAttribute("class", "message-time");
     spanTime.innerHTML = getTimeNow();
-    var img = document.createElement("img");
-    img.setAttribute("src", imgSrc);
-    img.setAttribute("class", "chatIcon");
-    
-    div.appendChild(img);
+   
     div.appendChild(spanMsg);
     div.appendChild(spanTime);
 
     msg.appendChild(div);
 
-    return msg;
-    
+    return msg;  
 }
     
 // Function which returns the time in this format => HH:MM
