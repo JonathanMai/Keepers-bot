@@ -133,8 +133,6 @@ margin-bottom: 0px;
 font-size: 15px;
 }
 
-<<<<<<< HEAD
-=======
 .lines {
 height: 1px;
 width: 80%;
@@ -146,11 +144,6 @@ display: none;
 display: block;
 }
 
-#answers {
-
-}
-
->>>>>>> chat_screen
 .mainDiv {
 /* height: 150px;  If 3 or more cols so must be off */
   /* margin-top: 40px; */
@@ -392,7 +385,6 @@ float:left;
 background:rgb(23, 144,159);
 }
 
-<<<<<<< HEAD
 i.icon.icon-contact-us {
 width: 25px;
 height: 30px;
@@ -409,8 +401,4 @@ position: absolute;
 left: 0;
 right: 0;
 bottom: 20px;
-=======
-i.icon.icon-bars {
-
->>>>>>> chat_screen
 }
