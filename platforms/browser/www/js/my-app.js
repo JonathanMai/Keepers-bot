@@ -104,11 +104,17 @@ function nodeOutput(index) {
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function createHomeScreen() {
     var index = 0;
-
     chatEntered = false;
+    document.getElementById('contents').innerHTML = "";   
+    document.getElementById('text').innerHTML = "";           
     document.getElementById('title').innerHTML = Titles[index];
-    document.getElementById('contents').innerHTML = Contents[index]
-    document.getElementById('text').innerHTML = Question[index];       
+
+    var bold = document.createElement("b");
+    var question = document.createTextNode(Question[index]);
+    bold.innerHTML = Contents[index] + "<br>";
+
+    document.getElementById('contents').appendChild(bold)
+    document.getElementById('contents').appendChild(question);
     // document.getElementsByClassName("toolbar")[0].style = "display: none;"    
     createButtons(0);
 }
