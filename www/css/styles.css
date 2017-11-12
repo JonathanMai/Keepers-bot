@@ -16,7 +16,7 @@
   -webkit-background-size: 80%;
   -moz-background-size: 80%;
   -o-background-size: 80%;
-  background-size: 80%;
+  background-size: 50%;
 } */
 
 .statusbar-overlay {
@@ -133,6 +133,7 @@ margin-bottom: 0px;
 font-size: 15px;
 }
 
+<<<<<<< HEAD
 .lines {
 height: 1px;
 width: 80%;
@@ -140,8 +141,13 @@ background-color: grey;
 display: none;
 }
 
+=======
+>>>>>>> dae2344e9c61154b7011976948e3aa1b5643162c
 #topLine {
-display: block;
+  height: 1px;
+  width: 80%;
+  background-color: grey;
+  display: block;
 }
 
 .mainDiv {
