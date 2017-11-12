@@ -106,13 +106,13 @@ function nodeOutput(index) {
 function createHomeScreen() {
     var index = 0;
     if (chatEntered) {
-        document.getElementById("titleImage").style.display = "unset";        
-        document.getElementsByClassName("lines")[0].style = ""; // Change top line color on home screen.  
-        document.getElementsByClassName("lines")[1].style = ""; // Change top line color on home screen.          
+        document.getElementById("title").removeChild(document.getElementById("title").childNodes[1]);
+        document.getElementById("answers").removeChild(document.getElementById("answers").childNodes[0]);        
+        document.getElementById("titleImage").style.display = "";        
+        document.getElementById("topLine").style = ""; // Change top line color on home screen.  
         document.getElementById('contents').innerHTML = "";   
         document.getElementById('text').innerHTML = "";           
     }
-    
     chatEntered = false;
     document.getElementById('title').innerHTML = Titles[index];
 
@@ -137,29 +137,49 @@ function chatScreen(index, col) {
     var answersCol = Back[Back.length-1][1];
 
     // document.getElementById('backButton').disabled = true;
-    document.getElementById("backButton").style.pointerEvents = "none";
-    document.getElementById("backButton").style = "color: grey;";  
-    document.getElementsByClassName("lines")[0].style = "background-color: #1DBACD;"; // Change top line color on home screen.      
+    // document.getElementById("backButton").style.pointerEvents = "none";
+    // document.getElementById("backButton").style = "color: grey;";  
+    document.getElementById("topLine").style = "background-color: #1DBACD;"; // Change top line color on home screen.      
     
+    // If its the first time the chat screen appear we need to set the elements below.
     if(!chatEntered) {
-        chatEntered = true;
-        document.getElementById("titleImage").style.display = "none";
-        document.getElementById("backButton").style.display = "unset"         
-        document.getElementById("title").innerHTML = Answers[answersRow][answersCol];
+
+        document.getElementById("titleImage").style.display = "none"; // Hides the image of the heart in home screen.
+        document.getElementById("title").innerHTML = Answers[answersRow][answersCol]; // Defines the title to the node title.
         document.getElementById("text").innerHTML = "";       
-        document.getElementById("text").appendChild(createChat());
+        document.getElementById("text").appendChild(createChat()); // Creates the chat screen.
         document.getElementById("contents").innerHTML = "";
-        document.getElementsByClassName("lines")[1].style.display = "block"         
+        
+        // Creating the back button(we create a div for it and append the back image to it).
+        var image = document.createElement("img");
+        image.setAttribute("src", "assets/Back.png");
+        image.setAttribute("onclick", "backListener()");        
+        var backButton = document.createElement("div");
+        backButton.appendChild(image);
+        
+        document.getElementById("title").appendChild(backButton); // We append the image to the title panel(top panel).
+        
+        // Add the bottom line.
+        var bottomLine = document.createElement("hr");
+        bottomLine.setAttribute("style", "height: 1px;background-color: grey;");
+        document.getElementById("answers").appendChild(bottomLine);
+
+        chatEntered = true;
     }
 
+    // When the user is already on the main screen we create a chat bubble instead of changing the main title.
     else {
         document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", Answers[answersRow][answersCol]));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.                
+        scrollBottonUpdate(); // Updates the scroll spot to the bottom of the chat panel.
     }
 
-    scrollBottonUpdate();
-    var msg = createMsg("message-left", Contents[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+    var msg = createMsg("message-left", Contents[index]);   // createMsg(direction, imgSrc, text, time) => Direction should be message-left or message-right - Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
     scrollBottonUpdate();
+
+    // Creates a bubble of content and inside we also create a question bubble.
+    // This part creates an illusion that the user is chatting with our consultant.
+    // It creates 3 dots that rolls for a few seconds until it shows the chat bubble.
     setTimeout(function (){
         if(document.getElementsByClassName("chat-message-list")[0]) {
             document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
@@ -178,17 +198,17 @@ function chatScreen(index, col) {
                         createButtons(index);
                         scrollBottonUpdate();                        
                         // document.getElementById('backButton').disabled = false; 
-                        document.getElementById('backButton').style.pointerEvents = 'auto';
+                        // document.getElementById('backButton').style.pointerEvents = 'auto';
                     }
-                }, Question[index].length*50); 
+                }, (Question[index].length*50) > 3000 ? 3000 : (Question[index].length*50)); 
             }    
             else {
                 // document.getElementById('backButton').disabled = false;  
-                document.getElementById('backButton').style.pointerEvents = 'auto';                
+                // document.getElementById('backButton').style.pointerEvents = 'auto';                
                 helpfulInfo(index);    
             }
         }
-    }, Contents[index].length*50);    
+    }, (Contents[index].length*50) > 3500 ? 3500 : (Contents[index].length*50));    
     
     //document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index])); // direction, logo, msg
     
@@ -345,9 +365,10 @@ function helpfulInfo(index) {
 // ------------------------------------------------------------------------------------------------------------------
 // Clear the buttons from the screen when needed.
 function clearButtons(){
-    var length = document.getElementById('answers').childElementCount;
+    var length = document.getElementsByClassName("mainDiv").length;
     var div =  document.getElementById('answers');
     for(i = 0; i < length; i++){
+        console.log(document.getElementsByClassName("mainDiv"));
         div.removeChild(document.getElementsByClassName("mainDiv")[0]);
   }
 }
