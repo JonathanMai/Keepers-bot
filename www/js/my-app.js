@@ -106,7 +106,7 @@ function nodeOutput(index) {
 function createHomeScreen() {
     var index = 0;
     if (chatEntered) {
-        document.getElementById("title").removeChild(document.getElementById("title").childNodes[1]);
+        document.getElementsByClassName("flex")[0].removeChild( document.getElementsByClassName("flex")[0].childNodes[0]);  // remove back button.
         document.getElementById("answers").removeChild(document.getElementById("answers").childNodes[0]);        
         document.getElementById("titleImage").style.display = "";        
         document.getElementById("topLine").style = ""; // Change top line color on home screen.  
@@ -149,13 +149,16 @@ function chatScreen(index, col) {
         // Creating the back button(we create a div for it and append the back image to it).
         var image = document.createElement("img");
         image.setAttribute("src", "assets/Back.png");
-        image.setAttribute("onclick", "backListener()");        
-        var backButton = document.createElement("div");
-        backButton.appendChild(image);
+        image.setAttribute("id", "backBtn");
+        image.setAttribute("onclick", "backListener()");   
+        
+        document.getElementsByClassName("flex")[0].insertAdjacentElement('afterbegin', image); // set the back buttom first child in .flex class
+        // var backButton = document.createElement("div");
+        // backButton.appendChild(image);
 
         // Adds the back button and the title to our title div.
         document.getElementById("title").innerHTML = Answers[answersRow][answersCol]; // Defines the title to the node title.
-        document.getElementById("title").appendChild(backButton); // We append the image to the title panel(top panel).
+        //document.getElementById("title").appendChild(backButton); // We append the image to the title panel(top panel).
         
         document.getElementById("text").innerHTML = "";       
         document.getElementById("text").appendChild(createChat()); // Creates the chat screen.
@@ -164,7 +167,7 @@ function chatScreen(index, col) {
         
         // Add the bottom line.
         var bottomLine = document.createElement("hr");
-        bottomLine.setAttribute("style", "height: 1px;background-color: white;");
+        bottomLine.setAttribute("style", "height: 1px;background-color: white; margin: 0px;");
         document.getElementById("answers").appendChild(bottomLine);
 
         chatEntered = true;
