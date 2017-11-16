@@ -110,8 +110,8 @@ function createHomeScreen() {
         document.getElementById("answers").removeChild(document.getElementById("answers").childNodes[0]);        
         document.getElementById("titleImage").style.display = "";        
         document.getElementById("topLine").style = ""; // Change top line color on home screen.  
-        document.getElementById('contents').innerHTML = "";   
-        document.getElementById('text').innerHTML = "";           
+        document.getElementById("contents").innerHTML = "";   
+        document.getElementById("text").innerHTML = "";           
     }
     chatEntered = false;
     document.getElementById('title').innerHTML = Titles[index];
@@ -145,23 +145,26 @@ function chatScreen(index, col) {
     if(!chatEntered) {
 
         document.getElementById("titleImage").style.display = "none"; // Hides the image of the heart in home screen.
-        document.getElementById("title").innerHTML = Answers[answersRow][answersCol]; // Defines the title to the node title.
-        document.getElementById("text").innerHTML = "";       
-        document.getElementById("text").appendChild(createChat()); // Creates the chat screen.
-        document.getElementById("contents").innerHTML = "";
-        
+       
         // Creating the back button(we create a div for it and append the back image to it).
         var image = document.createElement("img");
         image.setAttribute("src", "assets/Back.png");
         image.setAttribute("onclick", "backListener()");        
         var backButton = document.createElement("div");
         backButton.appendChild(image);
-        
+
+        // Adds the back button and the title to our title div.
+        document.getElementById("title").innerHTML = Answers[answersRow][answersCol]; // Defines the title to the node title.
         document.getElementById("title").appendChild(backButton); // We append the image to the title panel(top panel).
+        
+        document.getElementById("text").innerHTML = "";       
+        document.getElementById("text").appendChild(createChat()); // Creates the chat screen.
+        document.getElementById("contents").innerHTML = "";
+        
         
         // Add the bottom line.
         var bottomLine = document.createElement("hr");
-        bottomLine.setAttribute("style", "height: 1px;background-color: grey;");
+        bottomLine.setAttribute("style", "height: 1px;background-color: white;");
         document.getElementById("answers").appendChild(bottomLine);
 
         chatEntered = true;

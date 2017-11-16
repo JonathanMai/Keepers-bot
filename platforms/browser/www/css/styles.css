@@ -124,9 +124,9 @@ margin-top: 50px;
 }
 
 #title {
-line-height: 20px;
-font-size: 30px;
-margin-bottom: 0px;
+  line-height: 20px;
+  font-size: 30px;
+  margin-bottom: 0px;
 }
 
 #text {
@@ -386,6 +386,13 @@ width: 25px;
 height: 30px;
 background-image: url("../assets/Messages.png");
 }
+
+i.icon.icon-home {
+  width: 25px;
+  height: 30px;
+  background-image: url("../assets/Consultant.png");
+  }
+  .grayscale { filter: grayscale(100%); }
 
 img#breakline {
 width: 90%; 
