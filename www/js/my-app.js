@@ -131,6 +131,9 @@ function createHomeScreen() {
 function chatScreen(index, col) {
     //var textOutput = Contents[index] + "</br>" + Question[index];
     clearButtons();
+    if (chatEntered){
+        document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 40) + "px;";              
+   }
 
     // Two variables that holds the last node index - we use it to print the user "message".
     var answersRow = Back[Back.length-1][0];
@@ -150,7 +153,8 @@ function chatScreen(index, col) {
         var image = document.createElement("img");
         image.setAttribute("src", "assets/Back.png");
         image.setAttribute("id", "backBtn");
-        image.setAttribute("onclick", "backListener()");   
+        image.setAttribute("onclick", "backListener()");  
+        image.setAttribute("style", "margin-left: 20px");        
         
         document.getElementsByClassName("flex")[0].insertAdjacentElement('afterbegin', image); // set the back buttom first child in .flex class
         // var backButton = document.createElement("div");
@@ -167,8 +171,11 @@ function chatScreen(index, col) {
         
         // Add the bottom line.
         var bottomLine = document.createElement("hr");
+        bottomLine.id = "botLine";
         bottomLine.setAttribute("style", "height: 1px;background-color: white; margin: 0px;");
         document.getElementById("answers").appendChild(bottomLine);
+        document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 40) + "px;";              
+        
 
         chatEntered = true;
     }
@@ -178,7 +185,7 @@ function chatScreen(index, col) {
         document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-right", Answers[answersRow][answersCol]));   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.                
         scrollBottonUpdate(); // Updates the scroll spot to the bottom of the chat panel.
     }
-
+    
     var msg = createMsg("message-left", Contents[index]);   // createMsg(direction, imgSrc, text, time) => Direction should be message-left or message-right - Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
     scrollBottonUpdate();
@@ -218,7 +225,7 @@ function chatScreen(index, col) {
     
     //document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index])); // direction, logo, msg
     
-
+    
 }
 
 // ------------------------------------------------------------------------------------------------------------------
@@ -290,6 +297,10 @@ function createButtons(index) {
         if(i == Answers[index].length - 1) {        // if the number of the buttons if odd.
             answers.appendChild(mainDiv);           // add the last button to the DOM.
         }
+        if (chatEntered){
+             document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 40) + "px;";              
+        }
+        
     }   
 }
 // ------------------------------------------------------------------------------------------------------------------
@@ -322,7 +333,7 @@ function helpfulInfo(index) {
         ga('HelpfulInfo.send', 'event', {
             eventCategory: 'Information quality',
             eventAction: 'click',
-            eventLabel: 'Didn\'t help:' + (index+1)
+            eventLabel: "Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]
         });
 
         // Returns to home screen.
@@ -353,7 +364,7 @@ function helpfulInfo(index) {
         ga('HelpfulInfo.send', 'event', {
             eventCategory: 'Information quality',
             eventAction: 'click',
-            eventLabel: 'Helped: ' +(index+1)
+            eventLabel: "Helped: node: " + (index+1) +  ", content: " + Contents[index]
         });
         clearButtons();
         createHomeScreen();
@@ -366,6 +377,7 @@ function helpfulInfo(index) {
     mainDiv.appendChild(rightDiv);
 
     document.getElementById("answers").appendChild(mainDiv);  
+    document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 40) + "px;";                  
 }
 
 // ------------------------------------------------------------------------------------------------------------------

@@ -19,6 +19,9 @@
   background-size: 50%;
 } */
 
+.page-content {
+
+}
 .statusbar-overlay {
   background: #000000;
 }
@@ -110,7 +113,6 @@ max-width: 420;
 }
 
 #titleImage {
-display: block;
 margin: 0 auto;
 height: 120px;
 margin-top: 50px;
@@ -124,7 +126,8 @@ margin-top: 50px;
 }
 
 #title {
-  line-height: 20px;
+  display: block;
+  line-height: 35px;
   font-size: 30px;
   margin-bottom: 0px;
 }
@@ -135,9 +138,11 @@ font-size: 15px;
 
 #topLine {
   height: 1px;
-  width: 80%;
+  width: 100%;
   background-color: grey;
   display: block;
+  margin-bottom: 0px;
+  margin-top: 3px;
 }
 
 .mainDiv {
@@ -162,7 +167,6 @@ font-size: 15px;
   float: right;
 }
 
-@media screen and (max-width: 340px){
 @media screen and (max-height: 560px) {
   img#titleImage {
     display: none;
@@ -251,7 +255,7 @@ margin-bottom: 16px;
 .message-left .message-text {
 max-width: 80%;
 display: inline-block;
-background: #fff;
+background: rgb(236, 236, 236);
 padding: 15px;
 font-size: 14px;
 color: #999;
@@ -279,15 +283,14 @@ text-align: left;
 }
 
 .chat {
-border-radius: 30px;
+/* border-radius: 30px; */
 padding: 20px;
 /* width: 500px; */
-margin: 0 auto;
-background: #f5f7fa;
-max-width: 420px;  
+/* margin: 0 auto; */
+background: #fbfdfd;
+/* max-width: 420px;   */
 overflow-y: scroll;
-height: 250px;
-
+/* height: 60vh; */
 }
 
 .chat-container {
@@ -404,4 +407,14 @@ position: absolute;
 left: 0;
 right: 0;
 bottom: 20px;
+}
+
+img#backBtn {
+  width: 16px;
+  padding-top: 6px;
+  float: left;
+}
+
+div.flex {
+  margin-top: 20px;
 }

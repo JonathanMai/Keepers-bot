@@ -19,9 +19,6 @@
   background-size: 50%;
 } */
 
-.page-content {
-
-}
 .statusbar-overlay {
   background: #000000;
 }
@@ -167,7 +164,6 @@ font-size: 15px;
   float: right;
 }
 
-@media screen and (max-width: 340px){
 @media screen and (max-height: 560px) {
   img#titleImage {
     display: none;
@@ -210,7 +206,7 @@ font-size: 15px;
       padding-top: 0px;
       padding-bottom: 0px;
   } */
-}
+
 
 #wrapper {
 width: 600px;
@@ -256,7 +252,7 @@ margin-bottom: 16px;
 .message-left .message-text {
 max-width: 80%;
 display: inline-block;
-background: #fff;
+background: rgb(236, 236, 236);
 padding: 15px;
 font-size: 14px;
 color: #999;
@@ -288,11 +284,10 @@ text-align: left;
 padding: 20px;
 /* width: 500px; */
 /* margin: 0 auto; */
-background: #f5f7fa;
+background: #fbfdfd;
 /* max-width: 420px;   */
 overflow-y: scroll;
 /* height: 60vh; */
-
 }
 
 .chat-container {

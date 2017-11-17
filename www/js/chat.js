@@ -9,6 +9,7 @@
 function createChat() {
     var div = document.createElement("div");
     div.setAttribute("class", "chat");
+    div.id = "chat";
 
     var divList = document.createElement("div");
     divList.setAttribute("class", "chat-listcontainer");
