@@ -19,9 +19,6 @@
   background-size: 50%;
 } */
 
-.page-content {
-
-}
 .statusbar-overlay {
   background: #000000;
 }
@@ -138,7 +135,7 @@ font-size: 15px;
 
 #topLine {
   height: 1px;
-  width: 100%;
+  width: 98%;
   background-color: grey;
   display: block;
   margin-bottom: 0px;
@@ -209,7 +206,7 @@ font-size: 15px;
       padding-top: 0px;
       padding-bottom: 0px;
   } */
-}
+
 
 #wrapper {
 width: 600px;
