@@ -130,10 +130,10 @@ function createHomeScreen() {
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function chatScreen(index, col) {
     //var textOutput = Contents[index] + "</br>" + Question[index];
+    // Clears the buttons and drawing chat background, make the background dinamic as the buttons panel gets smaller.
     clearButtons();
-    if (chatEntered){
-        document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 40) + "px;";              
-   }
+    if (chatEntered)
+        drawChatBackground();
 
     // Two variables that holds the last node index - we use it to print the user "message".
     var answersRow = Back[Back.length-1][0];
@@ -166,6 +166,7 @@ function chatScreen(index, col) {
         
         document.getElementById("text").innerHTML = "";       
         document.getElementById("text").appendChild(createChat()); // Creates the chat screen.
+        
         document.getElementById("contents").innerHTML = "";
         
         
@@ -174,10 +175,9 @@ function chatScreen(index, col) {
         bottomLine.id = "botLine";
         bottomLine.setAttribute("style", "height: 1px;background-color: white; margin: 0px;");
         document.getElementById("answers").appendChild(bottomLine);
-        document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 40) + "px;";              
         
-
         chatEntered = true;
+        drawChatBackground();
     }
 
     // When the user is already on the main screen we create a chat bubble instead of changing the main title.
@@ -188,7 +188,7 @@ function chatScreen(index, col) {
     
     var msg = createMsg("message-left", Contents[index]);   // createMsg(direction, imgSrc, text, time) => Direction should be message-left or message-right - Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
-    scrollBottonUpdate();
+    drawChatBackground();
 
     // Creates a bubble of content and inside we also create a question bubble.
     // This part creates an illusion that the user is chatting with our consultant.
@@ -197,19 +197,16 @@ function chatScreen(index, col) {
         if(document.getElementsByClassName("chat-message-list")[0]) {
             document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
             document.getElementsByClassName("chat-message-list")[0].appendChild(msg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
-            scrollBottonUpdate();
             if(Question[index]) {
                 document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
-                scrollBottonUpdate();
                 var questMsg = createMsg("message-left", Question[index]);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
-                
+                drawChatBackground();
                 // Makes the spinner work and after few seconds shows the message question and also deletes the 3 dot spinner.
                 setTimeout(function (){
                     if(document.getElementsByClassName("chat-message-list")[0]) {
                         document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
                         document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
                         createButtons(index);
-                        scrollBottonUpdate();                        
                         // document.getElementById('backButton').disabled = false; 
                         // document.getElementById('backButton').style.pointerEvents = 'auto';
                     }
@@ -297,9 +294,9 @@ function createButtons(index) {
         if(i == Answers[index].length - 1) {        // if the number of the buttons if odd.
             answers.appendChild(mainDiv);           // add the last button to the DOM.
         }
-        if (chatEntered){
-             document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 40) + "px;";              
-        }
+
+        if(chatEntered)
+            drawChatBackground();
         
     }   
 }
@@ -377,7 +374,7 @@ function helpfulInfo(index) {
     mainDiv.appendChild(rightDiv);
 
     document.getElementById("answers").appendChild(mainDiv);  
-    document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 40) + "px;";                  
+    drawChatBackground();
 }
 
 // ------------------------------------------------------------------------------------------------------------------
@@ -407,6 +404,11 @@ function backListener() {
     }
 }
  
+function drawChatBackground() {
+    document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 40) + "px;"; 
+    scrollBottonUpdate();        
+}
+
 // Now we need to run the code that will be executed only for Contact page.
 
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
