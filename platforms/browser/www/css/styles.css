@@ -10,18 +10,24 @@
    See https://github.com/apache/cordova-plugin-statusbar
 */
 
-/* Add background image. */
-/* div.page-content {
-  background: url("../assets/Background.png") no-repeat center center fixed; 
-  -webkit-background-size: 80%;
-  -moz-background-size: 80%;
-  -o-background-size: 80%;
-  background-size: 50%;
-} */
-
-.statusbar-overlay {
-  background: #000000;
+/* Sets the body max width */
+body {
+  max-width: 420px;
+  margin:0 auto;
 }
+
+/* Add background image. */
+div.chat {
+  background: url("../assets/Background.png") no-repeat center center fixed; 
+  -webkit-background-size: 350px;
+  -moz-background-size: 350px;
+  -o-background-size: 350px;
+  background-size: 350px;
+}
+
+/* .statusbar-overlay {
+  background: #000000;
+} */
 
 .fa {
   padding: 15px;
@@ -127,6 +133,7 @@ margin-top: 50px;
   line-height: 35px;
   font-size: 30px;
   margin-bottom: 0px;
+  margin-right: 0px;
 }
 
 #text {
@@ -164,10 +171,34 @@ font-size: 15px;
   float: right;
 }
 
-@media screen and (max-height: 560px) {
+@media screen and (max-height: 590px) {
   img#titleImage {
     display: none;
   }
+
+  div.chat {
+    background: url("../assets/Background.png") no-repeat center center fixed; 
+    -webkit-background-size: 60%;
+    -moz-background-size: 60%;
+    -o-background-size: 60%;
+    background-size: 60%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  img#titleImage {
+    display: none;
+    
+  }
+
+  div.chat {
+    background: url("../assets/Background.png") no-repeat center center fixed; 
+    -webkit-background-size: 250px 300px;
+    -moz-background-size: 250px 300px;
+    -o-background-size: 250px 300px;
+    background-size: 250px 300px;
+  }
+
 }
   .categoryBtn {
       width: 130px;
@@ -253,12 +284,13 @@ margin-bottom: 16px;
 max-width: 80%;
 display: inline-block;
 background: rgb(236, 236, 236);
+color: black;
 padding: 15px;
 font-size: 14px;
-color: #999;
-border-radius: 30px;
+border-radius: 15px;
 font-weight: 100;
 line-height: 1.5em;
+border: gray solid 1.5px;
 }
 
 .message-right {
@@ -269,14 +301,15 @@ margin-bottom: 16px;
 .message-right .message-text {
 line-height: 1.5em;
 display: inline-block;
-background: #5ca6fa;
+background: rgb(26, 165,182);
 padding: 15px;
 font-size: 14px;
 color: #fff;
-border-radius: 30px;
+border-radius: 15px;
 line-height: 1.5em;
 font-weight: 100;
 text-align: left;
+border: rgb(23, 144,159) solid 1.5px;
 }
 
 .chat {
@@ -415,3 +448,58 @@ img#backBtn {
 div.flex {
   margin-top: 20px;
 }
+
+.message-left:before{
+    border-radius: 20px / 10px;
+    content: '';
+    position: relative;
+}
+
+.message-left:before {
+	border: 10px solid transparent;
+	border-bottom-color: rgba(0, 0, 0, 0.4);
+	bottom: -40px;
+	left: -10px;
+	z-index: -2;
+}
+
+.message-left:after {
+	border: 8px solid transparent;
+	border-bottom-color: #d2f4fe;
+	bottom: 1px;
+	left: -5px;
+}
+
+
+.message-right:before{
+  border-radius: 20px / 10px;
+  content: '';
+  position: relative;
+}
+
+.message-right:before {
+border: 10px solid transparent;
+border-bottom-color: rgb(23, 144,159);
+bottom: -40px;
+left: 10px;
+z-index: -2;
+}
+
+.message-right:after {
+border: 8px solid transparent;
+border-bottom-color: rgb(23, 144,159);
+bottom: 1px;
+}
+
+
+/* .message-right:before{
+  content: "";            
+  width: 0;
+  height: 0;
+  position: relative;
+  bottom: -22px;
+  right: 2px;
+  border-top: 15px solid transparent;
+  border-right: 15px solid rgb(26, 165,182);
+  border-bottom: 15px solid transparent;
+}   */
