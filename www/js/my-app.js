@@ -148,13 +148,13 @@ function chatScreen(index, col) {
     if(!chatEntered) {
 
         document.getElementById("titleImage").style.display = "none"; // Hides the image of the heart in home screen.
-       
+        document.getElementById("title").style = "margin-right:20px"
         // Creating the back button(we create a div for it and append the back image to it).
         var image = document.createElement("img");
         image.setAttribute("src", "assets/Back.png");
         image.setAttribute("id", "backBtn");
         image.setAttribute("onclick", "backListener()");  
-        image.setAttribute("style", "margin-left: 20px");        
+        image.setAttribute("style", "margin-left: 10px");        
         
         document.getElementsByClassName("flex")[0].insertAdjacentElement('afterbegin', image); // set the back buttom first child in .flex class
         // var backButton = document.createElement("div");
@@ -307,6 +307,7 @@ function helpfulInfo(index) {
     
     mainDiv = document.createElement("div");    // create new div with 0 children.
     mainDiv.setAttribute("class", "mainDiv");   // set class.
+    mainDiv.style = "padding:0px"
 
     //innerHTML = "Was the information helpful?";
     var helpedText = document.createElement("p"); 
@@ -323,6 +324,7 @@ function helpfulInfo(index) {
     var leftDiv = document.createElement("div");
     leftDiv.setAttribute("class", "left");
     
+    
     var leftButton = document.createElement("button");  
     leftButton.className = "categoryBtn";
     leftButton.addEventListener ("click", function() {
@@ -332,11 +334,13 @@ function helpfulInfo(index) {
             eventAction: 'click',
             eventLabel: "Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]
         });
-
+        
         // Returns to home screen.
         clearButtons();
         createHomeScreen(); 
     });
+
+    leftButton.setAttribute("style", "background:" + getButtonColor(index) +  ";");
     
     leftDiv.appendChild(leftButton);
     leftDiv.appendChild(lefParagraph);
@@ -367,11 +371,49 @@ function helpfulInfo(index) {
         createHomeScreen();
     });
     
+    rightButton.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+
     rightDiv.appendChild(rightButton);
     rightDiv.appendChild(rightParagraph);
     rightButton.appendChild(rightParagraph)
 
     mainDiv.appendChild(rightDiv);
+
+
+    // Contact us button.
+    var contactParagraph = document.createElement("p");
+    contactParagraph.className = "icon_paragraph";
+    contactParagraph.style = "color: white"
+    contactParagraph.appendChild(document.createTextNode("For personal question contact us"));                
+    
+    var contactDiv = document.createElement("div");
+    contactDiv.setAttribute("class", "center");
+    
+    var contactButton = document.createElement("button");  
+    contactButton.className = "categoryBtn";
+    contactButton.style = "margin-top:5px"
+    contactButton.addEventListener ("click", function() {
+        
+        // Refresh everything back to home screen with a delay that makes the screen switch much nicer and smoother.
+        setTimeout(function (){        
+            Back = [];
+            clearButtons();
+            createHomeScreen();
+        },500 );
+    });
+    
+    
+    contactButton.setAttribute("style", "background:" + getButtonColor(index) +  ";margin-top:13px;width:-webkit-fill-available");
+    
+    contactDiv.appendChild(contactButton);
+    contactDiv.appendChild(contactParagraph);
+    contactButton.appendChild(contactParagraph)
+    var hr = document.createElement("a");
+    hr.setAttribute("href", "contact.html");
+    hr.appendChild(contactButton);
+    contactDiv.appendChild(hr);
+
+    mainDiv.appendChild(contactDiv);
 
     document.getElementById("answers").appendChild(mainDiv);  
     drawChatBackground();
@@ -436,7 +478,6 @@ $$(document).on('pageInit', '.page[data-page="contact"]', function (e) {
 
 
 function recieveData() {
-
 
     sendMessage(email, name, subject, msg);
     // document.location.href = "mailto:jonathann.maimon@gmail.com?subject="
