@@ -16,8 +16,7 @@ $$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
 
-//relevant variables
-// var ImagesURL = [];
+// Relevant variables
 var Titles = [];
 var Contents = [];
 var Question = [];
@@ -26,16 +25,17 @@ var Next = [];
 var Back = [];
 var chatEntered;
 
-// Connects to the google sheets server and asks for the sheet we need to work with.
+// ------------------------------------------------------------------------------------------------------------------
+// Connects to the google sheets server and asks for the document that holds all the expert data.
 function handleClientLoad() {
     var xhr = new XMLHttpRequest();
-    var range = "B2:Q40";
+    var range = "B2:X40";
     xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
     xhr.send();
     xhr.onreadystatechange = function (e){
         if (xhr.readyState == 4 && xhr.status == 200) {
             var response = JSON.parse(xhr.responseText);
-            stringParse(response.values);
+            stringParse(response.values); 
         }
     }
 }
@@ -54,8 +54,8 @@ function stringParse(info){
         this.Question.push(info[i][2]);
         // Pushes all of the answers into one list
         for(q = 3; q < info[i].length; q++){
-            AnswersList.push(info[i][q].slice(0, info[i][q].length - 3));
-            NextList.push(parseInt(info[i][q].slice(info[i][q].length - 2, info[i][q].length - 1)));
+            AnswersList.push(info[i][q].slice(0, info[i][q].lastIndexOf("[")));
+            NextList.push(parseInt(info[i][q].slice(info[i][q].lastIndexOf("[")+1, info[i][q].length - 1)));
         }
 
         // Checks to see if there are any answers listed in the row
@@ -279,73 +279,80 @@ function helpfulInfo(index) {
     mainDiv.setAttribute("class", "mainDiv");   // set class.
     mainDiv.style = "padding:0px"
 
-    //innerHTML = "Was the information helpful?";
+    // Creating the paragraph that holds the question if the user found the infromation helpful, we append it to the main div.
     var helpedText = document.createElement("p"); 
     helpedText.innerHTML = "Was the information helpful?";
     mainDiv.appendChild(helpedText);
 
+    // Creates the two buttons that sends the information to google analytics.
+    createHelpBtn(mainDiv, "left", index);
+    createHelpBtn(mainDiv, "right", index);
     
-    // Left div creation - 'no' button.
-    var lefParagraph = document.createElement("p");
-    lefParagraph.className = "icon_paragraph";
-    lefParagraph.style = "color: white"
-    lefParagraph.appendChild(document.createTextNode("No"));        
+    // var helpedText = document.createElement("p"); 
+    // helpedText.innerHTML = "Was the information helpful?";
+    // mainDiv.appendChild(mainDiv, helpedText); //TODO
+
     
-    var leftDiv = document.createElement("div");
-    leftDiv.setAttribute("class", "left");
+    // var lefParagraph = document.createElement("p");
+    // lefParagraph.className = "icon_paragraph";
+    // lefParagraph.style = "color: white";
+    // lefParagraph.appendChild(document.createTextNode("No"));        
+    
+    // var leftDiv = document.createElement("div");
+    // leftDiv.setAttribute("class", "left");
     
     
-    var leftButton = document.createElement("button");  
-    leftButton.className = "categoryBtn";
-    leftButton.addEventListener ("click", function() {
-        Back = [];
-        ga('HelpfulInfo.send', 'event', {
-            eventCategory: 'Information quality',
-            eventAction: 'click',
-            eventLabel: "Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]
-        });
+    // var leftButton = document.createElement("button");  
+    // leftButton.className = "categoryBtn";
+    // leftButton.addEventListener ("click", function() {
+    //     Back = [];
+    //     ga('HelpfulInfo.send', 'event', {
+    //         eventCategory: 'Information quality',
+    //         eventAction: 'click',
+    //         eventLabel: "Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]
+    //     });
         
-        // Returns to home screen.
-        createHomeScreen(); 
-    });
+    //     // Returns to home screen.
+    //     createHomeScreen(); 
+    // });
 
-    leftButton.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+    // leftButton.setAttribute("style", "background:" + getButtonColor(index) +  ";");
     
-    leftDiv.appendChild(leftButton);
-    leftDiv.appendChild(lefParagraph);
-    leftButton.appendChild(lefParagraph)        
+    // leftDiv.appendChild(leftButton);
+    // leftDiv.appendChild(lefParagraph);
+    // leftButton.appendChild(lefParagraph)        
     
-    mainDiv.appendChild(leftDiv);        
+    // mainDiv.appendChild(leftDiv);        
     
-    // Right div creation - 'yes' button.
-    var rightParagraph = document.createElement("p");
-    rightParagraph.className = "icon_paragraph";
-    rightParagraph.style = "color: white"
-    rightParagraph.appendChild(document.createTextNode("Yes"));                
+    // // Right div creation - 'yes' button.
+    // var rightParagraph = document.createElement("p");
+    // rightParagraph.className = "icon_paragraph";
+    // rightParagraph.style = "color: white"
+    // rightParagraph.appendChild(document.createTextNode("Yes"));                
     
-    var rightDiv = document.createElement("div");
-    rightDiv.setAttribute("class", "right");
+    // var rightDiv = document.createElement("div");
+    // rightDiv.setAttribute("class", "right");
     
-    var rightButton = document.createElement("button");  
-    rightButton.className = "categoryBtn";
-    rightButton.addEventListener ("click", function() {
-        Back = [];
+    // var rightButton = document.createElement("button");  
+    // rightButton.className = "categoryBtn";
+    // rightButton.addEventListener ("click", function() {
+    //     Back = [];
         
-        ga('HelpfulInfo.send', 'event', {
-            eventCategory: 'Information quality',
-            eventAction: 'click',
-            eventLabel: "Helped: node: " + (index+1) +  ", content: " + Contents[index]
-        });
-        createHomeScreen();
-    });
+    //     ga('HelpfulInfo.send', 'event', {
+    //         eventCategory: 'Information quality',
+    //         eventAction: 'click',
+    //         eventLabel: "Helped: node: " + (index+1) +  ", content: " + Contents[index]
+    //     });
+    //     createHomeScreen();
+    // });
     
-    rightButton.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+    // rightButton.setAttribute("style", "background:" + getButtonColor(index) +  ";");
 
-    rightDiv.appendChild(rightButton);
-    rightDiv.appendChild(rightParagraph);
-    rightButton.appendChild(rightParagraph)
+    // rightDiv.appendChild(rightButton);
+    // rightDiv.appendChild(rightParagraph);
+    // rightButton.appendChild(rightParagraph)
 
-    mainDiv.appendChild(rightDiv);
+    // mainDiv.appendChild(rightDiv);
 
 
     // Contact us button.
@@ -386,6 +393,46 @@ function helpfulInfo(index) {
     drawChatBackground();
 }
 
+// ------------------------------------------------------------------------------------------------------------------
+// Clear the buttons from the screen when needed.
+function createHelpBtn(mainDiv, direction, index) {
+
+    var paragraph = document.createElement("p");
+    paragraph.className = "icon_paragraph";
+    paragraph.style = "color: white";
+    paragraph.appendChild(document.createTextNode(direction == "left" ? "No" : "Yes"));        
+
+    var div = document.createElement("div");
+    div.setAttribute("class", direction);
+
+
+    var btn = document.createElement("button");  
+    btn.className = "categoryBtn";
+
+    var label = direction == "left" ?("Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]) :
+                                     ("Helped: node: " + (index+1) +  ", content: " + Contents[index]);
+
+    btn.addEventListener ("click", function(label) {
+        Back = [];
+
+        ga('HelpfulInfo.send', 'event', {
+            eventCategory: "Information quality",
+            eventAction: "click",
+            eventLabel: label
+        });
+        
+        // Returns to home screen.
+        createHomeScreen(); 
+    });
+
+    btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+
+    div.appendChild(btn);
+    div.appendChild(paragraph);
+    btn.appendChild(paragraph)        
+
+    mainDiv.appendChild(div); 
+}
 // ------------------------------------------------------------------------------------------------------------------
 // Clear the buttons from the screen when needed.
 function clearButtons(){
