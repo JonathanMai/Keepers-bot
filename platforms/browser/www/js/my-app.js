@@ -71,41 +71,11 @@ function stringParse(info){
 }
 
 // ------------------------------------------------------------------------------------------------------------------
-function nodeOutput(index) {
-    var textOutput = [];
-    // Output the title inside the title at the html.  
-    
-    // document.getElementById('title').innerHTML = Titles[index];
-
-    // Output the content and question inside the text at the html.
-    // if (Question[index]) {
-        
-    // }
-
-    // else{
-    //     textOutput = Contents[index];
-    // }
-
-    //document.getElementById('text').innerHTML = textOutput;   
-    
-    clearButtons();
-    
-    // Creates answer buttons.
-    if(index == 0)  {   createHomeScreen();    }
-    else { 
-
-        chatScreen(index);   
-    }
-
-    // When its the last node to show - ask if the information helped.
-   
-}
-
-// ------------------------------------------------------------------------------------------------------------------
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function createHomeScreen() {
     var index = 0;
     if (chatEntered) {
+        clearButtons();
         document.getElementsByClassName("flex")[0].removeChild( document.getElementsByClassName("flex")[0].childNodes[0]);  // remove back button.
         document.getElementById("answers").removeChild(document.getElementById("answers").childNodes[0]);        
         document.getElementById("titleImage").style.display = "";        
@@ -336,7 +306,6 @@ function helpfulInfo(index) {
         });
         
         // Returns to home screen.
-        clearButtons();
         createHomeScreen(); 
     });
 
@@ -367,7 +336,6 @@ function helpfulInfo(index) {
             eventAction: 'click',
             eventLabel: "Helped: node: " + (index+1) +  ", content: " + Contents[index]
         });
-        clearButtons();
         createHomeScreen();
     });
     
@@ -397,7 +365,6 @@ function helpfulInfo(index) {
         // Refresh everything back to home screen with a delay that makes the screen switch much nicer and smoother.
         setTimeout(function (){        
             Back = [];
-            clearButtons();
             createHomeScreen();
         },500 );
     });
@@ -430,9 +397,9 @@ function clearButtons(){
   }
 }
 
+// ------------------------------------------------------------------------------------------------------------------
+// Back button function, goes back a node - if there no node to go back to we go back to home screen insted.
 function backListener() {
-    clearButtons();
-
     if ((Back[Back.length-1][0]) > 0) {
         var row = Back[Back.length-1][0];
         var col =  Back[Back.length-1][1];
