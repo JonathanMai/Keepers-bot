@@ -166,7 +166,7 @@ font-size: 15px;
   float: right;
 }
 
-@media screen and (max-height: 560px) {
+@media screen and (max-height: 590px) {
   img#titleImage {
     display: none;
   }
@@ -182,7 +182,7 @@ font-size: 15px;
 
 @media screen and (min-width: 1080px) {
   img#titleImage {
-    display: none;
+    display: unset;
   }
 
   div.chat {
@@ -451,7 +451,7 @@ div.flex {
 
 .message-left:before {
 	border: 10px solid transparent;
-	border-bottom-color: rgba(0, 0, 0, 0.5);
+	border-bottom-color: rgba(0, 0, 0, 0.4);
 	bottom: -40px;
 	left: -10px;
 	z-index: -2;
