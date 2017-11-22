@@ -123,7 +123,7 @@ function chatScreen(index, col) {
         var image = document.createElement("img");
         image.setAttribute("src", "assets/Back.png");
         image.setAttribute("id", "backBtn");
-        image.setAttribute("onclick", "backListener()");  
+        // image.setAttribute("onclick", "backListener()");  
         image.setAttribute("style", "margin-left: 10px");        
         
         document.getElementsByClassName("flex")[0].insertAdjacentElement('afterbegin', image); // set the back buttom first child in .flex class
@@ -159,11 +159,12 @@ function chatScreen(index, col) {
     var msg = createMsg("message-left", Contents[index]);   // createMsg(direction, imgSrc, text, time) => Direction should be message-left or message-right - Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
     drawChatBackground();
-
     // Creates a bubble of content and inside we also create a question bubble.
     // This part creates an illusion that the user is chatting with our consultant.
     // It creates 3 dots that rolls for a few seconds until it shows the chat bubble.
+    
     setTimeout(function (){
+        
         if(document.getElementsByClassName("chat-message-list")[0]) {
             document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
             document.getElementsByClassName("chat-message-list")[0].appendChild(msg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
@@ -179,16 +180,23 @@ function chatScreen(index, col) {
                         createButtons(index);
                         // document.getElementById('backButton').disabled = false; 
                         // document.getElementById('backButton').style.pointerEvents = 'auto';
+                        // After the dotts are ready, put back listener on the button
+                        if(document.getElementById("backBtn") != null)
+                            document.getElementById("backBtn").setAttribute("onclick", "backListener()");  
                     }
                 }, (Question[index].length*50) > 3000 ? 3000 : (Question[index].length*50)); 
             }    
             else {
                 // document.getElementById('backButton').disabled = false;  
-                // document.getElementById('backButton').style.pointerEvents = 'auto';                
+                // document.getElementById('backButton').style.pointerEvents = 'auto';  
+                // After the dotts are ready, put back listener on the button
+                if(document.getElementById("backBtn") != null)
+                    document.getElementById("backBtn").setAttribute("onclick", "backListener()");  
                 helpfulInfo(index);    
             }
         }
-    }, (Contents[index].length*50) > 3500 ? 3500 : (Contents[index].length*50));    
+    }, (Contents[index].length*50) > 3500 ? 3500 : (Contents[index].length*50));  
+
     
     //document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index])); // direction, logo, msg
     
@@ -198,7 +206,7 @@ function chatScreen(index, col) {
 // ------------------------------------------------------------------------------------------------------------------
 // Create all the buttons and puts it in answers panel.
 function createButtons(index) {
-
+    
     const INSIDE_DIV = 2;   // How many divs can be in row.
 
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
@@ -241,6 +249,10 @@ function createButtons(index) {
         var color = getButtonColor(i);
         button.setAttribute("style", "background:" + color +  ";");
         button.addEventListener ("click", function() {
+            // After click on the category button remove the listener from the back button.
+            if(document.getElementById("backBtn") != null) {
+                document.getElementById("backBtn").removeAttribute("onclick");                                              
+            }
             var temp = Next[index][this.id];
             var tempArr = [index, this.id];
             console.log('temp'+this.id);
@@ -262,7 +274,7 @@ function createButtons(index) {
         var answers = document.getElementById("answers");
         mainDiv.appendChild(div);
         if(i == Answers[index].length - 1) {        // if the number of the buttons if odd.
-            answers.appendChild(mainDiv);           // add the last button to the DOM.
+            answers.appendChild(mainDiv);           // add the last button to the DOM.            
         }
 
         if(chatEntered)
@@ -347,6 +359,7 @@ function helpfulInfo(index) {
 
     mainDiv.appendChild(rightDiv);
 
+   
 
     // Contact us button.
     var contactParagraph = document.createElement("p");
@@ -400,6 +413,7 @@ function clearButtons(){
 // ------------------------------------------------------------------------------------------------------------------
 // Back button function, goes back a node - if there no node to go back to we go back to home screen insted.
 function backListener() {
+ 
     if ((Back[Back.length-1][0]) > 0) {
         var row = Back[Back.length-1][0];
         var col =  Back[Back.length-1][1];
@@ -411,6 +425,9 @@ function backListener() {
         Back.pop();
         createHomeScreen();
     }
+    // Remove onclick listener after hitting back button
+    if(document.getElementById("backBtn") != null)
+        document.getElementById("backBtn").removeAttribute("onclick"); 
 }
  
 function drawChatBackground() {
