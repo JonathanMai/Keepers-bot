@@ -18,7 +18,7 @@
 /* Question & Answers */
 @font-face {
   font-family: "almoni-dl-aaa-regular";
-  src: url("../Fonts/almoni-dl-aaa-regular.otf");
+  src: url("../Fonts/almoni-dl-aaa-bold.otf");
 }
 
 /* Sets the body max width */
@@ -68,9 +68,14 @@ color: white;
 margin: 0 auto;
 text-align: center;
 max-width: 290px;
-line-height: 30px;
+line-height: 25px;
+color: #000000b8;
+padding-top: 5px;
 }
 
+.page {
+  background: #fbfbfb;
+}
 
 /* .bottomPanel{
   position: absolute;
@@ -114,7 +119,7 @@ transform: translateY(2px);
 
 .categoryBtn {
 /* background-color: rgb(29, 187, 205);  (30,175,192) */
-border-radius: 100px;
+border-radius: 10px;
 border: none;
 width: 150px;
 height: 25px;
@@ -141,6 +146,7 @@ margin-top: 50px;
 
 #title {
   font-family: "OpenSans-Regular";
+  color: #000000b8;
   display: block;
   line-height: 35px;
   font-size: 30px;
@@ -154,8 +160,8 @@ font-size: 15px;
 
 #topLine {
   height: 1px;
-  width: 98%;
-  background-color: grey;
+  width: 85%;
+  background-color: rgb(184, 180, 180);
   display: block;
   margin-bottom: 0px;
   margin-top: 3px;
@@ -197,24 +203,16 @@ font-size: 15px;
   }
 }
 
-@media screen and (max-width: 320px) {
-  img#titleImage {
-    display: none;
-    
-  }
-
+@media screen and (max-width: 360px) {
   div.chat {
     background: url("../assets/Background.png") no-repeat center center fixed; 
-    -webkit-background-size: 250px 300px;
-    -moz-background-size: 250px 300px;
-    -o-background-size: 250px 300px;
-    background-size: 250px 300px;
+    -webkit-background-size: 250px;
+    -moz-background-size: 250px;
+    -o-background-size: 250px;
+    background-size: 250px;
   }
 
 }
-  .categoryBtn {
-      width: 130px;
-  }
 
   div#answers {
     position: absolute;
@@ -227,9 +225,6 @@ font-size: 15px;
     margin-top: 10px;      
   } 
 
-  #contents {
-    line-height: 25px;
-  }
   /* .left {
       float: none;
       height: auto;

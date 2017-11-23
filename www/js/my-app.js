@@ -118,13 +118,13 @@ function chatScreen(index, col) {
     if(!chatEntered) {
 
         document.getElementById("titleImage").style.display = "none"; // Hides the image of the heart in home screen.
-        document.getElementById("title").style = "margin-right:20px"
+        document.getElementById("title").style = "margin-right:40px"
         // Creating the back button(we create a div for it and append the back image to it).
         var image = document.createElement("img");
         image.setAttribute("src", "assets/Back.png");
         image.setAttribute("id", "backBtn");
         // image.setAttribute("onclick", "backListener()");  
-        image.setAttribute("style", "margin-left: 10px");        
+        image.setAttribute("style", "margin-left: 30px");        
         
         document.getElementsByClassName("flex")[0].insertAdjacentElement('afterbegin', image); // set the back buttom first child in .flex class
         // var backButton = document.createElement("div");
@@ -470,6 +470,7 @@ function backListener() {
 
     else{
         Back.pop();
+        document.getElementById("title").style = "margin-right:0px"
         createHomeScreen();
     }
     // Remove onclick listener after hitting back button
