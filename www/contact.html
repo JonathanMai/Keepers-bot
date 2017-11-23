@@ -22,32 +22,33 @@
             <div class="content-block">
                 <form id="myform" onsubmit="sendFeedbackMessage();return false;">
                     <!-- Name input field. -->
-                    <div class="item-input">
-                        <input class="item-input" name="Name" type="text" id="nameInput" placeholder="Name" required>
+                    <div class="item-input left">
+                        <input class="item-input text-input" name="Name" type="text" id="nameInput" placeholder="Name" required>
                     </div>
                     
                     </br>
                 
                     <!-- Email input field. -->
-                    <div class="item-input">
-                        <input name="email" type="email" id="emailInput" placeholder="Email" pattern='[A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*[.]([A-Za-z0-9.-])+' required>
+                    <div class="item-input left">
+                        <input class="text-input" name="email" type="email" id="emailInput" placeholder="Email" pattern='[A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*[.]([A-Za-z0-9.-])+' required>
                     </div>  
     
                     </br>             
                 
                     <!-- Subject input field. -->
-                    <div class="item-input">
-                        <input name="subject" type="text" id="subjectInput" placeholder="Subject" required>
+                    <div class="item-input" style="display: inline;">
+                        <input class="text-input left" name="subject" type="text" id="subjectInput" placeholder="Subject" required>
+                        <input class="buttons right" type="submit" id="sendButton" value="Send">
                     </div>
     
                     </br>
                     
                     <!-- Message content input field. -->
-                    <div class="item-input">
-                        <textarea name="message" style="resize:none;width:100%;" id="msgInput" rows="4" cols="50" placeholder="Message" required></textarea>
+                    <div class="item-input left">
+                        <textarea class="text-input" name="message" style="resize:none;width:100%;" id="msgInput" rows="4" cols="50" placeholder="Message" required></textarea>
                     </div> 
 
-                    <input type="submit" class="buttons" id="sendButton" value="Send">  
+                      
                 </form>
             </div>
         </div>
