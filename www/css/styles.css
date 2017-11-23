@@ -503,6 +503,16 @@ border-bottom-color: rgb(23, 144,159);
 bottom: 1px;
 }
 
+/*---------------------------------------------------------------------------------*/
+/* From here its contact us styling */
+
+.text-input {
+  border-radius: 10px;
+  padding-left: 5px;
+  border-width: thin;
+  text-align: left;
+  margin: 3px;
+}
 
 /* .message-right:before{
   content: "";            

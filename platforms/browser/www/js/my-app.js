@@ -16,8 +16,7 @@ $$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
 
-//relevant variables
-// var ImagesURL = [];
+// Relevant variables
 var Titles = [];
 var Contents = [];
 var Question = [];
@@ -26,16 +25,17 @@ var Next = [];
 var Back = [];
 var chatEntered;
 
-// Connects to the google sheets server and asks for the sheet we need to work with.
+// ------------------------------------------------------------------------------------------------------------------
+// Connects to the google sheets server and asks for the document that holds all the expert data.
 function handleClientLoad() {
     var xhr = new XMLHttpRequest();
-    var range = "B2:Q40";
+    var range = "B2:X40";
     xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
     xhr.send();
     xhr.onreadystatechange = function (e){
         if (xhr.readyState == 4 && xhr.status == 200) {
             var response = JSON.parse(xhr.responseText);
-            stringParse(response.values);
+            stringParse(response.values); 
         }
     }
 }
@@ -54,8 +54,8 @@ function stringParse(info){
         this.Question.push(info[i][2]);
         // Pushes all of the answers into one list
         for(q = 3; q < info[i].length; q++){
-            AnswersList.push(info[i][q].slice(0, info[i][q].length - 3));
-            NextList.push(parseInt(info[i][q].slice(info[i][q].length - 2, info[i][q].length - 1)));
+            AnswersList.push(info[i][q].slice(0, info[i][q].lastIndexOf("[")));
+            NextList.push(parseInt(info[i][q].slice(info[i][q].lastIndexOf("[")+1, info[i][q].length - 1)));
         }
 
         // Checks to see if there are any answers listed in the row
@@ -123,7 +123,7 @@ function chatScreen(index, col) {
         var image = document.createElement("img");
         image.setAttribute("src", "assets/Back.png");
         image.setAttribute("id", "backBtn");
-        image.setAttribute("onclick", "backListener()");  
+        // image.setAttribute("onclick", "backListener()");  
         image.setAttribute("style", "margin-left: 10px");        
         
         document.getElementsByClassName("flex")[0].insertAdjacentElement('afterbegin', image); // set the back buttom first child in .flex class
@@ -159,11 +159,12 @@ function chatScreen(index, col) {
     var msg = createMsg("message-left", Contents[index]);   // createMsg(direction, imgSrc, text, time) => Direction should be message-left or message-right - Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
     drawChatBackground();
-
     // Creates a bubble of content and inside we also create a question bubble.
     // This part creates an illusion that the user is chatting with our consultant.
     // It creates 3 dots that rolls for a few seconds until it shows the chat bubble.
+    
     setTimeout(function (){
+        
         if(document.getElementsByClassName("chat-message-list")[0]) {
             document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
             document.getElementsByClassName("chat-message-list")[0].appendChild(msg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
@@ -179,16 +180,23 @@ function chatScreen(index, col) {
                         createButtons(index);
                         // document.getElementById('backButton').disabled = false; 
                         // document.getElementById('backButton').style.pointerEvents = 'auto';
+                        // After the dotts are ready, put back listener on the button
+                        if(document.getElementById("backBtn") != null)
+                            document.getElementById("backBtn").setAttribute("onclick", "backListener()");  
                     }
                 }, (Question[index].length*50) > 3000 ? 3000 : (Question[index].length*50)); 
             }    
             else {
                 // document.getElementById('backButton').disabled = false;  
-                // document.getElementById('backButton').style.pointerEvents = 'auto';                
+                // document.getElementById('backButton').style.pointerEvents = 'auto';  
+                // After the dotts are ready, put back listener on the button
+                if(document.getElementById("backBtn") != null)
+                    document.getElementById("backBtn").setAttribute("onclick", "backListener()");  
                 helpfulInfo(index);    
             }
         }
-    }, (Contents[index].length*50) > 3500 ? 3500 : (Contents[index].length*50));    
+    }, (Contents[index].length*50) > 3500 ? 3500 : (Contents[index].length*50));  
+
     
     //document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index])); // direction, logo, msg
     
@@ -198,7 +206,7 @@ function chatScreen(index, col) {
 // ------------------------------------------------------------------------------------------------------------------
 // Create all the buttons and puts it in answers panel.
 function createButtons(index) {
-
+    
     const INSIDE_DIV = 2;   // How many divs can be in row.
 
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
@@ -241,6 +249,10 @@ function createButtons(index) {
         var color = getButtonColor(i);
         button.setAttribute("style", "background:" + color +  ";");
         button.addEventListener ("click", function() {
+            // After click on the category button remove the listener from the back button.
+            if(document.getElementById("backBtn") != null) {
+                document.getElementById("backBtn").removeAttribute("onclick");                                              
+            }
             var temp = Next[index][this.id];
             var tempArr = [index, this.id];
             console.log('temp'+this.id);
@@ -262,7 +274,7 @@ function createButtons(index) {
         var answers = document.getElementById("answers");
         mainDiv.appendChild(div);
         if(i == Answers[index].length - 1) {        // if the number of the buttons if odd.
-            answers.appendChild(mainDiv);           // add the last button to the DOM.
+            answers.appendChild(mainDiv);           // add the last button to the DOM.            
         }
 
         if(chatEntered)
@@ -279,74 +291,82 @@ function helpfulInfo(index) {
     mainDiv.setAttribute("class", "mainDiv");   // set class.
     mainDiv.style = "padding:0px"
 
-    //innerHTML = "Was the information helpful?";
+    // Creating the paragraph that holds the question if the user found the infromation helpful, we append it to the main div.
     var helpedText = document.createElement("p"); 
     helpedText.innerHTML = "Was the information helpful?";
     mainDiv.appendChild(helpedText);
 
+    // Creates the two buttons that sends the information to google analytics.
+    createHelpBtn(mainDiv, "left", index);
+    createHelpBtn(mainDiv, "right", index);
     
-    // Left div creation - 'no' button.
-    var lefParagraph = document.createElement("p");
-    lefParagraph.className = "icon_paragraph";
-    lefParagraph.style = "color: white"
-    lefParagraph.appendChild(document.createTextNode("No"));        
+    // var helpedText = document.createElement("p"); 
+    // helpedText.innerHTML = "Was the information helpful?";
+    // mainDiv.appendChild(mainDiv, helpedText); //TODO
+
     
-    var leftDiv = document.createElement("div");
-    leftDiv.setAttribute("class", "left");
+    // var lefParagraph = document.createElement("p");
+    // lefParagraph.className = "icon_paragraph";
+    // lefParagraph.style = "color: white";
+    // lefParagraph.appendChild(document.createTextNode("No"));        
+    
+    // var leftDiv = document.createElement("div");
+    // leftDiv.setAttribute("class", "left");
     
     
-    var leftButton = document.createElement("button");  
-    leftButton.className = "categoryBtn";
-    leftButton.addEventListener ("click", function() {
-        Back = [];
-        ga('HelpfulInfo.send', 'event', {
-            eventCategory: 'Information quality',
-            eventAction: 'click',
-            eventLabel: "Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]
-        });
+    // var leftButton = document.createElement("button");  
+    // leftButton.className = "categoryBtn";
+    // leftButton.addEventListener ("click", function() {
+    //     Back = [];
+    //     ga('HelpfulInfo.send', 'event', {
+    //         eventCategory: 'Information quality',
+    //         eventAction: 'click',
+    //         eventLabel: "Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]
+    //     });
         
-        // Returns to home screen.
-        createHomeScreen(); 
-    });
+    //     // Returns to home screen.
+    //     createHomeScreen(); 
+    // });
 
-    leftButton.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+    // leftButton.setAttribute("style", "background:" + getButtonColor(index) +  ";");
     
-    leftDiv.appendChild(leftButton);
-    leftDiv.appendChild(lefParagraph);
-    leftButton.appendChild(lefParagraph)        
+    // leftDiv.appendChild(leftButton);
+    // leftDiv.appendChild(lefParagraph);
+    // leftButton.appendChild(lefParagraph)        
     
-    mainDiv.appendChild(leftDiv);        
+    // mainDiv.appendChild(leftDiv);        
     
-    // Right div creation - 'yes' button.
-    var rightParagraph = document.createElement("p");
-    rightParagraph.className = "icon_paragraph";
-    rightParagraph.style = "color: white"
-    rightParagraph.appendChild(document.createTextNode("Yes"));                
+    // // Right div creation - 'yes' button.
+    // var rightParagraph = document.createElement("p");
+    // rightParagraph.className = "icon_paragraph";
+    // rightParagraph.style = "color: white"
+    // rightParagraph.appendChild(document.createTextNode("Yes"));                
     
-    var rightDiv = document.createElement("div");
-    rightDiv.setAttribute("class", "right");
+    // var rightDiv = document.createElement("div");
+    // rightDiv.setAttribute("class", "right");
     
-    var rightButton = document.createElement("button");  
-    rightButton.className = "categoryBtn";
-    rightButton.addEventListener ("click", function() {
-        Back = [];
+    // var rightButton = document.createElement("button");  
+    // rightButton.className = "categoryBtn";
+    // rightButton.addEventListener ("click", function() {
+    //     Back = [];
         
-        ga('HelpfulInfo.send', 'event', {
-            eventCategory: 'Information quality',
-            eventAction: 'click',
-            eventLabel: "Helped: node: " + (index+1) +  ", content: " + Contents[index]
-        });
-        createHomeScreen();
-    });
+    //     ga('HelpfulInfo.send', 'event', {
+    //         eventCategory: 'Information quality',
+    //         eventAction: 'click',
+    //         eventLabel: "Helped: node: " + (index+1) +  ", content: " + Contents[index]
+    //     });
+    //     createHomeScreen();
+    // });
     
-    rightButton.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+    // rightButton.setAttribute("style", "background:" + getButtonColor(index) +  ";");
 
-    rightDiv.appendChild(rightButton);
-    rightDiv.appendChild(rightParagraph);
-    rightButton.appendChild(rightParagraph)
+    // rightDiv.appendChild(rightButton);
+    // rightDiv.appendChild(rightParagraph);
+    // rightButton.appendChild(rightParagraph)
 
-    mainDiv.appendChild(rightDiv);
+    // mainDiv.appendChild(rightDiv);
 
+   
 
     // Contact us button.
     var contactParagraph = document.createElement("p");
@@ -388,6 +408,46 @@ function helpfulInfo(index) {
 
 // ------------------------------------------------------------------------------------------------------------------
 // Clear the buttons from the screen when needed.
+function createHelpBtn(mainDiv, direction, index) {
+
+    var paragraph = document.createElement("p");
+    paragraph.className = "icon_paragraph";
+    paragraph.style = "color: white";
+    paragraph.appendChild(document.createTextNode(direction == "left" ? "No" : "Yes"));        
+
+    var div = document.createElement("div");
+    div.setAttribute("class", direction);
+
+
+    var btn = document.createElement("button");  
+    btn.className = "categoryBtn";
+
+    var label = direction == "left" ?("Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]) :
+                                     ("Helped: node: " + (index+1) +  ", content: " + Contents[index]);
+
+    btn.addEventListener ("click", function(label) {
+        Back = [];
+
+        ga('HelpfulInfo.send', 'event', {
+            eventCategory: "Information quality",
+            eventAction: "click",
+            eventLabel: label
+        });
+        
+        // Returns to home screen.
+        createHomeScreen(); 
+    });
+
+    btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+
+    div.appendChild(btn);
+    div.appendChild(paragraph);
+    btn.appendChild(paragraph)        
+
+    mainDiv.appendChild(div); 
+}
+// ------------------------------------------------------------------------------------------------------------------
+// Clear the buttons from the screen when needed.
 function clearButtons(){
     var length = document.getElementsByClassName("mainDiv").length;
     var div =  document.getElementById('answers');
@@ -400,6 +460,7 @@ function clearButtons(){
 // ------------------------------------------------------------------------------------------------------------------
 // Back button function, goes back a node - if there no node to go back to we go back to home screen insted.
 function backListener() {
+ 
     if ((Back[Back.length-1][0]) > 0) {
         var row = Back[Back.length-1][0];
         var col =  Back[Back.length-1][1];
@@ -411,6 +472,9 @@ function backListener() {
         Back.pop();
         createHomeScreen();
     }
+    // Remove onclick listener after hitting back button
+    if(document.getElementById("backBtn") != null)
+        document.getElementById("backBtn").removeAttribute("onclick"); 
 }
  
 function drawChatBackground() {
