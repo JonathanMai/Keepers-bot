@@ -9,6 +9,17 @@
 
    See https://github.com/apache/cordova-plugin-statusbar
 */
+/* Fonts Diclaration From Here */
+/* Title */
+@font-face {
+  font-family: "OpenSans-Regular";
+  src: url("../Fonts/OpenSans-Regular.ttf");
+}
+/* Question & Answers */
+@font-face {
+  font-family: "almoni-dl-aaa-regular";
+  src: url("../Fonts/almoni-dl-aaa-regular.otf");
+}
 
 /* Sets the body max width */
 body {
@@ -129,6 +140,7 @@ margin-top: 50px;
 }
 
 #title {
+  font-family: "OpenSans-Regular";
   display: block;
   line-height: 35px;
   font-size: 30px;
