@@ -103,10 +103,11 @@ transform: translateY(2px);
 
 .categoryBtn {
 /* background-color: rgb(29, 187, 205);  (30,175,192) */
-border-radius: 100px;
-border: none;
-width: 150px;
-height: 25px;
+  color: white;
+  border-radius: 100px;
+  border: none;
+  width: 150px;
+  height: 25px;
 }
 
 .content-block {
