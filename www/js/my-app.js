@@ -116,7 +116,7 @@ function chatScreen(index, col) {
     
     // If its the first time the chat screen appear we need to set the elements below.
     if(!chatEntered) {
-
+        
         document.getElementById("titleImage").style.display = "none"; // Hides the image of the heart in home screen.
         document.getElementById("title").style = "margin-right:40px"
         // Creating the back button(we create a div for it and append the back image to it).
@@ -207,28 +207,35 @@ function chatScreen(index, col) {
 // Create all the buttons and puts it in answers panel.
 function createButtons(index) {
     
-    const INSIDE_DIV = 2;   // How many divs can be in row.
-
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
     mainDiv.setAttribute("class", "mainDiv");           // set class
-
+    // if(!chatEntered) {
+    //     mainDiv.style.setProperty('max-height','auto','');
+    // }
     // if(chatEntered) {
     //     mainDiv.style = "height: auto; padding-top: 10px;";
     // }
     // Creates the all buttons we need using a for loop.
     for(i = 0; i < Answers[index].length; i++)
     {
-        if(mainDiv.childElementCount == INSIDE_DIV) {   // If the main div contain 2 children
-            answers.appendChild(mainDiv);               // append it to the dom.
-            mainDiv = document.createElement("div");    // create new div with 0 children.
-            mainDiv.setAttribute("class", "mainDiv");   // set class.
-        }
-        var div = document.createElement("div");
-        if(i % INSIDE_DIV == 0) {
-            div.setAttribute("class", "left");
-        } else if(i % INSIDE_DIV == 1){
-            div.setAttribute("class", "right");
-        }
+        // var answers = document.getElementById("answers");
+        
+        // if(mainDiv.childElementCount == INSIDE_DIV) {   // If the main div contain 2 children
+            // answers.appendChild(mainDiv);               // append it to the dom.
+            // mainDiv = document.createElement("div");    // create new div with 0 children.
+            // mainDiv.setAttribute("class", "mainDiv");   // set class.
+        // }
+        
+        // var div = document.createElement("div");
+        // div.setAttribute("style", "display:inline");
+        
+        // if(!chatEntered) {
+        //     if(i % INSIDE_DIV == 0) {
+        //     } else if(i % INSIDE_DIV == 1){
+        //         div.setAttribute("class", "right");
+        //     }
+        // } 
+        
         
         // We need image only on main screen.
         // var image;
@@ -239,15 +246,21 @@ function createButtons(index) {
         //     image.setAttribute("src", ImagesURL[i]);
         // }
         
-        var paragraph = document.createElement("p");
-        paragraph.className = "icon_paragraph";
-        paragraph.setAttribute("id", "par" + i);
+        // var paragraph = document.createElement("p");
+        // paragraph.className = "icon_paragraph";
+        // paragraph.setAttribute("id", "par" + i);
         
-        var button = document.createElement("button");  
+        var button = document.createElement("button"); 
+    
         button.id = i;
         button.className = "categoryBtn";
         var color = getButtonColor(i);
-        button.setAttribute("style", "background:" + color +  ";");
+        button.setAttribute("style", "display: inline-block;font-size: 90%;background:" + color +  "; color:white; margin-right: 6px; margin-left: 6px;");
+        if(chatEntered) {
+            button.style.setProperty('width','90%','');
+            button.style.setProperty('margin-left','0px','');   
+            button.style.setProperty('margin-right','0px','');                        
+        }
         button.addEventListener ("click", function() {
             // After click on the category button remove the listener from the back button.
             if(document.getElementById("backBtn") != null) {
@@ -260,19 +273,19 @@ function createButtons(index) {
             Back.push(tempArr);      
             chatScreen(temp-1, this.id);
         });
-        
-        paragraph.appendChild(document.createTextNode(Answers[index][i]));
-        div.appendChild(button);
-        div.appendChild(paragraph);
+        var text = document.createTextNode(Answers[index][i]);
+        button.appendChild(text);
+        // div.appendChild(button);
+        // div.appendChild(paragraph);
         // if(index == 0) {
         //     button.appendChild(image);
         // } else {
-            button.appendChild(paragraph);
-            paragraph.style = "color: white"
+            // button.appendChild(paragraph);
+            // paragraph.style = "color: white"
         // }
         // button.innerHTML = Answers[index][i];
         var answers = document.getElementById("answers");
-        mainDiv.appendChild(div);
+        mainDiv.appendChild(button);
         if(i == Answers[index].length - 1) {        // if the number of the buttons if odd.
             answers.appendChild(mainDiv);           // add the last button to the DOM.            
         }
