@@ -209,9 +209,9 @@ function createButtons(index) {
     
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
     mainDiv.setAttribute("class", "mainDiv");           // set class
-    // if(!chatEntered) {
-    //     mainDiv.style.setProperty('max-height','auto','');
-    // }
+    if(!chatEntered) {
+        mainDiv.style.setProperty('max-height','40vh','');
+    }
     // if(chatEntered) {
     //     mainDiv.style = "height: auto; padding-top: 10px;";
     // }
@@ -301,17 +301,17 @@ function helpfulInfo(index) {
     ga('create', 'UA-108462660-1',{"name": "HelpfulInfo"});        
     
     mainDiv = document.createElement("div");    // create new div with 0 children.
-    mainDiv.setAttribute("class", "mainDiv");   // set class.
-    mainDiv.style = "padding:0px"
+    mainDiv.setAttribute("id", "helpfulMainDiv");   // set class.
 
     // Creating the paragraph that holds the question if the user found the infromation helpful, we append it to the main div.
     var helpedText = document.createElement("p"); 
-    helpedText.innerHTML = "Was the information helpful?";
+    helpedText.setAttribute("id", "helpfulText");
+    helpedText.innerHTML = "The information helped you?";
     mainDiv.appendChild(helpedText);
 
     // Creates the two buttons that sends the information to google analytics.
-    createHelpBtn(mainDiv, "left", index);
-    createHelpBtn(mainDiv, "right", index);
+    createHelpBtn(mainDiv, "No", index);
+    createHelpBtn(mainDiv, "Yes", index);
     
     // var helpedText = document.createElement("p"); 
     // helpedText.innerHTML = "Was the information helpful?";
@@ -382,38 +382,39 @@ function helpfulInfo(index) {
    
 
     // Contact us button.
-    var contactParagraph = document.createElement("p");
-    contactParagraph.className = "icon_paragraph";
-    contactParagraph.style = "color: white"
-    contactParagraph.appendChild(document.createTextNode("For personal question contact us"));                
+    createHelpBtn(mainDiv, "For personal question contact us", index, true);    
+    // var contactParagraph = document.createElement("p");
+    // contactParagraph.className = "icon_paragraph";
+    // contactParagraph.style = "color: white"
+    // contactParagraph.appendChild(document.createTextNode("For personal question contact us"));                
     
-    var contactDiv = document.createElement("div");
-    contactDiv.setAttribute("class", "center");
+    // var contactDiv = document.createElement("div");
+    // contactDiv.setAttribute("class", "center");
     
-    var contactButton = document.createElement("button");  
-    contactButton.className = "categoryBtn";
-    contactButton.style = "margin-top:5px"
-    contactButton.addEventListener ("click", function() {
+    // var contactButton = document.createElement("button");  
+    // contactButton.className = "categoryBtn";
+    // contactButton.style = "margin-top:5px"
+    // contactButton.addEventListener ("click", function() {
         
-        // Refresh everything back to home screen with a delay that makes the screen switch much nicer and smoother.
-        setTimeout(function (){        
-            Back = [];
-            createHomeScreen();
-        },500 );
-    });
+    //     // Refresh everything back to home screen with a delay that makes the screen switch much nicer and smoother.
+    //     setTimeout(function (){        
+    //         Back = [];
+    //         createHomeScreen();
+    //     },500 );
+    // });
     
     
-    contactButton.setAttribute("style", "background:" + getButtonColor(index) +  ";margin-top:13px;width:-webkit-fill-available");
+    // contactButton.setAttribute("style", "background:" + getButtonColor(index) +  ";margin-top:13px;width:-webkit-fill-available");
     
-    contactDiv.appendChild(contactButton);
-    contactDiv.appendChild(contactParagraph);
-    contactButton.appendChild(contactParagraph)
+    // contactDiv.appendChild(contactButton);
+    // contactDiv.appendChild(contactParagraph);
+    // contactButton.appendChild(contactParagraph)
     var hr = document.createElement("a");
     hr.setAttribute("href", "contact.html");
-    hr.appendChild(contactButton);
-    contactDiv.appendChild(hr);
+    // hr.appendChild(contactButton);
+    // contactDiv.appendChild(hr);
 
-    mainDiv.appendChild(contactDiv);
+    // mainDiv.appendChild(contactDiv);
 
     document.getElementById("answers").appendChild(mainDiv);  
     drawChatBackground();
@@ -421,22 +422,23 @@ function helpfulInfo(index) {
 
 // ------------------------------------------------------------------------------------------------------------------
 // Clear the buttons from the screen when needed.
-function createHelpBtn(mainDiv, direction, index) {
+function createHelpBtn(mainDiv, text, index, fit_content) {
 
-    var paragraph = document.createElement("p");
-    paragraph.className = "icon_paragraph";
-    paragraph.style = "color: white";
-    paragraph.appendChild(document.createTextNode(direction == "left" ? "No" : "Yes"));        
+    // var paragraph = document.createElement("p");
+    // paragraph.className = "icon_paragraph";
+    // paragraph.style = "color: white";
+    // paragraph.appendChild(document.createTextNode(direction == "left" ? "No" : "Yes"));        
 
-    var div = document.createElement("div");
-    div.setAttribute("class", direction);
+    // var div = document.createElement("div");
+    // div.setAttribute("class", direction);
 
 
     var btn = document.createElement("button");  
-    btn.className = "categoryBtn";
+    btn.className = "yesNoBtn left";
+    btn.innerHTML = text;
 
-    var label = direction == "left" ?("Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]) :
-                                     ("Helped: node: " + (index+1) +  ", content: " + Contents[index]);
+    // var label = direction == "left" ?("Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]) :
+    //                                  ("Helped: node: " + (index+1) +  ", content: " + Contents[index]);
 
     btn.addEventListener ("click", function(label) {
         Back = [];
@@ -453,11 +455,16 @@ function createHelpBtn(mainDiv, direction, index) {
 
     btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
 
-    div.appendChild(btn);
-    div.appendChild(paragraph);
-    btn.appendChild(paragraph)        
+    // div.appendChild(btn);
+    // div.appendChild(paragraph);
+    // btn.appendChild(paragraph)        
 
-    mainDiv.appendChild(div); 
+    if(fit_content) {
+        btn.style.setProperty('width', 'fit-content', ''); 
+        btn.style.setProperty('padding-left', '15px', '');
+        btn.style.setProperty('padding-right', '15px', '');       
+    }
+    mainDiv.appendChild(btn); 
 }
 // ------------------------------------------------------------------------------------------------------------------
 // Clear the buttons from the screen when needed.
@@ -489,6 +496,12 @@ function backListener() {
     // Remove onclick listener after hitting back button
     if(document.getElementById("backBtn") != null)
         document.getElementById("backBtn").removeAttribute("onclick"); 
+
+    /* Remove the helpful div if exist on back press. */
+    var helpDiv = document.getElementById("helpfulMainDiv");
+    if(helpDiv) {
+        helpDiv.remove();
+    }
 }
  
 function drawChatBackground() {

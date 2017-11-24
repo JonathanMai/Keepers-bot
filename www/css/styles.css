@@ -20,6 +20,11 @@
   font-family: "almoni-dl-aaa-regular";
   src: url("../Fonts/almoni-dl-aaa-bold.otf");
 }
+/* Yes No Answers */
+@font-face {
+  font-family: "OpenSans-Bold";
+  src: url("../Fonts/OpenSans-Bold.ttf");
+}
 
 /* Sets the body max width */
 body {
@@ -123,7 +128,21 @@ border-radius: 10px;
 border: none;
 width: 45%;
 height: 25px;
+margin-right: 6px;
+margin-left: 6px;
 margin-bottom: 5px;
+}
+
+.yesNoBtn {
+  border-radius: 10px;
+  border: none;
+  width: 60px;
+  height: 25px;
+  margin-right: 6px;
+  margin-bottom: 5px;
+  color: white;
+  font-size: 17px;
+  margin-top: 5px;
 }
 
 .content-block {
@@ -171,8 +190,8 @@ font-size: 15px;
 .mainDiv {
 /* height: 150px;  If 3 or more cols so must be off */
   /* margin-top: 40px; */
-  //////// TO DO MAX HEIGHT
-  /* max-height: 100px; */
+  max-height: 20vh;
+  font-family: OpenSans-Regular;
   padding-top: 5px;
   /* padding-bottom: 5px; */
   /* max-width: 315px; */
@@ -468,17 +487,23 @@ div.flex {
 
 .message-left:before {
 	border: 10px solid transparent;
-	border-bottom-color: rgba(0, 0, 0, 0.4);
+	border-bottom-color: rgb(128, 128, 128);
 	bottom: -40px;
 	left: -10px;
 	z-index: -2;
 }
-
 .message-left:after {
+  border-radius: 20px / 10px;  
+  content: '';
+  position: relative;
+}
+
+.message-left:after {  
 	border: 8px solid transparent;
-	border-bottom-color: #d2f4fe;
-	bottom: 1px;
-	left: -5px;
+  border-bottom-color: #ececec;
+	bottom: 55px; 
+	left: -6px;
+	z-index: 0;
 }
 
 
@@ -502,8 +527,23 @@ border-bottom-color: rgb(23, 144,159);
 bottom: 1px;
 }
 
+#helpfulText {
+  font-size: 23px;
+  text-align: initial;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #000000b8;
+}
+
+#helpfulMainDiv {
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 0px;
+}
+
 /*---------------------------------------------------------------------------------*/
 /* From here its contact us styling */
+/* TAASE KOVEZ NOSAF LE STYLE SHEL CONTACT US SHLOHA!!!! */
 
 .text-input {
   border-radius: 10px;
