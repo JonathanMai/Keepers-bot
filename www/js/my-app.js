@@ -74,6 +74,8 @@ function stringParse(info){
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function createHomeScreen() {
     var index = 0;
+    Back = [];       
+    
     if (chatEntered) {
         clearButtons();
         document.getElementsByClassName("flex")[0].removeChild( document.getElementsByClassName("flex")[0].childNodes[0]);  // remove back button.
@@ -81,7 +83,7 @@ function createHomeScreen() {
         document.getElementById("titleImage").style.display = "";        
         document.getElementById("topLine").style = ""; // Change top line color on home screen.  
         document.getElementById("contents").innerHTML = "";   
-        document.getElementById("text").innerHTML = "";           
+        document.getElementById("text").innerHTML = "";         
     }
     chatEntered = false;
     document.getElementById('title').innerHTML = Titles[index];
@@ -251,28 +253,28 @@ function createButtons(index) {
         // paragraph.setAttribute("id", "par" + i);
         
         var button = document.createElement("button"); 
-    
-        button.id = i;
-        button.className = "categoryBtn";
-        var color = getButtonColor(i);
-        button.setAttribute("style", "display: inline-block;font-size: 90%;background:" + color +  "; color:white; margin-right: 6px; margin-left: 6px;");
-        if(chatEntered) {
-            button.style.setProperty('width','90%','');
-            button.style.setProperty('margin-left','0px','');   
-            button.style.setProperty('margin-right','0px','');                        
-        }
-        button.addEventListener ("click", function() {
-            // After click on the category button remove the listener from the back button.
-            if(document.getElementById("backBtn") != null) {
-                document.getElementById("backBtn").removeAttribute("onclick");                                              
+        
+            button.id = i;
+            button.className = "categoryBtn";
+            var color = getButtonColor(i);
+            button.setAttribute("style", "display: inline-block;font-size: 90%;background:" + color +  "; color:white; margin-right: 6px; margin-left: 6px;");
+            if(chatEntered) {
+                button.style.setProperty('width','90%','');
+                button.style.setProperty('margin-left','0px','');   
+                button.style.setProperty('margin-right','0px','');                        
             }
-            var temp = Next[index][this.id];
-            var tempArr = [index, this.id];
-            console.log('temp'+this.id);
-            // document.getElementsByClassName("toolbar")[0].style = "display: block;"
-            Back.push(tempArr);      
-            chatScreen(temp-1, this.id);
-        });
+            button.addEventListener ("click", function() {
+                // After click on the category button remove the listener from the back button.
+                if(document.getElementById("backBtn") != null) {
+                    document.getElementById("backBtn").removeAttribute("onclick");                                              
+                }
+                var temp = Next[index][this.id];
+                var tempArr = [index, this.id];
+                console.log('temp'+this.id);
+                // document.getElementsByClassName("toolbar")[0].style = "display: block;"
+                Back.push(tempArr);      
+                chatScreen(temp-1, this.id);
+            });
         var text = document.createTextNode(Answers[index][i]);
         button.appendChild(text);
         // div.appendChild(button);
@@ -292,15 +294,17 @@ function createButtons(index) {
 
         if(chatEntered)
             drawChatBackground();
-        
+            
     }   
 }
+
 // ------------------------------------------------------------------------------------------------------------------
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function helpfulInfo(index) {
     ga('create', 'UA-108462660-1',{"name": "HelpfulInfo"});        
     
     mainDiv = document.createElement("div");    // create new div with 0 children.
+    mainDiv.setAttribute("class", "mainDiv");
     mainDiv.setAttribute("id", "helpfulMainDiv");   // set class.
 
     // Creating the paragraph that holds the question if the user found the infromation helpful, we append it to the main div.
@@ -409,8 +413,8 @@ function helpfulInfo(index) {
     // contactDiv.appendChild(contactButton);
     // contactDiv.appendChild(contactParagraph);
     // contactButton.appendChild(contactParagraph)
-    var hr = document.createElement("a");
-    hr.setAttribute("href", "contact.html");
+    // var hr = document.createElement("a");
+    // hr.setAttribute("href", "contact.html");
     // hr.appendChild(contactButton);
     // contactDiv.appendChild(hr);
 
@@ -440,18 +444,42 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
     // var label = direction == "left" ?("Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]) :
     //                                  ("Helped: node: " + (index+1) +  ", content: " + Contents[index]);
 
-    btn.addEventListener ("click", function(label) {
-        Back = [];
+    if(text == "No" || text == "Yes") {
+        btn.addEventListener ("click", function(label) {        
+            
+            ga('HelpfulInfo.send', 'event', {
+                eventCategory: "Information quality",
+                eventAction: "click",
+                eventLabel: label
+            });
+            clearButtons();
+            drawChatBackground();
 
-        ga('HelpfulInfo.send', 'event', {
-            eventCategory: "Information quality",
-            eventAction: "click",
-            eventLabel: label
+            var appreciation = document.createElement("p"); 
+            appreciation.setAttribute("id", "helpfulText");
+            appreciation.innerHTML = "Thank you for your feedback,<br>we will learn and improve";
+            document.getElementById("answers").appendChild(appreciation);
+
+            setTimeout(function() {
+                    // Returns to home screen.
+                    createHomeScreen(); 
+                    document.getElementById("answers").removeChild(document.getElementById("helpfulText"));
+                }
+            ,2000);
         });
-        
-        // Returns to home screen.
-        createHomeScreen(); 
-    });
+    }
+    else {
+        var hr = document.createElement("a");
+        hr.setAttribute("href", "contact.html");
+        mainDiv.appendChild(hr);
+        drawChatBackground();
+        btn.addEventListener ("click", function() {
+            // Refresh everything back to home screen with a delay that makes the screen switch much nicer and smoother.
+            setTimeout(function (){        
+                createHomeScreen();
+            },500 );
+        });
+    }
 
     btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
 
@@ -474,36 +502,38 @@ function clearButtons(){
     for(i = 0; i < length; i++){
         console.log(document.getElementsByClassName("mainDiv"));
         div.removeChild(document.getElementsByClassName("mainDiv")[0]);
-  }
+    }
+  
+    /* Remove the helpful div if exist on back press. */
 }
 
 // ------------------------------------------------------------------------------------------------------------------
 // Back button function, goes back a node - if there no node to go back to we go back to home screen insted.
 function backListener() {
- 
-    if ((Back[Back.length-1][0]) > 0) {
-        var row = Back[Back.length-1][0];
-        var col =  Back[Back.length-1][1];
-        Back.pop();        
-        chatScreen(row,col);
-    }
 
-    else{
+    // Checks if the user only entered the chat screen - then the back button returns to home screen.
+    if (Back.length <= 1) {
         Back.pop();
         document.getElementById("title").style = "margin-right:0px"
         createHomeScreen();
     }
-    // Remove onclick listener after hitting back button
+    
+    // When the user went deeper in the decision tree we need to go back a node.
+    else{
+        var row = Back[Back.length-1][0];
+        var col =  Back[Back.length-1][1];
+        console.log(Back.length);
+        Back.pop();        
+        chatScreen(row,col);
+    }
+
+    // Remove onclick listener after hitting back button - disable button.
     if(document.getElementById("backBtn") != null)
         document.getElementById("backBtn").removeAttribute("onclick"); 
-
-    /* Remove the helpful div if exist on back press. */
-    var helpDiv = document.getElementById("helpfulMainDiv");
-    if(helpDiv) {
-        helpDiv.remove();
-    }
 }
  
+// ------------------------------------------------------------------------------------------------------------------
+// Draw the chat background using the screen size calculation to make it responsive.
 function drawChatBackground() {
     document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 40) + "px;"; 
     scrollBottonUpdate();        
