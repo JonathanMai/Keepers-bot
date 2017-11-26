@@ -532,6 +532,7 @@ bottom: 1px;
   text-align: initial;
   margin-top: 5px;
   margin-bottom: 5px;
+  /* margin-left: 5%; */
   color: #000000b8;
 }
 
@@ -541,17 +542,33 @@ bottom: 1px;
   padding: 0px;
 }
 
+.age {
+    width: 13%;
+}
 /*---------------------------------------------------------------------------------*/
 /* From here its contact us styling */
 /* TAASE KOVEZ NOSAF LE STYLE SHEL CONTACT US SHLOHA!!!! */
 
-.text-input {
+.frame {
   border-radius: 10px;
-  padding-left: 5px;
+  padding: 5px;
   border-width: thin;
   text-align: left;
-  margin: 3px;
+  margin-top: 7px;
 }
+
+.longer-text {
+  height: 10%;
+  width: 67%;
+}
+
+#send-button {
+  width: 25%;
+  display: unset;
+  padding: 2%;
+  border-radius: 10px;
+}
+
 
 /* .message-right:before{
   content: "";            

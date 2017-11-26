@@ -20,32 +20,34 @@
     <div data-page="about" class="page no-toolbar">
         <div class="page-content">
             <div class="content-block">
+                <h2 style="margin-bottom:0px;"> Contact us for personal questions </h2>
+                <hr id="topLine" style="background-color: #1DBACD;width:100%;height:1px;">
                 <form id="myform" onsubmit="sendFeedbackMessage();return false;">
                     <!-- Name input field. -->
                     <div class="item-input left">
-                        <input class="item-input text-input" name="Name" type="text" id="nameInput" placeholder="Name" required>
+                        <input class="frame left" name="Name" type="text" id="name-input" placeholder="Name" required>
                     </div>
                     
                     </br>
                 
                     <!-- Email input field. -->
-                    <div class="item-input left">
-                        <input class="text-input" name="email" type="email" id="emailInput" placeholder="Email" pattern='[A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*[.]([A-Za-z0-9.-])+' required>
+                    <div class="item-input ">
+                        <input class="frame left longer-text" name="email" type="email" id="email-input" placeholder="Email" pattern='[A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*[.]([A-Za-z0-9.-])+' required>
                     </div>  
     
                     </br>             
                 
                     <!-- Subject input field. -->
                     <div class="item-input" style="display: inline;">
-                        <input class="text-input left" name="subject" type="text" id="subjectInput" placeholder="Subject" required>
-                        <input class="buttons right" type="submit" id="sendButton" value="Send">
+                        <input class="frame left longer-text" name="subject" type="text" id="subject-input" placeholder="Subject" required>
+                        <input class="buttons right" type="submit" id="send-button" value="Send">
                     </div>
     
                     </br>
                     
                     <!-- Message content input field. -->
                     <div class="item-input left">
-                        <textarea class="text-input" name="message" style="resize:none;width:100%;" id="msgInput" rows="4" cols="50" placeholder="Message" required></textarea>
+                        <textarea class="frame" name="message" style="resize:none;width:96%;height:100px" id="msg-input" rows="4" cols="50" placeholder="Message" required></textarea>
                     </div> 
 
                       
@@ -55,3 +57,4 @@
     </div>
 </div>
 </div>
+</body>
