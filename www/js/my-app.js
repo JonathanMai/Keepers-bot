@@ -100,7 +100,7 @@ function createHomeScreen() {
 
 // ------------------------------------------------------------------------------------------------------------------
 // Asks the user if the information was helpful and sends the answer to google analytics.
-function chatScreen(index, col) {
+function chatScreen(index) {
     //var textOutput = Contents[index] + "</br>" + Question[index];
     // Clears the buttons and drawing chat background, make the background dinamic as the buttons panel gets smaller.
     clearButtons();
@@ -158,7 +158,7 @@ function chatScreen(index, col) {
         scrollBottonUpdate(); // Updates the scroll spot to the bottom of the chat panel.
     }
     
-    var msg = createMsg("message-left", Contents[index]);   // createMsg(direction, imgSrc, text, time) => Direction should be message-left or message-right - Admin Left, User Right.
+    var msg = createMsg("message-left",Question[index] ? Contents[index] : "Entere childs age");   // createMsg(direction, imgSrc, text, time) => Direction should be message-left or message-right - Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
     drawChatBackground();
     // Creates a bubble of content and inside we also create a question bubble.
@@ -194,17 +194,30 @@ function chatScreen(index, col) {
                 // After the dotts are ready, put back listener on the button
                 if(document.getElementById("backBtn") != null)
                     document.getElementById("backBtn").setAttribute("onclick", "backListener()");  
-                helpfulInfo(index);    
+                getAge(index);    
             }
         }
-    }, (Contents[index].length*50) > 3500 ? 3500 : (Contents[index].length*50));  
-
-    
+    }, (msg.innerText.length*50) > 3500 ? 3500 : (msg.innerText.length*50));  
     //document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index])); // direction, logo, msg
-    
-    
 }
 
+// ------------------------------------------------------------------------------------------------------------------
+function getAge(index) {
+    // console.log("GETTING AGE B ITCHED");
+    clearButtons();
+    drawChatBackground();
+    mainDiv = document.createElement("div");    // create new div with 0 children.
+    mainDiv.setAttribute("class", "mainDiv");
+    // mainDiv.setAttribute("id", "helpfulMainDiv");   // set class.
+    // Creates the two buttons that sends the information to google analytics.
+    for(var i = 0; i < 12; i++){
+
+        createHelpBtn(mainDiv, i + 6, index);
+    
+        document.getElementById("answers").appendChild(mainDiv); 
+    } 
+    
+}
 // ------------------------------------------------------------------------------------------------------------------
 // Create all the buttons and puts it in answers panel.
 function createButtons(index) {
@@ -300,9 +313,18 @@ function createButtons(index) {
 
 // ------------------------------------------------------------------------------------------------------------------
 // Asks the user if the information was helpful and sends the answer to google analytics.
-function helpfulInfo(index) {
+function helpfulInfo(index, col) {
     ga('create', 'UA-108462660-1',{"name": "HelpfulInfo"});        
     
+    var msg = createMsg("message-left", Answers[index][col]);   // createMsg(direction, imgSrc, text, time) => Direction should be message-left or message-right - Admin Left, User Right.
+    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
+    clearButtons();
+    drawChatBackground();
+    // Creates a bubble of content and inside we also create a question bubble.
+    // This part creates an illusion that the user is chatting with our consultant.
+    // It creates 3 dots that rolls for a few seconds until it shows the chat bubble.
+    
+
     mainDiv = document.createElement("div");    // create new div with 0 children.
     mainDiv.setAttribute("class", "mainDiv");
     mainDiv.setAttribute("id", "helpfulMainDiv");   // set class.
@@ -310,7 +332,7 @@ function helpfulInfo(index) {
     // Creating the paragraph that holds the question if the user found the infromation helpful, we append it to the main div.
     var helpedText = document.createElement("p"); 
     helpedText.setAttribute("id", "helpfulText");
-    helpedText.innerHTML = "The information helped you?";
+    helpedText.innerHTML = "The information help you?";
     mainDiv.appendChild(helpedText);
 
     // Creates the two buttons that sends the information to google analytics.
@@ -419,9 +441,21 @@ function helpfulInfo(index) {
     // contactDiv.appendChild(hr);
 
     // mainDiv.appendChild(contactDiv);
-
-    document.getElementById("answers").appendChild(mainDiv);  
-    drawChatBackground();
+    setTimeout(function (){
+        
+        if(document.getElementsByClassName("chat-message-list")[0]) {
+            document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
+            document.getElementsByClassName("chat-message-list")[0].appendChild(msg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+                // document.getElementById('backButton').disabled = false;  
+                // document.getElementById('backButton').style.pointerEvents = 'auto';  
+                // After the dotts are ready, put back listener on the button
+            if(document.getElementById("backBtn") != null)
+                document.getElementById("backBtn").setAttribute("onclick", "backListener()");     
+            document.getElementById("answers").appendChild(mainDiv);  
+            // clearButtons();
+            drawChatBackground();
+        }
+    }, (msg.innerText.length*50) > 3500 ? 3500 : (msg.innerText.length*50)); 
 }
 
 // ------------------------------------------------------------------------------------------------------------------
@@ -438,27 +472,30 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
 
 
     var btn = document.createElement("button");  
-    btn.className = "yesNoBtn left";
+    btn.className = "yesNoBtn";
     btn.innerHTML = text;
-
-    // var label = direction == "left" ?("Didn\'t help: node: " + (index+1) +  "\tcontent: " + Contents[index]) :
-    //                                  ("Helped: node: " + (index+1) +  ", content: " + Contents[index]);
-
+    
     if(text == "No" || text == "Yes") {
+        var label = text == "No" ?("Didn\'t help - node: " + (index+1) + ", answer: " + text-6 +  ", content: " + Contents[index]) :
+                                         ("Helped - node: " + (index+1) + ", answer: " + text-6 +  ", content: " + Contents[index]);
+        btn.className += " left";
         btn.addEventListener ("click", function(label) {        
+            clearButtons();
+            drawChatBackground();
             
             ga('HelpfulInfo.send', 'event', {
                 eventCategory: "Information quality",
                 eventAction: "click",
                 eventLabel: label
             });
-            clearButtons();
-            drawChatBackground();
-
-            var appreciation = document.createElement("p"); 
+            
+            
+            var appreciation = document.createElement("p");
+            appreciation.style = "margin-left: 5%;"
             appreciation.setAttribute("id", "helpfulText");
             appreciation.innerHTML = "Thank you for your feedback,<br>we will learn and improve";
             document.getElementById("answers").appendChild(appreciation);
+            drawChatBackground();
 
             setTimeout(function() {
                     // Returns to home screen.
@@ -467,8 +504,47 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
                 }
             ,2000);
         });
+        btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+    }
+    else if(typeof text == "number") {
+        btn.className += " age";
+        btn.id = text-6;
+        if(!Answers[index][text-6]) {
+            btn.setAttribute("style", "background:grey;color:#CDCECE")
+        }
+
+        else {
+            btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");            
+            drawChatBackground();
+            btn.addEventListener ("click", function(label) { 
+                Back.push([index, this.id]);                
+                helpfulInfo(index, this.id);
+            // ga('HelpfulInfo.send', 'event', {
+            //     eventCategory: "Information quality",
+            //     eventAction: "click",
+            //     eventLabel: label
+            // });
+            // clearButtons();
+            // drawChatBackground();
+
+            // var appreciation = document.createElement("p"); 
+            // appreciation.setAttribute("id", "helpfulText");
+            // appreciation.innerHTML = "Thank you for your feedback,<br>we will learn and improve";
+            // document.getElementById("answers").appendChild(appreciation);
+
+            // setTimeout(function() {
+            //         // Returns to home screen.
+            //         createHomeScreen(); 
+            //         document.getElementById("answers").removeChild(document.getElementById("helpfulText"));
+            //     }
+            // ,2000);
+            });
+        }
+        
     }
     else {
+        btn.className += " left";
+        
         var hr = document.createElement("a");
         hr.setAttribute("href", "contact.html");
         mainDiv.appendChild(hr);
@@ -479,9 +555,10 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
                 createHomeScreen();
             },500 );
         });
+        btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
     }
 
-    btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+    
 
     // div.appendChild(btn);
     // div.appendChild(paragraph);
@@ -522,7 +599,6 @@ function backListener() {
     else{
         var row = Back[Back.length-1][0];
         var col =  Back[Back.length-1][1];
-        console.log(Back.length);
         Back.pop();        
         chatScreen(row,col);
     }
