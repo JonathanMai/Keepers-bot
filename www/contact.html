@@ -1,3 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!--
+            Customize this policy to fit your own app's needs. For more guidance, see:
+                https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+            Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        -->
+        <meta http-equiv="Content-Security-Policy" content="
+        default-src *; 
+        style-src * 'unsafe-inline'; 
+        script-src * 'unsafe-inline'; 
+        media-src *; img-src * data:; 
+    " />
+        <!-- Required meta tags-->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        
+        <!-- Your app title -->
+        <title>Chat bot</title>
+        
+        <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+            http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+        -->
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
+        <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+        <script
+        src="https://code.jquery.com/jquery-3.2.1.js"
+        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+        crossorigin="anonymous"></script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108462660-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-108462660-1');
+        </script>
+    </head>
+
+    <body>
+  
+
+
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->
 
 <!-- Top Navbar-->
@@ -20,22 +80,16 @@
     <div data-page="about" class="page no-toolbar">
         <div class="page-content">
             <div class="content-block">
-                <h2 style="margin-bottom:0px;"> Contact us for personal questions </h2>
-                <hr id="topLine" style="background-color: #1DBACD;width:100%;height:1px;">
+                <div id="contactus-title"style="margin-bottom:0px;"> Contact us for personal questions </div>
+                <hr id="topLine" style="background-color: #1DBACD;width:100%;height:1px;"/>
                 <form id="myform" onsubmit="sendFeedbackMessage();return false;">
                     <!-- Name input field. -->
-                    <div class="item-input left">
-                        <input class="frame left" name="Name" type="text" id="name-input" placeholder="Name" required>
-                    </div>
+                        <input class="item-input frame left smaller-text" name="Name" type="text" id="name-input" placeholder="Name" required>
                     
                     </br>
                 
                     <!-- Email input field. -->
-                    <div class="item-input ">
-                        <input class="frame left longer-text" name="email" type="email" id="email-input" placeholder="Email" pattern='[A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*[.]([A-Za-z0-9.-])+' required>
-                    </div>  
-    
-                    </br>             
+                        <input class="item-input frame left longer-text" name="email" type="email" id="email-input" placeholder="Email" pattern='[A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*[.]([A-Za-z0-9.-])+' required>             
                 
                     <!-- Subject input field. -->
                     <div class="item-input" style="display: inline;">
@@ -46,12 +100,13 @@
                     </br>
                     
                     <!-- Message content input field. -->
-                    <div class="item-input left">
                         <textarea class="frame" name="message" style="resize:none;width:96%;height:100px" id="msg-input" rows="4" cols="50" placeholder="Message" required></textarea>
-                    </div> 
-
                       
                 </form>
+                <div class="link"> 
+                    <i class="icon icon-website"></i>
+                    <a href="fuck you">Visit our website</a>
+                </div>
             </div>
         </div>
     </div>

@@ -476,8 +476,8 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
     btn.innerHTML = text;
     
     if(text == "No" || text == "Yes") {
-        var label = text == "No" ?("Didn\'t help - node: " + (index+1) + ", answer: " + text-6 +  ", content: " + Contents[index]) :
-                                         ("Helped - node: " + (index+1) + ", answer: " + text-6 +  ", content: " + Contents[index]);
+        var label = text == "No" ? ("Didn\'t help - node: " + (index+1) + ", answer: " + text-6 +  ", content: " + Contents[index]) :
+                                   ("Helped - node: " + (index+1) + ", answer: " + text-6 +  ", content: " + Contents[index]);
         btn.className += " left";
         btn.addEventListener ("click", function(label) {        
             clearButtons();

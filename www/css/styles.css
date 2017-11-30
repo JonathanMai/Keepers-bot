@@ -146,7 +146,7 @@ margin-bottom: 5px;
 }
 
 .content-block {
-text-align: center;
+/* text-align: center; */
 margin: 0 auto;
 max-width: 420;
 }
@@ -547,7 +547,7 @@ bottom: 1px;
 }
 /*---------------------------------------------------------------------------------*/
 /* From here its contact us styling */
-/* TAASE KOVEZ NOSAF LE STYLE SHEL CONTACT US SHLOHA!!!! */
+/* TAASE KOVEZ NOSAF LE STYLE SHEL CONTACT US SHLOHA!!!! FUCK YOU SHLOHA */
 
 .frame {
   border-radius: 10px;
@@ -558,8 +558,11 @@ bottom: 1px;
 }
 
 .longer-text {
-  height: 10%;
   width: 67%;
+}
+
+.smaller-text {
+  width: 40%;
 }
 
 #send-button {
@@ -569,6 +572,21 @@ bottom: 1px;
   border-radius: 10px;
 }
 
+.link {
+  display: inline-block;
+  /* padding:15px; */
+}
+
+i.icon.icon-website {
+  width: 14px;
+  height: 30px;
+  background-image: url("../assets/website-link.png");
+}
+
+i + a{
+  text-decoration: underline;
+  font-weight: bold;
+}
 
 /* .message-right:before{
   content: "";            
