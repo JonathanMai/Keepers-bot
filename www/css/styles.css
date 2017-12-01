@@ -75,7 +75,11 @@ text-align: center;
 max-width: 290px;
 line-height: 25px;
 color: #000000b8;
-padding-top: 5px;
+/* padding-top: 5px; */
+}
+
+#contents::first-line {
+  font-size: 15px;
 }
 
 .page {
@@ -123,13 +127,14 @@ transform: translateY(2px);
 }
 
 .categoryBtn {
-/* background-color: rgb(29, 187, 205);  (30,175,192) */
+font-weight: bold;
 border-radius: 10px;
 border: none;
 width: 45%;
 height: 25px;
 margin-right: 6px;
 margin-left: 6px;
+margin-top: 5px;
 margin-bottom: 5px;
 }
 
@@ -169,7 +174,7 @@ margin-top: 50px;
   color: #000000b8;
   display: block;
   line-height: 35px;
-  font-size: 30px;
+  font-size: 205%;
   margin-bottom: 0px;
   margin-right: 0px;
 }
@@ -183,7 +188,7 @@ font-size: 15px;
   width: 85%;
   background-color: rgb(184, 180, 180);
   display: block;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
   margin-top: 3px;
 }
 
@@ -191,11 +196,14 @@ font-size: 15px;
 /* height: 150px;  If 3 or more cols so must be off */
   /* margin-top: 40px; */
   max-height: 20vh;
+  background-color: white;
+  text-align: center;
   font-family: OpenSans-Regular;
   padding-top: 5px;
   /* padding-bottom: 5px; */
   /* max-width: 315px; */
   margin: 0 auto;
+  /* margin-top: 10px; */
   overflow-y: scroll;
 }
 
@@ -306,45 +314,49 @@ font-family: Courier;
 }
 
 .message-left {
+display: inline;
 text-align: left;
-margin-bottom: 16px;
+color: white;
 }
 
 .message-left .message-text {
-max-width: 80%;
+position: relative;
+font-family: OpenSans-Regular;
+font-weight: bold;
+max-width: 74%;
 display: inline-block;
 background: rgb(236, 236, 236);
-color: black;
-padding: 15px;
+color: #000000c7;
+padding: 5px 15px 5px 10px;
 font-size: 14px;
-border-radius: 15px;
-font-weight: 100;
+border-radius: 10px;
 line-height: 1.5em;
-border: gray solid 1.5px;
+border: #8080801c solid 1.5px;
 }
 
 .message-right {
 text-align: right;
-margin-bottom: 16px;
 }
 
 .message-right .message-text {
+position: relative;
+font-family: OpenSans-Regular;
+font-weight: bold;
 line-height: 1.5em;
 display: inline-block;
 background: rgb(26, 165,182);
-padding: 15px;
+padding: 5px 15px 5px 10px;
 font-size: 14px;
-color: #fff;
-border-radius: 15px;
+color: #ffffffe3;
+border-radius: 10px;
 line-height: 1.5em;
-font-weight: 100;
 text-align: left;
-border: rgb(23, 144,159) solid 1.5px;
+border: rgb(62, 166, 179) solid 1.5px;
 }
 
 .chat {
 /* border-radius: 30px; */
-padding: 20px;
+padding: 0px 20px 20px 20px;
 /* width: 500px; */
 /* margin: 0 auto; */
 background: #fbfdfd;
@@ -382,7 +394,7 @@ opacity: 0.2;
 }
 
 .spinner {
-margin: 0;
+margin-top: 10px;
 width: 40px;
 text-align: center;
 }
@@ -476,58 +488,51 @@ img#backBtn {
 }
 
 div.flex {
+  text-align: center;
   margin-top: 20px;
 }
 
-.message-left:before{
+.message-text:before, .message-text:after{
     border-radius: 20px / 10px;
     content: '';
-    position: relative;
+    position: absolute;
+    display: block;
 }
 
-.message-left:before {
+
+.message-left .message-text:before {
 	border: 10px solid transparent;
-	border-bottom-color: rgb(128, 128, 128);
-	bottom: -40px;
-	left: -10px;
+	border-bottom-color: rgb(224, 224, 224);
+	bottom: 1px;
+	left: -12px;
 	z-index: -2;
 }
-.message-left:after {
-  border-radius: 20px / 10px;  
-  content: '';
-  position: relative;
-}
 
-.message-left:after {  
+.message-left  .message-text:after {  
 	border: 8px solid transparent;
   border-bottom-color: #ececec;
-	bottom: 55px; 
-	left: -6px;
+	bottom: 2px; 
+	left: -9px;
 	z-index: 0;
 }
 
-
-.message-right:before{
-  border-radius: 20px / 10px;
-  content: '';
-  position: relative;
-}
-
-.message-right:before {
+.message-right .message-text:before {
 border: 10px solid transparent;
-border-bottom-color: rgb(23, 144,159);
-bottom: -40px;
-left: 10px;
+border-bottom-color: rgb(62, 166, 179);
+bottom: 0px;
+left: 250px;
 z-index: -2;
 }
 
-.message-right:after {
+.message-right .message-text:after {
 border: 8px solid transparent;
-border-bottom-color: rgb(23, 144,159);
-bottom: 1px;
+border-bottom-color: rgb(26, 165, 182);
+bottom: 2px;
+left: 250px;
 }
 
 #helpfulText {
+  font-family: "OpenSans-Regular";
   font-size: 23px;
   text-align: initial;
   margin-top: 5px;

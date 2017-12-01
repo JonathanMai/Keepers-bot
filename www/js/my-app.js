@@ -120,13 +120,13 @@ function chatScreen(index) {
     if(!chatEntered) {
         
         document.getElementById("titleImage").style.display = "none"; // Hides the image of the heart in home screen.
-        document.getElementById("title").style = "margin-right:40px"
+        document.getElementById("title").style = "margin-right:30px"
         // Creating the back button(we create a div for it and append the back image to it).
         var image = document.createElement("img");
         image.setAttribute("src", "assets/Back.png");
         image.setAttribute("id", "backBtn");
         // image.setAttribute("onclick", "backListener()");  
-        image.setAttribute("style", "margin-left: 30px");        
+        image.setAttribute("style", "margin-left: 20px");        
         
         document.getElementsByClassName("flex")[0].insertAdjacentElement('afterbegin', image); // set the back buttom first child in .flex class
         // var backButton = document.createElement("div");
@@ -611,7 +611,7 @@ function backListener() {
 // ------------------------------------------------------------------------------------------------------------------
 // Draw the chat background using the screen size calculation to make it responsive.
 function drawChatBackground() {
-    document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 40) + "px;"; 
+    document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 20) + "px;"; 
     scrollBottonUpdate();        
 }
 
