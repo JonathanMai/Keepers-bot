@@ -314,22 +314,8 @@ function createButtons(index) {
 
 function msg(age) {
 
-    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
-    var questMsg = createMsg("message-left", age + " years old");   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
-    drawChatBackground();
-
-    setTimeout(function (){
-        if(document.getElementsByClassName("chat-message-list")[0]) {
-            document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
-            document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
-            createButtons(index);
-            // document.getElementById('backButton').disabled = false; 
-            // document.getElementById('backButton').style.pointerEvents = 'auto';
-            // After the dotts are ready, put back listener on the button
-            if(document.getElementById("backBtn") != null)
-                document.getElementById("backBtn").setAttribute("onclick", "backListener()");  
-        }
-    }, (Question[index].length*50) > 3000 ? 3000 : (Question[index].length*50)); 
+    var questMsg = createMsg("message-right", (+(age) + 6) + " years old");   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
+    document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);
 }
 
 // ------------------------------------------------------------------------------------------------------------------
