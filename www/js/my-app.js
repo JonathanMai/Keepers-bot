@@ -83,7 +83,8 @@ function createHomeScreen() {
         document.getElementById("titleImage").style.display = "";        
         document.getElementById("topLine").style = ""; // Change top line color on home screen.  
         document.getElementById("contents").innerHTML = "";   
-        document.getElementById("text").innerHTML = "";         
+        document.getElementById("text").innerHTML = "";       
+        // document.getElementById()  
     }
     chatEntered = false;
     document.getElementById('title').innerHTML = Titles[index];
@@ -158,7 +159,7 @@ function chatScreen(index) {
         scrollBottonUpdate(); // Updates the scroll spot to the bottom of the chat panel.
     }
     
-    var msg = createMsg("message-left",Question[index] ? Contents[index] : "Entere childs age");   // createMsg(direction, imgSrc, text, time) => Direction should be message-left or message-right - Admin Left, User Right.
+    var msg = createMsg("message-left",Question[index] ? Contents[index] : "Enter childs age");   // createMsg(direction, imgSrc, text, time) => Direction should be message-left or message-right - Admin Left, User Right.
     document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
     drawChatBackground();
     // Creates a bubble of content and inside we also create a question bubble.
@@ -309,6 +310,26 @@ function createButtons(index) {
             drawChatBackground();
             
     }   
+}
+
+function msg(age) {
+
+    document.getElementsByClassName("chat-message-list")[0].appendChild(createMsgSpinner());
+    var questMsg = createMsg("message-left", age + " years old");   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right. 
+    drawChatBackground();
+
+    setTimeout(function (){
+        if(document.getElementsByClassName("chat-message-list")[0]) {
+            document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
+            document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
+            createButtons(index);
+            // document.getElementById('backButton').disabled = false; 
+            // document.getElementById('backButton').style.pointerEvents = 'auto';
+            // After the dotts are ready, put back listener on the button
+            if(document.getElementById("backBtn") != null)
+                document.getElementById("backBtn").setAttribute("onclick", "backListener()");  
+        }
+    }, (Question[index].length*50) > 3000 ? 3000 : (Question[index].length*50)); 
 }
 
 // ------------------------------------------------------------------------------------------------------------------
@@ -517,8 +538,9 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");            
             drawChatBackground();
             btn.addEventListener ("click", function(label) { 
-                Back.push([index, this.id]);                
-                helpfulInfo(index, this.id);
+            Back.push([index, this.id]);                
+            helpfulInfo(index, this.id);
+            msg(this.id);
             // ga('HelpfulInfo.send', 'event', {
             //     eventCategory: "Information quality",
             //     eventAction: "click",
