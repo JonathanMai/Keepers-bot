@@ -465,10 +465,11 @@ float:left;
 background:rgb(23, 144,159);
 }
 
+
 i.icon.icon-contact-us {
-width: 25px;
-height: 30px;
-background-image: url("../assets/Messages.png");
+  width: 25px;
+  height: 30px;
+  background-image: url("../assets/Messages.png");
 }
 
 i.icon.icon-home {
@@ -584,21 +585,52 @@ right: -9px;
 }
 
 .link {
-  display: inline-block;
-  /* padding:15px; */
+  margin-bottom: 10px
 }
 
 i.icon.icon-website {
   width: 14px;
   height: 30px;
+  position: absolute;  
   background-image: url("../assets/website-link.png");
+}
+
+i.icon.icon-youtube {
+  width: 18px;
+  height: 20px;
+  position: absolute; 
+  background-image: url("../assets/youtube-link.png");
+}
+
+i.icon.icon-facebook {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background-image: url("../assets/facebook-link.png");
 }
 
 i + a{
   text-decoration: underline;
   font-weight: bold;
+  vertical-align: sub;
+  color: #1DBACD;  
+  margin-left: 30px;
 }
 
+<<<<<<< HEAD
+
+/* .message-right:before{
+  content: "";            
+  width: 0;
+  height: 0;
+  position: relative;
+  bottom: -22px;
+  right: 2px;
+  border-top: 15px solid transparent;
+  border-right: 15px solid rgb(26, 165,182);
+  border-bottom: 15px solid transparent;
+}   */
+=======
 ::-webkit-scrollbar {
   -webkit-appearance: none;
 }
@@ -621,3 +653,4 @@ i + a{
   background-color: white;
   margin-bottom: 0px;
 }
+>>>>>>> 8323c1c44629c52c823bf6bfa3c0dec803d6f9c5
