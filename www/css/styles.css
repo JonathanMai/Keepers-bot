@@ -34,11 +34,11 @@ body {
 
 /* Add background image. */
 div.chat {
-  background: url("../assets/Background.png") no-repeat center center fixed; 
-  -webkit-background-size: 350px;
-  -moz-background-size: 350px;
-  -o-background-size: 350px;
-  background-size: 350px;
+  background: url("../assets/Background-Icon.png") no-repeat center center fixed; 
+  -webkit-background-size: 285px;
+  -moz-background-size: 285px;
+  -o-background-size: 285px;
+  background-size: 285px;
 }
 
 /* .statusbar-overlay {
@@ -87,7 +87,11 @@ color: #000000b8;
 }
 
 .page-content {
-  background-color: white;
+  background: url("../assets/Background.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   border: #d6d6d6 solid 1px;
 }
 
@@ -131,12 +135,34 @@ box-shadow: 0 1px #666;
 transform: translateY(2px);
 }
 
+.chatBtnAnswer {
+  border-radius: 10px;
+  border: none;
+  width: 45%;
+  height: 28px;
+  margin-right: 6px;
+  margin-left: 6px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: left;
+  padding-left: 15px;
+  background-color: rgb(23, 144,159);
+}
+
+.btn {
+  display: inline-block;
+  font-size: 103%;
+  color:white;
+  margin-right: 6px; 
+  margin-left: 6px;
+  
+}
+
 .categoryBtn {
-font-weight: bold;
 border-radius: 10px;
 border: none;
-width: 45%;
-height: 25px;
+width: 46%;
+height: 28px;
 margin-right: 6px;
 margin-left: 6px;
 margin-top: 5px;
@@ -147,12 +173,13 @@ margin-bottom: 5px;
   border-radius: 10px;
   border: none;
   width: 60px;
-  height: 25px;
+  height: 28px;
   margin-right: 6px;
   margin-bottom: 5px;
   color: white;
   font-size: 17px;
   margin-top: 5px;
+  background-color: rgb(23, 144,159);
 }
 
 .content-block {
@@ -163,8 +190,8 @@ max-width: 420;
 
 #titleImage {
 margin: 0 auto;
-height: 120px;
-margin-top: 50px;
+height: 15vh;
+margin-top: 10px;
 }
 
 #backButton {
@@ -179,7 +206,7 @@ margin-top: 50px;
   color: #000000b8;
   display: block;
   line-height: 35px;
-  font-size: 205%;
+  font-size: 210%;
   margin-bottom: 0px;
   margin-right: 0px;
 }
@@ -200,16 +227,19 @@ font-size: 15px;
 .mainDiv {
 /* height: 150px;  If 3 or more cols so must be off */
   /* margin-top: 40px; */
-  max-height: 20vh;
-  background-color: white;
+  max-height: 50vh;
+  /* background-color: white; */
   text-align: center;
-  font-family: OpenSans-Regular;
+  font-family: "OpenSans-Regular";
   padding-top: 5px;
   /* padding-bottom: 5px; */
   /* max-width: 315px; */
   margin: 0 auto;
   /* margin-top: 10px; */
   overflow-y: scroll;
+  padding-left: 7px;
+  padding-bottom: 10px;
+  padding-top: 7px;
 }
 
 .icon_paragraph {
@@ -224,63 +254,31 @@ font-size: 15px;
 .right {
   float: right;
 }
-
-@media screen and (max-height: 590px) {
-  img#titleImage {
-    display: none;
-  }
-
-  div.chat {
-    background: url("../assets/Background.png") no-repeat center center fixed; 
-    -webkit-background-size: 60%;
-    -moz-background-size: 60%;
-    -o-background-size: 60%;
-    background-size: 60%;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  div.chat {
-    background: url("../assets/Background.png") no-repeat center center fixed; 
-    -webkit-background-size: 250px;
-    -moz-background-size: 250px;
-    -o-background-size: 250px;
-    background-size: 250px;
-  }
-
-}
-
-  /* div#answers {
-    position: absolute;
-    left: 22px !important;
-    right: 22px !important;
-    bottom: 10px;
-  } */
-
-  img#titleImage {
-    margin-top: 10px;      
-  } 
-
-  /* .left {
-      float: none;
-      height: auto;
-      margin-top: 7px;
-      margin-bottom: 7px;
-  }
-
-  .right {
-      float: none;
-      height: auto;
-      margin-top: 7px;
-      margin-bottom: 7px;
-  }
-
+/* From 0px to 630px Height */
+@media screen and (max-height: 630px) {
   .mainDiv {
-      height: auto;
-      padding-top: 0px;
-      padding-bottom: 0px;
-  } */
-
+    max-height: 32vh;
+  }
+} 
+/* From 360px and 380px Width */
+@media screen and (min-width: 360px) and  (max-width: 380px) {
+  div.chat {
+    background: url("../assets/Background_Icon.png") no-repeat center center fixed; 
+    -webkit-background-size: 180px;
+    -moz-background-size: 180px;
+    -o-background-size: 180px;
+    background-size: 180px;
+  }
+  .btn {
+    font-size: 115%;
+  }
+}
+/* From 380px Width */
+@media screen and (min-width: 380px) {
+  .btn {
+    font-size: 125%;
+  }
+}
 
 #wrapper {
 width: 600px;
@@ -300,7 +298,6 @@ list-style: none;
 
 .message-left .message-time {
 display: block;
-font-size: 12px;
 text-align: left;
 padding-left: 30px;
 padding-top: 4px;
@@ -310,7 +307,6 @@ font-family: Courier;
 
 .message-right .message-time {
 display: block;
-font-size: 12px;
 text-align: right;
 padding-right: 20px;
 padding-top: 4px;
@@ -333,7 +329,6 @@ display: inline-block;
 background:rgba(241, 241, 241, 0.7);
 color: #000000c7;
 padding: 5px 15px 5px 10px;
-font-size: 14px;
 border-radius: 10px;
 line-height: 1.5em;
 border: #8080801c solid 1.5px;
@@ -345,13 +340,13 @@ text-align: right;
 
 .message-right .message-text {
 position: relative;
-font-family: OpenSans-Regular;
+font-family: "OpenSans-Regular";
 font-weight: bold;
+max-width: 74%;
 line-height: 1.5em;
 display: inline-block;
 background: rgb(26, 165,182);
 padding: 5px 15px 5px 10px;
-font-size: 14px;
 color: #ffffffe3;
 border-radius: 10px;
 line-height: 1.5em;
@@ -368,6 +363,7 @@ background: #fbfdfd;
 /* max-width: 420px;   */
 overflow-y: scroll;
 /* height: 60vh; */
+margin-left: 7px;
 }
 
 .chat-container {
@@ -483,7 +479,7 @@ div#answers {
 position: absolute;
 left: 0;
 right: 0;
-bottom: 10px;
+bottom: 0px;
 }
 
 img#backBtn {
@@ -547,9 +543,11 @@ right: -9px;
 }
 
 #helpfulMainDiv {
-  margin-left: 5%;
-  margin-right: 5%;
-  padding: 0px;
+  background-color: white;
+  /* margin-left: 5%; */
+  /* margin-right: 5%; */
+  padding-top: 0px;
+  padding-left: 20px;
 }
 
 .age {
@@ -598,14 +596,25 @@ i + a{
   font-weight: bold;
 }
 
-/* .message-right:before{
-  content: "";            
-  width: 0;
-  height: 0;
-  position: relative;
-  bottom: -22px;
-  right: 2px;
-  border-top: 15px solid transparent;
-  border-right: 15px solid rgb(26, 165,182);
-  border-bottom: 15px solid transparent;
-}   */
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+::-webkit-scrollbar:vertical {
+  width: 7px;
+}
+::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .5);
+  border-radius: 10px;
+  border: 2px solid #effbfc;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+#botLine{
+  background-color: white;
+  margin-bottom: 0px;
+}
