@@ -74,7 +74,7 @@ function stringParse(info){
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function createHomeScreen() {
     var index = 0;
-    Back = [];       
+    Back = [];    
     
     if (chatEntered) {
         clearButtons();
@@ -84,8 +84,9 @@ function createHomeScreen() {
         document.getElementById("topLine").style = ""; // Change top line color on home screen.  
         document.getElementById("contents").innerHTML = "";   
         document.getElementById("text").innerHTML = "";       
-        // document.getElementById()  
     }
+    document.getElementById("title").style = "margin-right:0px"  
+    // document.getElementsByClassName("mainDiv")[0].style = " text-align: center;padding-left: 0px;"      
     chatEntered = false;
     document.getElementById('title').innerHTML = Titles[index];
 
@@ -146,7 +147,7 @@ function chatScreen(index) {
         // Add the bottom line.
         var bottomLine = document.createElement("hr");
         bottomLine.id = "botLine";
-        bottomLine.setAttribute("style", "height: 1px;background-color: white; margin: 0px;");
+        bottomLine.setAttribute("class", "bottomLine");
         document.getElementById("answers").appendChild(bottomLine);
         
         chatEntered = true;
@@ -223,10 +224,12 @@ function getAge(index) {
 // Create all the buttons and puts it in answers panel.
 function createButtons(index) {
     
+    var className = "categoryBtn btn";
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
     mainDiv.setAttribute("class", "mainDiv");           // set class
-    if(!chatEntered) {
-        mainDiv.style.setProperty('max-height','40vh','');
+    if(chatEntered) {
+        className = "chatBtnAnswer btn"        
+        // mainDiv.style.setProperty('max-height','40vh','');
     }
     // if(chatEntered) {
     //     mainDiv.style = "height: auto; padding-top: 10px;";
@@ -269,13 +272,15 @@ function createButtons(index) {
         var button = document.createElement("button"); 
         
             button.id = i;
-            button.className = "categoryBtn";
+            button.className = className;
             var color = getButtonColor(i);
-            button.setAttribute("style", "display: inline-block;font-size: 90%;background:" + color +  "; color:white; margin-right: 6px; margin-left: 6px;");
             if(chatEntered) {
                 button.style.setProperty('width','90%','');
                 button.style.setProperty('margin-left','0px','');   
                 button.style.setProperty('margin-right','0px','');                        
+            }
+            else {
+                button.setAttribute("style", ";background:" + color +  ";");                
             }
             button.addEventListener ("click", function() {
                 // After click on the category button remove the listener from the back button.
@@ -307,9 +312,10 @@ function createButtons(index) {
         }
 
         if(chatEntered)
+        {
             drawChatBackground();
-            
-    }   
+        } 
+    }    
 }
 
 function msg(age) {
@@ -511,7 +517,7 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
                 }
             ,2000);
         });
-        btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+        // btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
     }
     else if(typeof text == "number") {
         btn.className += " age";
@@ -521,7 +527,7 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
         }
 
         else {
-            btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");            
+            // btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");            
             drawChatBackground();
             btn.addEventListener ("click", function(label) { 
             Back.push([index, this.id]);                
@@ -563,7 +569,7 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
                 createHomeScreen();
             },500 );
         });
-        btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+        // btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
     }
 
     
