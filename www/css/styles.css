@@ -151,7 +151,7 @@ transform: translateY(2px);
 
 .btn {
   display: inline-block;
-  font-size: 103%;
+  font-size: 101%;
   color:white;
   margin-right: 6px; 
   margin-left: 6px;
@@ -207,6 +207,7 @@ margin-top: 10px;
   display: block;
   line-height: 35px;
   font-size: 210%;
+  margin-top: 10px;
   margin-bottom: 0px;
   margin-right: 0px;
 }
@@ -261,24 +262,46 @@ div.flex {
 }
 /* From 0px to 630px Height */
 @media screen and (max-height: 630px) {
+
+  div.chat {
+      background: url("../assets/Background-Icon.png") no-repeat center center fixed; 
+      -webkit-background-size: 150px;
+      -moz-background-size: 150px;
+      -o-background-size: 150px;
+      background-size: 150px;
+    }
+
   .mainDiv {
     max-height: 28vh;
+  }
+  #title {
+    font-size: 195%;
   }
   div.flex {
     margin-top: 0px;
   }
+
+  #topLine {
+    margin-top: 0px;
+    /* margin-bottom: 0px; */
+  }
+
+  #contents {
+    line-height: 20px;
+  }
 } 
+
 /* From 360px and 380px Width */
 @media screen and (min-width: 360px) and  (max-width: 380px) {
   div.chat {
-    background: url("../assets/Background_Icon.png") no-repeat center center fixed; 
+    background: url("../assets/Background-Icon.png") no-repeat center center fixed; 
     -webkit-background-size: 180px;
     -moz-background-size: 180px;
     -o-background-size: 180px;
     background-size: 180px;
   }
   .btn {
-    font-size: 115%;
+    font-size: 107%;
   }
 }
 /* From 380px Width */
@@ -617,20 +640,6 @@ i + a{
   margin-left: 30px;
 }
 
-<<<<<<< HEAD
-
-/* .message-right:before{
-  content: "";            
-  width: 0;
-  height: 0;
-  position: relative;
-  bottom: -22px;
-  right: 2px;
-  border-top: 15px solid transparent;
-  border-right: 15px solid rgb(26, 165,182);
-  border-bottom: 15px solid transparent;
-}   */
-=======
 ::-webkit-scrollbar {
   -webkit-appearance: none;
 }
@@ -653,4 +662,3 @@ i + a{
   background-color: white;
   margin-bottom: 0px;
 }
->>>>>>> 8323c1c44629c52c823bf6bfa3c0dec803d6f9c5
