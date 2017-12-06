@@ -242,6 +242,11 @@ font-size: 15px;
   padding-top: 7px;
 }
 
+div.flex {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .icon_paragraph {
   /* max-width: 50px; */
   margin: 0 auto;
@@ -257,7 +262,10 @@ font-size: 15px;
 /* From 0px to 630px Height */
 @media screen and (max-height: 630px) {
   .mainDiv {
-    max-height: 32vh;
+    max-height: 28vh;
+  }
+  div.flex {
+    margin-top: 0px;
   }
 } 
 /* From 360px and 380px Width */
@@ -486,11 +494,6 @@ img#backBtn {
   width: 16px;
   padding-top: 6px;
   float: left;
-}
-
-div.flex {
-  text-align: center;
-  margin-top: 20px;
 }
 
 .message-text:before, .message-text:after{
