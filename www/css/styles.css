@@ -34,7 +34,7 @@ body {
 
 /* Add background image. */
 div.chat {
-  background: url("../assets/Background-Icon.png") no-repeat center center fixed; 
+  background: url("../assets/Background-image.png") no-repeat center center fixed; 
   -webkit-background-size: 285px;
   -moz-background-size: 285px;
   -o-background-size: 285px;
@@ -272,7 +272,7 @@ div.flex {
 @media screen and (max-height: 630px) {
 
   div.chat {
-      background: url("../assets/Background-Icon.png") no-repeat center center fixed; 
+      background: url("../assets/Background-image.png") no-repeat center center fixed; 
       -webkit-background-size: 150px;
       -moz-background-size: 150px;
       -o-background-size: 150px;
@@ -302,7 +302,7 @@ div.flex {
 /* From 360px and 380px Width */
 @media screen and (min-width: 360px) and  (max-width: 380px) {
   div.chat {
-    background: url("../assets/Background-Icon.png") no-repeat center center fixed; 
+    background: url("../assets/Background-image.png") no-repeat center center fixed; 
     -webkit-background-size: 180px;
     -moz-background-size: 180px;
     -o-background-size: 180px;
@@ -512,13 +512,13 @@ background:rgb(23, 144,159);
 i.icon.icon-contact-us {
   width: 25px;
   height: 30px;
-  background-image: url("../assets/Messages.png");
+  background-image: url("../assets/Messages-icon.png");
 }
 
 i.icon.icon-home {
   width: 25px;
   height: 30px;
-  background-image: url("../assets/Consultant.png");
+  background-image: url("../assets/Home-icon.png");
   }
   .grayscale { filter: grayscale(100%); }
 

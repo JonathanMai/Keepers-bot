@@ -125,7 +125,7 @@ function chatScreen(index) {
         document.getElementById("title").style = "margin-right:30px"
         // Creating the back button(we create a div for it and append the back image to it).
         var image = document.createElement("img");
-        image.setAttribute("src", "assets/Back.png");
+        image.setAttribute("src", "assets/Back-icon.png");
         image.setAttribute("id", "backBtn");
         // image.setAttribute("onclick", "backListener()");  
         image.setAttribute("style", "margin-left: 20px");        
