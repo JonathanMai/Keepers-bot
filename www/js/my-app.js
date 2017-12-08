@@ -579,7 +579,8 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
     // btn.appendChild(paragraph)        
 
     if(fit_content) {
-        btn.style.setProperty('width', 'fit-content', ''); 
+        btn.style.setProperty('width', 'auto', '');  
+        
         btn.style.setProperty('padding-left', '15px', '');
         btn.style.setProperty('padding-right', '15px', '');       
     }
