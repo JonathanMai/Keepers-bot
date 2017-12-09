@@ -85,7 +85,7 @@ function createHomeScreen() {
         document.getElementById("contents").innerHTML = "";   
         document.getElementById("text").innerHTML = "";       
     }
-    document.getElementById("title").style = "margin-right:0px"  
+    document.getElementById("title").style.marginLeft = "0px"  
     // document.getElementsByClassName("mainDiv")[0].style = " text-align: center;padding-left: 0px;"      
     chatEntered = false;
     document.getElementById('title').innerHTML = Titles[index];
@@ -116,19 +116,22 @@ function chatScreen(index) {
     // document.getElementById('backButton').disabled = true;
     // document.getElementById("backButton").style.pointerEvents = "none";
     // document.getElementById("backButton").style = "color: grey;";  
-    document.getElementById("topLine").style = "background-color: #1DBACD;"; // Change top line color on home screen.      
+    // document.getElementById("topLine").style.backgroundColor = "background-color: #1DBACD;"; // Change top line color on home screen.
+    document.getElementById("topLine").style.backgroundColor = "rgb(29, 186, 205)"; // Change top line color on home screen.      
+    
     
     // If its the first time the chat screen appear we need to set the elements below.
     if(!chatEntered) {
         
         document.getElementById("titleImage").style.display = "none"; // Hides the image of the heart in home screen.
-        document.getElementById("title").style = "margin-right:30px"
+        document.getElementById("title").style.marginRight = "30px";
         // Creating the back button(we create a div for it and append the back image to it).
         var image = document.createElement("img");
         image.setAttribute("src", "assets/Back-icon.png");
         image.setAttribute("id", "backBtn");
         // image.setAttribute("onclick", "backListener()");  
-        image.setAttribute("style", "margin-left: 20px");        
+        // image.setAttribute("style", "margin-left: 20px"); 
+        image.style.marginLeft = "20px";       
         
         document.getElementsByClassName("flex")[0].insertAdjacentElement('afterbegin', image); // set the back buttom first child in .flex class
         // var backButton = document.createElement("div");
@@ -280,7 +283,8 @@ function createButtons(index) {
                 button.style.setProperty('margin-right','0px','');                        
             }
             else {
-                button.setAttribute("style", ";background:" + color +  ";");                
+                button.style.background = color;
+                // setAttribute("style", ";background:" + color +  ";");                
             }
             button.addEventListener ("click", function() {
                 // After click on the category button remove the listener from the back button.
@@ -504,7 +508,7 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             
             
             var appreciation = document.createElement("p");
-            appreciation.style = "margin-left: 5%;"
+            appreciation.style.marginLeft = "5%";
             appreciation.setAttribute("id", "helpfulText");
             appreciation.innerHTML = "Thank you for your feedback,<br>we will learn and improve";
             document.getElementById("answers").appendChild(appreciation);
@@ -523,7 +527,10 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
         btn.className += " age";
         btn.id = text-6;
         if(!Answers[index][text-6]) {
-            btn.setAttribute("style", "background:grey;color:#CDCECE")
+            // btn.setAttribute("style", "background:grey;color:#CDCECE")
+            btn.style.background = "grey";
+            btn.style.color = "rgb(205, 206, 206)";
+            btn.style
         }
 
         else {
@@ -606,7 +613,7 @@ function backListener() {
     // Checks if the user only entered the chat screen - then the back button returns to home screen.
     if (Back.length <= 1) {
         Back.pop();
-        document.getElementById("title").style = "margin-right:0px"
+        document.getElementById("title").style.marginRight = "0px";
         createHomeScreen();
     }
     
@@ -626,7 +633,7 @@ function backListener() {
 // ------------------------------------------------------------------------------------------------------------------
 // Draw the chat background using the screen size calculation to make it responsive.
 function drawChatBackground() {
-    document.getElementById("chat").style = "height: " + ($('#botLine').offset().top  - $('#text').offset().top - 20) + "px;"; 
+    document.getElementById("chat").style.height = ($('#botLine').offset().top  - $('#text').offset().top - 20) + "px"; 
     scrollBottonUpdate();        
 }
 
