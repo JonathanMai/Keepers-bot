@@ -87,6 +87,10 @@
                 <div class="navbar">
                     <div class="navbar-inner">
 
+                        <div class="center sliding left"><!-- divs ready for left side, also fixes the problem of IE positioning of the right div. -->
+                            <!-- <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a> -->
+                        </div>
+
                         <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
                         
                         <div class="right"> 
@@ -117,7 +121,7 @@
                                 <div id="title">
                                         <!-- <img id="backButton" src="assets/Back.png" onclick="backListener()"/>                                                 -->
                                 </div>
-                                <hr id="topLine">
+                                <div id="topLine"></div>
                                 </div>
                                 <div>
                                     <p id="contents"></p>

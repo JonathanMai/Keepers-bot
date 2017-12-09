@@ -3,8 +3,7 @@
 <!-- Top Navbar-->
 <div class="navbar">
     <div class="navbar-inner">
-        <!-- <div class="left">
-        </div>    -->
+        <div></div> <!-- Fix IE problem with right item in inner navbar -->
         <div class="right">
 
             <a href="#" class="back link icon-only">
@@ -21,7 +20,7 @@
         <div class="page-content">
             <div class="content-block">
                 <div id="contactus-title"style="margin-bottom:0px;"> Contact us for personal questions </div>
-                <hr id="topLine" style="background-color: #1DBACD;width:100%;height:1px;"/>
+                <div id="topLine" style="background-color: rgb(29, 186, 205);width:100%;"/>
                 <form id="myform" onsubmit="sendFeedbackMessage();return false;">
                     <!-- Name input field. -->
                         <input class="item-input frame left smaller-text" name="Name" type="text" id="name-input" placeholder="Name" required>
