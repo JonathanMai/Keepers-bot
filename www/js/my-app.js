@@ -24,6 +24,7 @@ var Answers = [];
 var Next = [];
 var Back = [];
 var chatEntered;
+var btnColor;
 
 // ------------------------------------------------------------------------------------------------------------------
 // Connects to the google sheets server and asks for the document that holds all the expert data.
@@ -75,7 +76,8 @@ function stringParse(info){
 function createHomeScreen() {
     var index = 0;
     Back = [];    
-    
+    btnColor = null;
+
     if (chatEntered) {
         clearButtons();
         document.getElementsByClassName("flex")[0].removeChild( document.getElementsByClassName("flex")[0].childNodes[0]);  // remove back button.
@@ -122,7 +124,6 @@ function chatScreen(index) {
     
     // If its the first time the chat screen appear we need to set the elements below.
     if(!chatEntered) {
-        
         document.getElementById("titleImage").style.display = "none"; // Hides the image of the heart in home screen.
         document.getElementById("title").style.marginRight = "30px";
         // Creating the back button(we create a div for it and append the back image to it).
@@ -231,15 +232,15 @@ function createButtons(index) {
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
     mainDiv.setAttribute("class", "mainDiv");           // set class
     if(chatEntered) {
-        className = "chatBtnAnswer btn"        
+        className = "chatBtnAnswer btn"
+        mainDiv.style.backgroundColor = "white";
         // mainDiv.style.setProperty('max-height','40vh','');
     }
     // if(chatEntered) {
     //     mainDiv.style = "height: auto; padding-top: 10px;";
     // }
     // Creates the all buttons we need using a for loop.
-    for(i = 0; i < Answers[index].length; i++)
-    {
+    for(i = 0; i < Answers[index].length; i++) {
         // var answers = document.getElementById("answers");
         
         // if(mainDiv.childElementCount == INSIDE_DIV) {   // If the main div contain 2 children
@@ -273,33 +274,43 @@ function createButtons(index) {
         // paragraph.setAttribute("id", "par" + i);
         
         var button = document.createElement("button"); 
+    
+        button.id = i;
+        button.className = className;
+        button.style.backgroundColor = (btnColor!=null) ? btnColor : getButtonColor(i);
         
-            button.id = i;
-            button.className = className;
-            var color = getButtonColor(i);
-            if(chatEntered) {
-                button.style.setProperty('width','90%','');
-                button.style.setProperty('margin-left','0px','');   
-                button.style.setProperty('margin-right','0px','');                        
+        if(chatEntered) {
+            button.style.setProperty('width','90%','');
+            button.style.setProperty('margin-left','0px','');   
+            button.style.setProperty('margin-right','0px','');                        
+        }
+        // else {
+        //     // setAttribute("style", ";background:" + color +  ";");                
+        // }
+        button.addEventListener ("click", function() {
+            // After click on the category button remove the listener from the back button.
+            if(document.getElementById("backBtn") != null) {
+                document.getElementById("backBtn").removeAttribute("onclick");                                              
             }
-            else {
-                button.style.background = color;
-                // setAttribute("style", ";background:" + color +  ";");                
+            var temp = Next[index][this.id];
+            var tempArr = [index, this.id];
+            console.log('temp'+this.id);
+            // document.getElementsByClassName("toolbar")[0].style = "display: block;"
+            Back.push(tempArr);      
+            chatScreen(temp-1, this.id);
+            if (btnColor == null) {
+                btnColor = getButtonColor(this.id);
+                console.log(btnColor);
             }
-            button.addEventListener ("click", function() {
-                // After click on the category button remove the listener from the back button.
-                if(document.getElementById("backBtn") != null) {
-                    document.getElementById("backBtn").removeAttribute("onclick");                                              
-                }
-                var temp = Next[index][this.id];
-                var tempArr = [index, this.id];
-                console.log('temp'+this.id);
-                // document.getElementsByClassName("toolbar")[0].style = "display: block;"
-                Back.push(tempArr);      
-                chatScreen(temp-1, this.id);
-            });
-        var text = document.createTextNode(Answers[index][i]);
-        button.appendChild(text);
+        });
+        var text = Answers[index][i];
+        if (text.length > 40) {
+            text = text.slice(0,38); // Takes all the data to index 38.
+            text = text.slice(0,text.lastIndexOf(" ")) + "..."; // Slices from the last space so we wont cut a word in the middle.
+        }
+
+        var textNode = document.createTextNode(text);
+        button.appendChild(textNode);
         // div.appendChild(button);
         // div.appendChild(paragraph);
         // if(index == 0) {
@@ -491,6 +502,7 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
     var btn = document.createElement("button");  
     btn.className = "yesNoBtn";
     btn.innerHTML = text;
+    btn.style.backgroundColor = btnColor;    
     
     if(text == "No" || text == "Yes") {
         var label = text == "No" ? ("Didn\'t help - node: " + (index+1) + ", answer: " + text-6 +  ", content: " + Contents[index]) :
@@ -530,7 +542,6 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             // btn.setAttribute("style", "background:grey;color:#CDCECE")
             btn.style.background = "grey";
             btn.style.color = "rgb(205, 206, 206)";
-            btn.style
         }
 
         else {
@@ -570,6 +581,7 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
         hr.setAttribute("href", "contact.html");
         mainDiv.appendChild(hr);
         drawChatBackground();
+        
         btn.addEventListener ("click", function() {
             // Refresh everything back to home screen with a delay that makes the screen switch much nicer and smoother.
             setTimeout(function (){        
@@ -690,15 +702,18 @@ function sendMessage(email, name, subject, msg) {
   });
 }
 $("#myform").on('submit', function(e) {
-    e.preventDefault();
     console.log("WORKD");
     sendFeedbackMessage();
+    this
 });
+
 function sendFeedbackMessage() {
-    var email = document.getElementById('emailInput').value;
-    var name = document.getElementById('nameInput').value;
-    var subject = document.getElementById('subjectInput').value;
-    var msg = document.getElementById('msgInput').value;    
+    e.preventDefault();
+    console.log("Feedback");
+    var email = document.getElementById('email-input').value;
+    var name = document.getElementById('name-input').value;
+    var subject = document.getElementById('subject-input').value;
+    var msg = document.getElementById('msg-input').value;    
 
     $.ajax('https://api.mailgun.net/v3/sandbox4fd134d803914cbfb5198d49ff10d08a.mailgun.org/messages',
     {
