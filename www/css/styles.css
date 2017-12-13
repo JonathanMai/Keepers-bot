@@ -141,17 +141,32 @@ box-shadow: 0 1px #666;
 transform: translateY(2px);
 }
 
+#cont-title {
+  font-family: "OpenSans-Regular";
+  /* color: #000000b8; */
+  color: rgba(0, 0, 0, 0.74);
+  
+  display: block;
+  line-height: 35px;
+  font-size: 5.5vw;
+  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 0px;
+  margin-right: 0px;
+
+}
+
 .chatBtnAnswer {
   border-radius: 10px;
   border: none;
   width: 45%;
-  height: 28px;
+  height: auto;
   margin-right: 6px;
   margin-left: 6px;
   margin-top: 5px;
   margin-bottom: 5px;
   text-align: left;
-  padding-left: 15px;
+  padding: 5px 10px 5px 10px;
   background-color: rgb(23, 144,159);
 }
 
@@ -185,7 +200,7 @@ margin-bottom: 5px;
   color: white;
   font-size: 17px;
   margin-top: 5px;
-  background-color: rgb(23, 144,159);
+  /* background-color: rgb(23, 144,159); */
 }
 
 .content-block {
@@ -237,7 +252,6 @@ font-size: 15px;
 /* height: 150px;  If 3 or more cols so must be off */
   /* margin-top: 40px; */
   max-height: 50vh;
-  /* background-color: white; */
   text-align: center;
   font-family: "OpenSans-Regular";
   padding-top: 5px;
@@ -319,6 +333,12 @@ div.flex {
   }
 }
 
+@media screen and (min-width: 407px) {
+  #cont-title {
+    font-size: 170%;
+  }
+}
+
 #wrapper {
 width: 600px;
 margin: 50px auto;
@@ -335,27 +355,25 @@ padding: 0px;
 list-style: none;
 }
 
-.message-left .message-time {
-display: block;
-text-align: left;
-padding-left: 30px;
-padding-top: 4px;
-/* color: #ccc; */
-color: rgb(204,204,204);
-
-font-family: Courier;
+/* .message-left .message-time {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  padding-left: 30px;
+  padding-top: 4px;
+  color: rgb(204,204,204);
+  font-family: Courier;
 }
 
 .message-right .message-time {
-display: block;
-text-align: right;
-padding-right: 20px;
-padding-top: 4px;
-/* color: #ccc; */
-color: rgb(204,204,204);
-
-font-family: Courier;
-}
+  display: block;
+  text-align: right;
+  font-weight: bold;
+  padding-right: 20px;
+  padding-top: 4px;
+  color: rgb(204,204,204);
+  font-family: Courier;
+} */
 
 .message-left {
 display: inline;
@@ -364,6 +382,8 @@ color: white;
 }
 
 .message-left .message-text {
+  font-weight: bold;
+  
 position: relative;
 font-family: "OpenSans-Regular";
 /* font-weight: bold; */
@@ -389,7 +409,6 @@ text-align: right;
 .message-right .message-text {
 position: relative;
 font-family: "OpenSans-Regular";
-font-weight: bold;
 max-width: 74%;
 line-height: 1.5em;
 display: inline-block;
@@ -612,6 +631,7 @@ right: -9px;
   border-width: thin;
   text-align: left;
   margin-top: 7px;
+  font-family: "OpenSans-Regular";
 }
 
 .longer-text {
@@ -686,5 +706,6 @@ i + a{
   margin-bottom: 0px;
 }
 
-
-/* UPDATED!*/
+#myform {
+  margin-top: 10px;
+}

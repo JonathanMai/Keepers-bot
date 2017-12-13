@@ -19,27 +19,27 @@
     <div data-page="about" class="page no-toolbar">
         <div class="page-content">
             <div class="content-block">
-                <div id="contactus-title"style="margin-bottom:0px;"> Contact us for personal questions </div>
+                <div id="cont-title"style="margin-bottom:0px;"> Contact us for personal questions </div>
                 <div id="topLine" style="background-color: rgb(29, 186, 205);width:100%;"/>
                 <form id="myform" onsubmit="sendFeedbackMessage();return false;">
                     <!-- Name input field. -->
-                        <input class="item-input frame left smaller-text" name="Name" type="text" id="name-input" placeholder="Name" required>
+                        <input class="item-input frame left smaller-text" name="Name" type="text" id="name-input" placeholder="What's your name?" required>
                     
                     </br>
                 
                     <!-- Email input field. -->
-                        <input class="item-input frame left longer-text" name="email" type="email" id="email-input" placeholder="Email" pattern='[A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*[.]([A-Za-z0-9.-])+' required>             
+                        <input class="item-input frame left longer-text" name="email" type="email" id="email-input" placeholder="What's your email address?" pattern='[A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*[.]([A-Za-z0-9.-])+' required>             
                 
                     <!-- Subject input field. -->
                     <div class="item-input" style="display: inline;">
                         <input class="frame left longer-text" name="subject" type="text" id="subject-input" placeholder="Subject" required>
-                        <input class="buttons right" type="submit" id="send-button" value="Send">
+                        <button class="buttons right" id="send-button" type="submit">Send</button>
                     </div>
     
                     </br>
                     
                     <!-- Message content input field. -->
-                        <textarea class="frame" name="message" style="resize:none;width:96%;height:100px" id="msg-input" rows="4" cols="50" placeholder="Message" required></textarea>
+                        <textarea class="frame" name="message" style="resize:none;width:96%;height:100px" id="msg-input" rows="4" cols="50" placeholder="Message content" required></textarea>
                       
                 </form>
                 <div class="link"> 
