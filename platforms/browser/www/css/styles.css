@@ -657,6 +657,12 @@ right: -9px;
   display: inline-block;
 }
 
+#share {
+  display: inline;
+  position: absolute;
+  right: 1%;
+}
+
 i.icon.icon-website {
   width: 14px;
   height: 30px;
