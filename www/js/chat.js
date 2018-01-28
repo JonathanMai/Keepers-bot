@@ -82,18 +82,19 @@ function createMsg(direction, text) {     // Direction should be message-left or
     msg.setAttribute("class", direction);
 
     var div = document.createElement("div");
+    div.setAttribute("style", "margin-top: 10px;");
 
     
     var spanMsg = document.createElement("span");
     spanMsg.setAttribute("class", "message-text");
     spanMsg.innerHTML = text;
     
-    var spanTime = document.createElement("span");
-    spanTime.setAttribute("class", "message-time");
-    spanTime.innerHTML = getTimeNow();
+    // var spanTime = document.createElement("span");
+    // spanTime.setAttribute("class", "message-time");
+    // spanTime.innerHTML = getTimeNow();
    
     div.appendChild(spanMsg);
-    div.appendChild(spanTime);
+    // div.appendChild(spanTime);
 
     msg.appendChild(div);
 

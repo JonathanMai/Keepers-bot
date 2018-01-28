@@ -3,8 +3,7 @@
 <!-- Top Navbar-->
 <div class="navbar">
     <div class="navbar-inner">
-        <!-- <div class="left">
-        </div>    -->
+        <div></div> <!-- Fix IE problem with right item in inner navbar -->
         <div class="right">
 
             <a href="#" class="back link icon-only">
@@ -20,38 +19,50 @@
     <div data-page="about" class="page no-toolbar">
         <div class="page-content">
             <div class="content-block">
+                <div id="cont-title"style="margin-bottom:0px;"> Contact us for personal questions </div>
+                <div id="topLine" style="background-color: rgb(29, 186, 205);width:100%;"/>
                 <form id="myform" onsubmit="sendFeedbackMessage();return false;">
                     <!-- Name input field. -->
-                    <div class="item-input left">
-                        <input class="item-input text-input" name="Name" type="text" id="nameInput" placeholder="Name" required>
-                    </div>
+                        <input class="item-input frame left smaller-text" name="Name" type="text" id="name-input" placeholder="What's your name?" required>
                     
                     </br>
                 
                     <!-- Email input field. -->
-                    <div class="item-input left">
-                        <input class="text-input" name="email" type="email" id="emailInput" placeholder="Email" pattern='[A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*[.]([A-Za-z0-9.-])+' required>
-                    </div>  
-    
-                    </br>             
+                        <input class="item-input frame left longer-text" name="email" type="email" id="email-input" placeholder="What's your email address?" pattern='[A-Za-z0-9._%+-]+@[A-Za-z0-9][A-Za-z0-9.-]*[.]([A-Za-z0-9.-])+' required>             
                 
                     <!-- Subject input field. -->
                     <div class="item-input" style="display: inline;">
-                        <input class="text-input left" name="subject" type="text" id="subjectInput" placeholder="Subject" required>
-                        <input class="buttons right" type="submit" id="sendButton" value="Send">
+                        <input class="frame left longer-text" name="subject" type="text" id="subject-input" placeholder="Subject" required>
+                        <button class="buttons right" id="send-button" type="submit">Send</button>
                     </div>
     
                     </br>
                     
                     <!-- Message content input field. -->
-                    <div class="item-input left">
-                        <textarea class="text-input" name="message" style="resize:none;width:100%;" id="msgInput" rows="4" cols="50" placeholder="Message" required></textarea>
-                    </div> 
-
+                        <textarea class="frame" name="message" style="resize:none;width:96%;height:100px" id="msg-input" rows="4" cols="50" placeholder="Message content" required></textarea>
                       
                 </form>
+
+                <!-- Link icon -->
+                <span class="links">
+                    <div class="link">
+                        <i class="icon icon-website"></i>
+                        <a href="https://www.keeperschildsafety.net" target="_blank">Visit our website</a>
+                    </div>
+                    <div class="link">
+                        <i class="icon icon-facebook"></i>
+                        <a href="https://www.facebook.com/keeperschildsafety/" target="_blank">Visit our Facebook page</a>
+                    </div>
+                    <div class="link">
+                        <i class="icon icon-youtube"></i>
+                        <a href="https://www.youtube.com/channel/UCeWRhIpLDLHPssI5KhAVBqA" target="_blank">Visit our Youtube page</a>
+                    </div>
+                </span>
+                <div id="share">
+                    <a href="https://www.keeperschildsafety.net" target="_blank"><i class="icon icon-share"></i></a>
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+
