@@ -130,14 +130,9 @@ function chatScreen(index) {
         var image = document.createElement("img");
         image.setAttribute("src", "assets/Back-icon.png");
         image.setAttribute("id", "backBtn");
-<<<<<<< HEAD
-        image.setAttribute("onclick", "backListener()");  
-        image.setAttribute("style", "margin-left: 10px");        
-=======
         // image.setAttribute("onclick", "backListener()");  
         // image.setAttribute("style", "margin-left: 20px"); 
         image.style.marginLeft = "20px";       
->>>>>>> style
         
         document.getElementsByClassName("flex")[0].insertAdjacentElement('afterbegin', image); // set the back buttom first child in .flex class
         // var backButton = document.createElement("div");
@@ -195,14 +190,6 @@ function chatScreen(index) {
                     }
                 }, (Question[index].length*50) > 3000 ? 3000 : (Question[index].length*50)); 
             }    
-<<<<<<< HEAD
-            else {              
-                info(index);    
-            }
-        }
-    }, (Contents[index].length*50) > 3500 ? 3500 : (Contents[index].length*50));    
-    
-=======
             else {
                 // document.getElementById('backButton').disabled = false;  
                 // document.getElementById('backButton').style.pointerEvents = 'auto';  
@@ -213,7 +200,6 @@ function chatScreen(index) {
             }
         }
     }, (msg.innerText.length*50) > 3500 ? 3500 : (msg.innerText.length*50));  
->>>>>>> style
     //document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index])); // direction, logo, msg
 }
 
@@ -237,14 +223,8 @@ function getAge(index) {
 // ------------------------------------------------------------------------------------------------------------------
 // Create all the buttons and puts it in answers panel.
 function createButtons(index) {
-<<<<<<< HEAD
-
-    const INSIDE_DIV = 2;   // How many divs can be in row.
-
-=======
     
     var className = "categoryBtn btn";
->>>>>>> style
     var mainDiv = document.createElement("div");        // mainDiv will contain 2 divs inside
     mainDiv.setAttribute("class", "mainDiv");           // set class
     if(chatEntered) {
@@ -315,11 +295,6 @@ function createButtons(index) {
                 console.log(btnColor);
             }
         });
-<<<<<<< HEAD
-        
-        // paragraph.appendChild(document.createTextNode(Answers[index][i]));
-        div.appendChild(button);
-=======
         var text = Answers[index][i];
         if (text.length > 40) {
             text = text.slice(0,38); // Takes all the data to index 38.
@@ -329,16 +304,11 @@ function createButtons(index) {
         var textNode = document.createTextNode(text);
         button.appendChild(textNode);
         // div.appendChild(button);
->>>>>>> style
         // div.appendChild(paragraph);
         // if(index == 0) {
         //     button.appendChild(image);
         // } else {
-<<<<<<< HEAD
-            button.appendChild(document.createTextNode(Answers[index][i]));
-=======
             // button.appendChild(paragraph);
->>>>>>> style
             // paragraph.style = "color: white"
         // }
         // button.innerHTML = Answers[index][i];
@@ -361,21 +331,9 @@ function msg(age) {
     document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);
 }
 
-<<<<<<< HEAD
-// ------------------------------------------------------------------------------------------------------------------
-// creates final node that holds the information.
-function info(index) {
-    createButtons(index);
-}
-
-// ------------------------------------------------------------------------------------------------------------------
-// Asks the user if the information was helpful and sends the answer to google analytics.
-function helpfulButton(index) {
-=======
 // ------------------------------------------------------------------------------------------------------------------
 // Asks the user if the information was helpful and sends the answer to google analytics.
 function helpfulInfo(index, col) {
->>>>>>> style
     ga('create', 'UA-108462660-1',{"name": "HelpfulInfo"});        
     
     var msg = createMsg("message-left", Answers[index][col]);   // createMsg(direction, imgSrc, text, time) => Direction should be message-left or message-right - Admin Left, User Right.
@@ -466,15 +424,6 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
 
 
     var btn = document.createElement("button");  
-<<<<<<< HEAD
-    btn.className = "categoryBtn";
-
-    var label = direction == "left" ?("Didn\'t help: node: " + (index+1) +  "content: " + Contents[index]) :
-                                     ("Helped: node: " + (index+1) +  ", content: " + Contents[index]);
-
-    btn.addEventListener ("click", function(label) {
-        Back = [];
-=======
     btn.className = "yesNoBtn";
     btn.innerHTML = text;
     btn.style.backgroundColor = btnColor;    
@@ -500,7 +449,6 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             appreciation.innerHTML = "Thank you for your feedback,<br>we will learn and improve";
             document.getElementById("answers").appendChild(appreciation);
             drawChatBackground();
->>>>>>> style
 
             setTimeout(function() {
                     // Returns to home screen.
@@ -598,9 +546,6 @@ function clearButtons(){
 // ------------------------------------------------------------------------------------------------------------------
 // Back button function, goes back a node - if there no node to go back to we go back to home screen insted.
 function backListener() {
-<<<<<<< HEAD
-    if ((Back[Back.length-1][0]) > 0) {
-=======
 
     // Checks if the user only entered the chat screen - then the back button returns to home screen.
     if (Back.length <= 1) {
@@ -611,23 +556,15 @@ function backListener() {
     
     // When the user went deeper in the decision tree we need to go back a node.
     else{
->>>>>>> style
         var row = Back[Back.length-1][0];
         var col =  Back[Back.length-1][1];
         Back.pop();        
         chatScreen(row,col);
     }
 
-<<<<<<< HEAD
-    else{
-        Back.pop();
-        createHomeScreen();
-    }
-=======
     // Remove onclick listener after hitting back button - disable button.
     if(document.getElementById("backBtn") != null)
         document.getElementById("backBtn").removeAttribute("onclick"); 
->>>>>>> style
 }
  
 // ------------------------------------------------------------------------------------------------------------------
