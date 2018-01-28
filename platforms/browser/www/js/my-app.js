@@ -458,6 +458,8 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             ,2000);
         });
         // btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+        mainDiv.appendChild(btn);         
+        
     }
     else if(typeof text == "number") {
         btn.className += " age";
@@ -475,6 +477,8 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             Back.push([index, this.id]);                
             helpfulInfo(index, this.id);
             msg(this.id);
+                    mainDiv.appendChild(btn);         
+
             // ga('HelpfulInfo.send', 'event', {
             //     eventCategory: "Information quality",
             //     eventAction: "click",
@@ -496,13 +500,14 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             // ,2000);
             });
         }
-        
+        mainDiv.appendChild(btn);                 
     }
     else {
         btn.className += " left";
         
         var hr = document.createElement("a");
         hr.setAttribute("href", "contact.html");
+        hr.appendChild(btn);
         mainDiv.appendChild(hr);
         drawChatBackground();
         
@@ -523,11 +528,9 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
 
     if(fit_content) {
         btn.style.setProperty('width', 'auto', '');  
-        
         btn.style.setProperty('padding-left', '15px', '');
-        btn.style.setProperty('padding-right', '15px', '');       
+        btn.style.setProperty('padding-right', '15px', ''); 
     }
-    mainDiv.appendChild(btn); 
 }
 
 // ------------------------------------------------------------------------------------------------------------------
@@ -670,13 +673,13 @@ function getButtonColor(i) {
 }
 
 function shareBtn() {
-    if(!window.navigator.share) {
+    if(!window.navigator.share) {   // pc
      console.log("This is pc");
-     window.location.href = "mailto:user@example.com?subject=Subject&body=message%20goes%20here";
-       } else {
+     window.location.href = "mailto:?subject=Try%20this%20cool%20consultant%20center!&body=You%20must%20try%20this%20crazy%20app%20here%20is%20the%20link:https://chat-bot-55ed9.firebaseapp.com/";
+       } else { // mobile
      navigator.share({
-      title: "Awesome app",
-        text: 'Checkout this app',
+      title: "Try this cool consultant center",
+        text: 'Checkout this crazy new app',
         url: 'https://chat-bot-55ed9.firebaseapp.com/',
    }); // share the URL of MDN
        }
