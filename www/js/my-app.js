@@ -29,14 +29,20 @@ var btnColor;
 // ------------------------------------------------------------------------------------------------------------------
 // Connects to the google sheets server and asks for the document that holds all the expert data.
 function handleClientLoad() {
+    
     var xhr = new XMLHttpRequest();
     var range = "B2:X40";
     xhr.open('GET', "https://sheets.googleapis.com/v4/spreadsheets/16oXmBaKcVvEzv_5421m5FgjuVYE7C7wUytzL8_2A7w0/values/" + range + "?key=AIzaSyDfXNTAOiF2foSfcXh-zrhJpuZkZmqwVak", true);       
     xhr.send();
+    var random = Math.random() * 1000;
     xhr.onreadystatechange = function (e){
         if (xhr.readyState == 4 && xhr.status == 200) {
-            var response = JSON.parse(xhr.responseText);
-            stringParse(response.values); 
+            setTimeout(function() {
+                console.log(random);
+                var response = JSON.parse(xhr.responseText);
+                stringParse(response.values); 
+                $$(".content-block")[0].removeChild($(".loader")[0]);
+            }, random);
         }
     } // TODO: add something for when we didnt recieve any data from google sheets.
 }
@@ -503,7 +509,7 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
         
         var hr = document.createElement("a");
         hr.setAttribute("href", "contact.html");
-        mainDiv.appendChild(hr);
+        btn.appendChild(hr);
         drawChatBackground();
         
         btn.addEventListener ("click", function() {
@@ -653,6 +659,30 @@ function sendFeedbackMessage() {
     });
 } 
 
+function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+  
+      // Check if the XMLHttpRequest object has a "withCredentials" property.
+      // "withCredentials" only exists on XMLHTTPRequest2 objects.
+      xhr.open(method, url, true);
+  
+    } else if (typeof XDomainRequest != "undefined") {
+  
+      // Otherwise, check if XDomainRequest.
+      // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+      xhr = new XDomainRequest();
+      xhr.open(method, url);
+  
+    } else {
+  
+      // Otherwise, CORS is not supported by the browser.
+      xhr = null;
+  
+    }
+    return xhr;
+  }
+
 const RED = 29;
 const GREEN = 186;
 const BLUE = 205;
@@ -670,13 +700,13 @@ function getButtonColor(i) {
 }
 
 function shareBtn() {
-    if(!window.navigator.share) {
+    if(!window.navigator.share) {   // pc
      console.log("This is pc");
-     window.location.href = "mailto:user@example.com?subject=Subject&body=message%20goes%20here";
-       } else {
+     window.location.href = "mailto:?subject=Try%20this%20cool%20consultant%20center!&body=You%20must%20try%20this%20crazy%20app%20here%20is%20the%20link:https://chat-bot-55ed9.firebaseapp.com/";
+       } else { // mobile
      navigator.share({
-      title: "Awesome app",
-        text: 'Checkout this app',
+      title: "Try this cool consultant center",
+        text: 'Checkout this crazy new app',
         url: 'https://chat-bot-55ed9.firebaseapp.com/',
    }); // share the URL of MDN
        }
