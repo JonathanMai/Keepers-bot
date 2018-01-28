@@ -673,13 +673,13 @@ function getButtonColor(i) {
 }
 
 function shareBtn() {
-    if(!window.navigator.share) {
+    if(!window.navigator.share) {   // pc
      console.log("This is pc");
-     window.location.href = "mailto:user@example.com?subject=Subject&body=message%20goes%20here";
-       } else {
+     window.location.href = "mailto:?subject=Try%20this%20cool%20consultant%20center!&body=You%20must%20try%20this%20crazy%20app%20here%20is%20the%20link:https://chat-bot-55ed9.firebaseapp.com/";
+       } else { // mobile
      navigator.share({
-      title: "Awesome app",
-        text: 'Checkout this app',
+      title: "Try this cool consultant center",
+        text: 'Checkout this crazy new app',
         url: 'https://chat-bot-55ed9.firebaseapp.com/',
    }); // share the URL of MDN
        }
