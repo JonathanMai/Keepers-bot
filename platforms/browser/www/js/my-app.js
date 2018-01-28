@@ -668,3 +668,16 @@ function getButtonColor(i) {
     blue = BLUE - (23 * index / 2);
     return "rgb(" + red + ", " + green + "," + blue + ")";
 }
+
+function shareBtn() {
+    if(!window.navigator.share) {
+     console.log("This is pc");
+     window.location.href = "mailto:user@example.com?subject=Subject&body=message%20goes%20here";
+       } else {
+     navigator.share({
+      title: "Awesome app",
+        text: 'Checkout this app',
+        url: 'https://chat-bot-55ed9.firebaseapp.com/',
+   }); // share the URL of MDN
+       }
+   }
