@@ -458,6 +458,8 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             ,2000);
         });
         // btn.setAttribute("style", "background:" + getButtonColor(index) +  ";");
+        mainDiv.appendChild(btn);         
+        
     }
     else if(typeof text == "number") {
         btn.className += " age";
@@ -475,6 +477,8 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             Back.push([index, this.id]);                
             helpfulInfo(index, this.id);
             msg(this.id);
+                    mainDiv.appendChild(btn);         
+
             // ga('HelpfulInfo.send', 'event', {
             //     eventCategory: "Information quality",
             //     eventAction: "click",
@@ -496,13 +500,14 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             // ,2000);
             });
         }
-        
+        mainDiv.appendChild(btn);                 
     }
     else {
         btn.className += " left";
         
         var hr = document.createElement("a");
         hr.setAttribute("href", "contact.html");
+        hr.appendChild(btn);
         mainDiv.appendChild(hr);
         drawChatBackground();
         
@@ -523,11 +528,9 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
 
     if(fit_content) {
         btn.style.setProperty('width', 'auto', '');  
-        
         btn.style.setProperty('padding-left', '15px', '');
-        btn.style.setProperty('padding-right', '15px', '');       
+        btn.style.setProperty('padding-right', '15px', ''); 
     }
-    mainDiv.appendChild(btn); 
 }
 
 // ------------------------------------------------------------------------------------------------------------------
