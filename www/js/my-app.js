@@ -191,6 +191,9 @@ function chatScreen(index) {
                         document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
                         document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
                         createButtons(index);
+                        if(document.getElementById("backBtn") != null) {
+                            document.getElementById("backBtn").setAttribute("onclick", "backListener()");  
+                        }
                         // document.getElementById('backButton').disabled = false; 
                         // document.getElementById('backButton').style.pointerEvents = 'auto';
                     }
@@ -200,11 +203,11 @@ function chatScreen(index) {
                 // document.getElementById('backButton').disabled = false;  
                 // document.getElementById('backButton').style.pointerEvents = 'auto';  
                 // After the dotts are ready, put back listener on the button
-                if(document.getElementById("backBtn") != null)
-                    document.getElementById("backBtn").setAttribute("onclick", "backListener()");  
                 getAge(index);    
             }
+           
         }
+       
     }, (msg.innerText.length*50) > 3500 ? 3500 : (msg.innerText.length*50));  
     //document.getElementsByClassName("chat-message-list")[0].appendChild(createMsg("message-left", "http://www.pvhc.net/img8/niexjjzstcseuzdzkvoq.png", Question[index])); // direction, logo, msg
 }
