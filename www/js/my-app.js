@@ -191,11 +191,12 @@ function chatScreen(index) {
                         document.getElementsByClassName("chat-message-list")[0].removeChild(document.getElementById('spinner'));
                         document.getElementsByClassName("chat-message-list")[0].appendChild(questMsg);   // createMsg(direction, imgSrc, text, time)     // Direction should be message-left or message-right => Admin Left, User Right.
                         createButtons(index);
-                        if(document.getElementById("backBtn") != null) {
-                            document.getElementById("backBtn").setAttribute("onclick", "backListener()");  
-                        }
+        
                         // document.getElementById('backButton').disabled = false; 
                         // document.getElementById('backButton').style.pointerEvents = 'auto';
+                         // After the dotts are ready, put back listener on the button
+                         if(document.getElementById("backBtn") != null)
+                         document.getElementById("backBtn").setAttribute("onclick", "backListener()"); 
                     }
                 }, (Question[index].length*50) > 3000 ? 3000 : (Question[index].length*50)); 
             }    
@@ -203,7 +204,10 @@ function chatScreen(index) {
                 // document.getElementById('backButton').disabled = false;  
                 // document.getElementById('backButton').style.pointerEvents = 'auto';  
                 // After the dotts are ready, put back listener on the button
-                getAge(index);    
+                getAge(index);   
+                if(document.getElementById("backBtn") != null) {
+                    document.getElementById("backBtn").setAttribute("onclick", "backListener()");  
+                } 
             }
            
         }
@@ -293,6 +297,10 @@ function createButtons(index) {
         //     // setAttribute("style", ";background:" + color +  ";");                
         // }
         button.addEventListener ("click", function() {
+             // After click on the category button remove the listener from the back button.
+             if(document.getElementById("backBtn") != null) {
+                document.getElementById("backBtn").removeAttribute("onclick");                                              
+            }
             var temp = Next[index][this.id];
             var tempArr = [index, this.id];
             console.log('temp'+this.id);
@@ -486,7 +494,7 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             Back.push([index, this.id]);                
             helpfulInfo(index, this.id);
             msg(this.id);
-                    mainDiv.appendChild(btn);         
+                    // mainDiv.appendChild(btn);         
 
             // ga('HelpfulInfo.send', 'event', {
             //     eventCategory: "Information quality",
@@ -509,7 +517,6 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             // ,2000);
             });
         }
-        mainDiv.appendChild(btn);                 
     }
     else {
         btn.className += " left";
@@ -540,6 +547,8 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
         btn.style.setProperty('padding-left', '15px', '');
         btn.style.setProperty('padding-right', '15px', ''); 
     }
+    mainDiv.appendChild(btn);                 
+
 }
 
 // ------------------------------------------------------------------------------------------------------------------
