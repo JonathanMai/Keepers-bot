@@ -494,7 +494,7 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             Back.push([index, this.id]);                
             helpfulInfo(index, this.id);
             msg(this.id);
-                    // mainDiv.appendChild(btn);         
+            mainDiv.appendChild(btn);         
 
             // ga('HelpfulInfo.send', 'event', {
             //     eventCategory: "Information quality",
@@ -517,6 +517,7 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
             // ,2000);
             });
         }
+        mainDiv.appendChild(btn);                 
     }
     else {
         btn.className += " left";
@@ -547,8 +548,6 @@ function createHelpBtn(mainDiv, text, index, fit_content) {
         btn.style.setProperty('padding-left', '15px', '');
         btn.style.setProperty('padding-right', '15px', ''); 
     }
-    mainDiv.appendChild(btn);                 
-
 }
 
 // ------------------------------------------------------------------------------------------------------------------
