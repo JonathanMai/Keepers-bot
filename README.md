@@ -1,4 +1,6 @@
-# Keepers-bot
+
+# Keepers-Consultant Center(Chat bot)
+Web application based on expert system - consulating parents with problems that came up with they're child.
 
 # Framework7 PhoneGap Application 
 
