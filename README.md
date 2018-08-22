@@ -10,13 +10,31 @@ The application helps parents with problems that came up with their child.
 
 ### [Application](https://chat-bot-55ed9.firebaseapp.com/)
 
+## Application screenshots
+Home page - when the application opens the parent need to choose the category in which he needs advice at.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/26069883/44460227-e832cc00-a614-11e8-8705-36669d735d5b.jpg" width="30%" />
+</p>
+
+Chat - here the parent need to characterize the problem in a chat like page, it acts like a live chat.
+In the end the parent receive advice based on the chat characterization.
+<p align="center">
+     <img src="https://user-images.githubusercontent.com/26069883/44460456-cd148c00-a615-11e8-9f9d-f465e8ab80fb.jpg" width="28.5%"  />
+  <img src="https://user-images.githubusercontent.com/26069883/44459793-8a51b480-a613-11e8-8dab-6be2060529c2.jpg" width="30%"  />
+</p>
+
+Contact us page - let the parent contact keepers and the consultants.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/26069883/44459973-14018200-a614-11e8-9abe-878358b00960.jpg" width="30%"  />
+</p>
+
 |Category|Status|
 |---|---|
 | Version Control System| [git](https://git-scm.com/) & [github](https://github.com/JonathanMai/Keepers-bot/) |
 | Recommended IDE | [Visual Studio Code](https://code.visualstudio.com/) |
 | Github Issues | [![GitHub issues](https://img.shields.io/github/issues/JonathanMai/Keepers-bot.svg?style=flat)](https://github.com/JonathanMai/Keepers-bot/issues) |
 | Project Management Board| [Project Board](https://github.com/JonathanMai/Keepers-bot/projects/2) |
-| Project report | [Final report](https://drive.google.com/file/d/1rhJDAXqObWFVxVHI6RWubWAdySadKcyv/view?usp=sharing) |
+| Project report | [Final report](https://user-images.githubusercontent.com/26069883/44459973-14018200-a614-11e8-9abe-878358b00960.jpg) |
 | Project Status | Done |
 
 # Tools & Practices
