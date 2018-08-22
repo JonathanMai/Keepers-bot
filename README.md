@@ -5,7 +5,7 @@
 # Keepers-Consultant Center(Chat bot)
 Keepers is an award-winning application that monitors children's text messages on all social media platforms simultaneously and protects them from the dangers of cyberbullying.
 
-In this project we have developed a web application based on expert system.
+In this project we have developed a responsive web application based on expert system.
 The application helps parents with problems that came up with their child.
 
 ### [Application](https://chat-bot-55ed9.firebaseapp.com/)
