@@ -3,11 +3,12 @@
   <img src="http://finder.startupnationcentral.org/image_cloud/keepers-child-safety_be03ca57-524a-11e6-914d-1599937b2892?w=300&h=300"  /></p>
   
 # Keepers-Consultant Center(Chat bot)
-Web application based on expert system - consulating parents with problems that came up with their child.
-### [Application](https://chat-bot-55ed9.firebaseapp.com/)
+Keepers is an award-winning application that monitors children's text messages on all social media platforms simultaneously and protects them from the dangers of cyberbullying.
 
-## Tools & Practices
-We're trying to use the best tools and practices in order to produce a quality enginneered product that is thoroughly tested.
+In this project we have developed a web application based on expert system.
+The application helps parents with problems that came up with their child.
+
+### [Application](https://chat-bot-55ed9.firebaseapp.com/)
 
 |Category|Status|
 |---|---|
@@ -15,10 +16,15 @@ We're trying to use the best tools and practices in order to produce a quality e
 | Recommended IDE | [Visual Studio Code](https://code.visualstudio.com/) |
 | Github Issues | [![GitHub issues](https://img.shields.io/github/issues/JonathanMai/Keepers-bot.svg?style=flat)](https://github.com/JonathanMai/Keepers-bot/issues) |
 | Project Management Board| [Project Board](https://github.com/JonathanMai/Keepers-bot/projects/2) |
-| Project Status | On Development |
+| Project report | [Final report](https://drive.google.com/file/d/1rhJDAXqObWFVxVHI6RWubWAdySadKcyv/view?usp=sharing) |
+| Project Status | Done |
+
+# Tools & Practices
+The project was developed using framework7 and phonegap technologies.
 
 
-# Framework7 PhoneGap Application 
+
+## Framework7 PhoneGap Application 
 
 > [Framework7](http://www.idangero.us/framework7) is a Mobile UI framework that can be used to build hybrid apps with PhoneGap. This template allows you to get started using Framework7 
   quickly. 
